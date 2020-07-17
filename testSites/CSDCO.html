@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html class="gr__opencoredata_org">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>CSDCO</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="CSDCO_files/csdcorestmpl.css"
+    />
+    <link rel="stylesheet" type="text/css" href="CSDCO_files/nav.css" />
+    <link rel="stylesheet" type="text/css" href="CSDCO_files/2cgrid.css" />
+
+    <!-- Load the custom elements-->
+    <script type="module" src="CSDCO_files/gd-displayfeature.js"></script>
+
+    <script type="module" src="CSDCO_files/gd-getfeature.js"></script>
+    <script type="module" src="CSDCO_files/gd-getpackage.js"></script>
+    <script type="module" src="CSDCO_files/fcore-fdpviewer.js"></script>
+    <script type="module" src="CSDCO_files/gd-keywords.js"></script>
+    <script type="module" src="CSDCO_files/gd-header.js"></script>
+    <script src="CSDCO_files/gd-citation.js"></script>
+    <script src="CSDCO_files/gd-abstract.js"></script>
+
+    <!-- leaflet stuff -->
+    <link rel="stylesheet" href="CSDCO_files/leaflet.css" />
+    <script src="CSDCO_files/leaflet.js"></script>
+    <script src="CSDCO_files/jquery.js"></script>
+    <link rel="stylesheet" href="CSDCO_files/MarkerCluster.css" />
+    <link rel="stylesheet" href="CSDCO_files/MarkerCluster_002.css" />
+    <script src="CSDCO_files/leaflet_002.js"></script>
+
+    <script type="module" src="../www/build/throughputwidget.esm.js"></script>
+
+    <style>
+      #map {
+        height: 500px;
+      }
+
+      leaflet-map {
+        height: 100%;
+      }
+    </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": {
+          "@vocab": "http://schema.org/",
+          "Abstract": "http://opencoredata.org/voc/csdco/v1/abstract",
+          "Discipline": "http://opencoredata.org/voc/csdco/v1/discipline",
+          "Expedition": "http://opencoredata.org/voc/csdco/v1/expedition",
+          "Funding": "http://opencoredata.org/voc/csdco/v1/funding",
+          "Investigators": "http://opencoredata.org/voc/csdco/v1/investigators",
+          "Lab": "http://opencoredata.org/voc/csdco/v1/lab",
+          "Linktitle": "http://opencoredata.org/voc/csdco/v1/linktitle",
+          "Linkurl": "http://opencoredata.org/voc/csdco/v1/linkurl",
+          "Outreach": "http://opencoredata.org/voc/csdco/v1/outreach",
+          "Repository": "http://opencoredata.org/voc/csdco/v1/repository",
+          "Startdate": "http://opencoredata.org/voc/csdco/v1/startdate",
+          "Status": "http://opencoredata.org/voc/csdco/v1/status",
+          "Technique": "http://opencoredata.org/voc/csdco/v1/technique",
+          "csdco": "http://opencoredata.org/voc/csdco/v1/",
+          "re3data": "http://example.org/re3data/0.1/"
+        },
+        "@id": "http://opencoredata.org/id/do/PLJ",
+        "@type": "ResearchProject",
+        "csdco:abstract": "ake Junin, located at 4000 m asl in the inner-tropics of the Southern Hemisphere, is a prime target for drilling because it contains a thick (\u003e200 m) sediment package deposited at a high rate (0.2 to 1.0 mm/yr). Abundant research conducted on and around Lake Junin provides a compelling rationale for deep drilling. Moraine mapping coupled with cosmogenic radionuclide dating indicate that paleoglaciers reached the lake edge, but have not overridden the lake in as much as one million years. Lake Junin is one of the few lakes in the tropical Andes that predates the maximum extent of glaciation and is in a geomorphic position to record the waxing and waning of glaciers in nearby cordillera. Sediment coring of Lake Junin began in the 1970s; two cores spanning the past 50,000 years reveal that sedimentation has alternated between clastic sediments deposited during peak glacial periods and authigenic calcite (marl) precipitated from the water column during interglacial times. The lake also contains ideal sediments for multiproxy analysis that can be reliably dated using both the radiocarbon and U/Th methods. The oxygen isotopic composition of marl and ostracod carapaces demonstrate that authigenic calcite in Lake Junin primarily records the isotopic composition of precipitation and secondarily the degree of evaporative enrichment of lake water. Lake Junin contains a continuous record of tropical hydroclimate over interglacial and interstadial intervals for much of the past several hundred thousand years that is both comparable to, and an extension of stable isotope records from regional ice cores and speleothems. New organic geochemical proxies compliment the marl isotope record and offer the potential for a truly continuous isotope paleoclimate record through glacial and interglacial intervals alike. Lake Junin is ideally situated, both from logistical and scientific standpoints, to provide continuous high-resolution, independently-dated, long-term records of glaciation, and the variability of phenomena such as ENSO, the South America Summer Monsoon, and the Intertropical Convergence Zone. Because of the strong, demonstrated U/Th dating potential of Junin marl, we will be able to address critical issues regarding the synchrony of climate change in the tropics with that in high latitude regions of both hemispheres, the rate and timing of ecosystem response to climatic perturbations, and the dynamics of the geomagnetic field from a tropical perspective. Lake Junin is a scientifically mature site that will yield critical scientific insights that only drilling coupled with analysis can unlock.\n\nThe primary objective of the proposed research is to develop the first continuous, high-resolution, absolute-dated late Quaternary record of climate change, water balance (P/E), glaciation, vegetation, and paleomagnetic secular variation for the tropical Andes. The well-dated Junin record will allow the team to develop proxy records spanning \u003e200,000yr, which will document the timing of wet/dry cycles, glacial advances/retreats, and the impacts of climatic phenomena such as the changing strength and variability of ENSO, the South America Summer Monsoon, and shifts in the location and range of the Intertropical Convergence Zone. In addition, this study will provide an opportunity to date (via U-Th) the \u003e40ka sections of both the Titicaca and Sabana de Bogota records through correlation of pollen, stable isotope, and paleomagnetic time series. This study will also enable important insights into the response of tropical vegetation to climate change in the upper Amazon Basin, and will provide a rare southern equatorial perspective on the evolution of Earth?s geomagnetic field. ",
+        "csdco:discipline": "Paleorecords",
+        "csdco:expedition": "PLJ",
+        "csdco:funding": "National Science Foundation EAR-1405030, International Continental Scientific Drilling Program, National Science Foundation EAR-1400903, National Science Foundation EAR-1402054, National Science Foundation EAR-1404113, National Science Foundation EAR-1402076, National Science Foundation EAR-1404414",
+        "csdco:investigators": "",
+        "csdco:lab": "LacCore",
+        "csdco:linktitle": "ICDP Project Page|Facebook Page",
+        "csdco:linkurl": "http://junin.icdp-online.org/|https://www.facebook.com/LakeJuninProject/",
+        "csdco:outreach": "Public lecture,Community driven research,Partnership with non-academic institution,Outreach to the scientific community,Improving public scientific literacy",
+        "csdco:repository": "LacCore",
+        "csdco:startdate": "0001-01-01T00:00:00Z",
+        "csdco:status": "Analytical/Curation",
+        "csdco:technique": "Deep Drilling",
+        "description": "ake Junin, located at 4000 m asl in the inner-tropics of the Southern Hemisphere, is a prime target for drilling because it contains a thick (\u003e200 m) sediment package deposited at a high rate (0.2 to 1.0 mm/yr). Abundant research conducted on and around Lake Junin provides a compelling rationale for deep drilling. Moraine mapping coupled with cosmogenic radionuclide dating indicate that paleoglaciers reached the lake edge, but have not overridden the lake in as much as one million years. Lake Junin is one of the few lakes in the tropical Andes that predates the maximum extent of glaciation and is in a geomorphic position to record the waxing and waning of glaciers in nearby cordillera. Sediment coring of Lake Junin began in the 1970s; two cores spanning the past 50,000 years reveal that sedimentation has alternated between clastic sediments deposited during peak glacial periods and authigenic calcite (marl) precipitated from the water column during interglacial times. The lake also contains ideal sediments for multiproxy analysis that can be reliably dated using both the radiocarbon and U/Th methods. The oxygen isotopic composition of marl and ostracod carapaces demonstrate that authigenic calcite in Lake Junin primarily records the isotopic composition of precipitation and secondarily the degree of evaporative enrichment of lake water. Lake Junin contains a continuous record of tropical hydroclimate over interglacial and interstadial intervals for much of the past several hundred thousand years that is both comparable to, and an extension of stable isotope records from regional ice cores and speleothems. New organic geochemical proxies compliment the marl isotope record and offer the potential for a truly continuous isotope paleoclimate record through glacial and interglacial intervals alike. Lake Junin is ideally situated, both from logistical and scientific standpoints, to provide continuous high-resolution, independently-dated, long-term records of glaciation, and the variability of phenomena such as ENSO, the South America Summer Monsoon, and the Intertropical Convergence Zone. Because of the strong, demonstrated U/Th dating potential of Junin marl, we will be able to address critical issues regarding the synchrony of climate change in the tropics with that in high latitude regions of both hemispheres, the rate and timing of ecosystem response to climatic perturbations, and the dynamics of the geomagnetic field from a tropical perspective. Lake Junin is a scientifically mature site that will yield critical scientific insights that only drilling coupled with analysis can unlock.\n\nThe primary objective of the proposed research is to develop the first continuous, high-resolution, absolute-dated late Quaternary record of climate change, water balance (P/E), glaciation, vegetation, and paleomagnetic secular variation for the tropical Andes. The well-dated Junin record will allow the team to develop proxy records spanning \u003e200,000yr, which will document the timing of wet/dry cycles, glacial advances/retreats, and the impacts of climatic phenomena such as the changing strength and variability of ENSO, the South America Summer Monsoon, and shifts in the location and range of the Intertropical Convergence Zone. In addition, this study will provide an opportunity to date (via U-Th) the \u003e40ka sections of both the Titicaca and Sabana de Bogota records through correlation of pollen, stable isotope, and paleomagnetic time series. This study will also enable important insights into the response of tropical vegetation to climate change in the upper Amazon Basin, and will provide a rare southern equatorial perspective on the evolution of Earth?s geomagnetic field. ",
+        "location": {
+          "@type": "Place",
+          "geo": [
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.0365,
+              "http://schema.org/longitude": -76.1104
+            },
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.03595,
+              "http://schema.org/longitude": -76.11076
+            },
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.03507,
+              "http://schema.org/longitude": -76.1108
+            },
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.03557,
+              "http://schema.org/longitude": -76.11083
+            },
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.03558,
+              "http://schema.org/longitude": -76.11076
+            },
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.00432,
+              "http://schema.org/longitude": -76.06939
+            },
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.00432,
+              "http://schema.org/longitude": -76.06939
+            },
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.04394,
+              "http://schema.org/longitude": -76.05912
+            },
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.04394,
+              "http://schema.org/longitude": -76.05912
+            },
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.04382,
+              "http://schema.org/longitude": -76.05919
+            },
+            {
+              "@type": "GeoCoordinates",
+              "http://schema.org/latitude": -11.00432,
+              "http://schema.org/longitude": -76.06939
+            }
+          ]
+        },
+        "name": "Deep Drilling of Lake Junin, Peru: Continuous Tropical Records of Glaciation, Climate Change and Magnetic Field Variations Spanning the Late Quaternary",
+        "url": "http://opencoredata.org/id/do/PLJ"
+      }
+    </script>
+  </head>
+
+  <body data-gr-c-s-loaded="true">
+    <throughput-widget></throughput-widget>
+    <div class="ctnr">
+      <div id="navbar">
+        <nav class="container">
+          <div class="m1">
+            <a href="http://opencoredata.org/" class="navLinks">Home</a>
+          </div>
+          <div class="m2">
+            <a href="http://opencoredata.org/csdco.html" class="navLinks"
+              >CSDCO</a
+            >
+          </div>
+
+          <div class="logo"></div>
+
+          <div class="m3">
+            <a
+              href="http://opencoredata.org/collections/matrix"
+              class="navLinks"
+              >JRSO</a
+            >
+          </div>
+          <div class="m4">
+            <a
+              target="_blank"
+              href="http://opencoredata.org/voc/"
+              class="navLinks"
+              >Dictionary</a
+            >
+          </div>
+        </nav>
+      </div>
+
+      <header>
+        <geodex-header></geodex-header>
+      </header>
+
+      <div id="subheader"></div>
+
+      <div id="lkg"></div>
+
+      <main>
+        <div style="margin-top: 15px;">
+          <h3>About</h3>
+          <geodex-citation></geodex-citation>
+        </div>
+
+        <div style="margin-top: 15px;">
+          <h3>Abstract</h3>
+          <geodex-abstract></geodex-abstract>
+        </div>
+
+        <div style="margin-top: 15px;">
+          <h3>Details(s)</h3>
+          <geodex-keywords></geodex-keywords>
+        </div>
+
+        <div style="margin-top: 15px;">
+          <h3>Map</h3>
+          <p></p>
+          <div
+            id="map"
+            class="leaflet-container leaflet-fade-anim leaflet-grab"
+            style="position: relative;"
+            tabindex="0"
+          >
+            <div
+              class="leaflet-pane leaflet-map-pane"
+              style="transform: translate3d(0px, 0px, 0px);"
+            >
+              <div class="leaflet-pane leaflet-tile-pane">
+                <div class="leaflet-layer" style="z-index: 1; opacity: 1;">
+                  <div
+                    class="leaflet-tile-container leaflet-zoom-animated"
+                    style="
+                      z-index: 3;
+                      transform: translate3d(0px, 0px, 0px) scale(1);
+                    "
+                  >
+                    <img
+                      alt=""
+                      src="CSDCO_files/3_002.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(440px, 218px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/3.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(440px, -38px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/2_002.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(184px, 218px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/4_003.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(696px, 218px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/3_003.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(440px, 474px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/2.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(184px, -38px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/4.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(696px, -38px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/2_003.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(184px, 474px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/4_002.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(696px, 474px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/1_002.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(-72px, 218px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/5.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(952px, 218px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/1_003.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(-72px, -38px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/5_003.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(952px, -38px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/1.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(-72px, 474px, 0px);
+                        opacity: 1;
+                      "
+                    /><img
+                      alt=""
+                      src="CSDCO_files/5_002.jpg"
+                      class="leaflet-tile leaflet-tile-loaded"
+                      style="
+                        width: 256px;
+                        height: 256px;
+                        transform: translate3d(952px, 474px, 0px);
+                        opacity: 1;
+                      "
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="leaflet-pane leaflet-shadow-pane"></div>
+              <div class="leaflet-pane leaflet-overlay-pane">
+                <svg
+                  pointer-events="none"
+                  class="leaflet-zoom-animated"
+                  width="1152"
+                  height="600"
+                  style="transform: translate3d(-96px, -50px, 0px) scale(1);"
+                  viewBox="-96 -50 1152 600"
+                >
+                  <g>
+                    <path
+                      class="leaflet-interactive"
+                      stroke="#fff"
+                      stroke-opacity="1"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="rgb(255,0,195)"
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      pointer-events="visiblePainted"
+                      d="M253,281a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 "
+                    ></path>
+                    <path
+                      class="leaflet-interactive"
+                      stroke="#fff"
+                      stroke-opacity="1"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="rgb(255,0,195)"
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      pointer-events="visiblePainted"
+                      d="M253,281a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 "
+                    ></path>
+                    <path
+                      class="leaflet-interactive"
+                      stroke="#fff"
+                      stroke-opacity="1"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="rgb(255,0,195)"
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      pointer-events="visiblePainted"
+                      d="M253,281a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 "
+                    ></path>
+                    <path
+                      class="leaflet-interactive"
+                      stroke="#fff"
+                      stroke-opacity="1"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="rgb(255,0,195)"
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      pointer-events="visiblePainted"
+                      d="M253,281a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 "
+                    ></path>
+                    <path
+                      class="leaflet-interactive"
+                      stroke="#fff"
+                      stroke-opacity="1"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="rgb(255,0,195)"
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      pointer-events="visiblePainted"
+                      d="M253,281a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 "
+                    ></path>
+                    <path
+                      class="leaflet-interactive"
+                      stroke="#fff"
+                      stroke-opacity="1"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="rgb(255,0,195)"
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      pointer-events="visiblePainted"
+                      d="M686,218a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 "
+                    ></path>
+                    <path
+                      class="leaflet-interactive"
+                      stroke="#fff"
+                      stroke-opacity="1"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="rgb(255,0,195)"
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      pointer-events="visiblePainted"
+                      d="M686,218a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 "
+                    ></path>
+                    <path
+                      class="leaflet-interactive"
+                      stroke="#fff"
+                      stroke-opacity="1"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="rgb(255,0,195)"
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      pointer-events="visiblePainted"
+                      d="M253,281a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 "
+                    ></path>
+                    <path
+                      class="leaflet-interactive"
+                      stroke="#fff"
+                      stroke-opacity="1"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="rgb(255,0,195)"
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      pointer-events="visiblePainted"
+                      d="M253,281a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 "
+                    ></path>
+                    <path
+                      class="leaflet-interactive"
+                      stroke="#fff"
+                      stroke-opacity="1"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="rgb(255,0,195)"
+                      fill-opacity="1"
+                      fill-rule="evenodd"
+                      pointer-events="visiblePainted"
+                      d="M253,281a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 "
+                    ></path>
+                  </g>
+                </svg>
+              </div>
+              <div class="leaflet-pane leaflet-marker-pane"></div>
+              <div class="leaflet-pane leaflet-popup-pane"></div>
+              <div
+                class="leaflet-proxy leaflet-zoom-animated"
+                style="
+                  transform: translate3d(807.507px, 1055.61px, 0px) scale(4);
+                "
+              ></div>
+            </div>
+            <div class="leaflet-control-container">
+              <div class="leaflet-top leaflet-left">
+                <div class="leaflet-control-zoom leaflet-bar leaflet-control">
+                  <a
+                    class="leaflet-control-zoom-in leaflet-disabled"
+                    href="#"
+                    title="Zoom in"
+                    >+</a
+                  ><a class="leaflet-control-zoom-out" href="#" title="Zoom out"
+                    >-</a
+                  >
+                </div>
+              </div>
+              <div class="leaflet-top leaflet-right"></div>
+              <div class="leaflet-bottom leaflet-left"></div>
+              <div class="leaflet-bottom leaflet-right">
+                <div class="leaflet-control-attribution leaflet-control">
+                  <a
+                    href="http://leafletjs.com/"
+                    title="A JS library for interactive maps"
+                    >Leaflet</a
+                  >
+                  | © ESRI
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="info" style="display: none;">
+            <h5>Building map... please wait...</h5>
+          </div>
+          <p></p>
+        </div>
+
+        <div style="margin-top: 15px;">
+          <hr />
+          <h3>Project Dataset(s)</h3>
+          <p>
+            <geodex-getpackage
+              res-id="http://opencoredata.org/id/do/bo10gjbm1jf0p8snte1g"
+            ></geodex-getpackage>
+
+            <geodex-getpackage
+              res-id="http://opencoredata.org/id/do/bo10gjbm1jf0p8snte20"
+            ></geodex-getpackage>
+
+            <geodex-getpackage
+              res-id="http://opencoredata.org/id/do/bo10gjjm1jf0p8snte2g"
+            ></geodex-getpackage>
+
+            <geodex-getpackage
+              res-id="http://opencoredata.org/id/do/bo10gjjm1jf0p8snte30"
+            ></geodex-getpackage>
+          </p>
+          <hr />
+        </div>
+
+        <div class="twocgrid">
+          <div class="colone">
+            <h3>Project File(s)</h3>
+            <p>
+              <fcore-fdpviewer
+                res-id="http://opencoredata.org/id/do/98c4286c5998b1c477d198af57c8bb95298c69f8829389623cf1d482d5c082b7"
+              ></fcore-fdpviewer>
+
+              <fcore-fdpviewer
+                res-id="http://opencoredata.org/id/do/9c216efe6aa80c80cd3a617ecd057e5a7481763594b3a4810b84f2190e8d825f"
+              ></fcore-fdpviewer>
+
+              <fcore-fdpviewer
+                res-id="http://opencoredata.org/id/do/eac91f2f10d30f15d0d44e3e469312650bed8c629a2aa2287b4fc2ef14db4223"
+              ></fcore-fdpviewer>
+
+              <fcore-fdpviewer
+                res-id="http://opencoredata.org/id/do/f8e365b756d8d7afd0faac593336adc9107f32caaa252e6ceface1f964e2273a"
+              ></fcore-fdpviewer>
+            </p>
+          </div>
+
+          <div class="coltwo">
+            <h3>Project Feature(s)</h3>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-1A">http://opencoredata.org/id/do/PLJ-JUN15-1A</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-1A"
+              ></geodex-getfeature>
+            </p>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-1B">http://opencoredata.org/id/do/PLJ-JUN15-1B</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-1B"
+              ></geodex-getfeature>
+            </p>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-1C">http://opencoredata.org/id/do/PLJ-JUN15-1C</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-1C"
+              ></geodex-getfeature>
+            </p>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-1D">http://opencoredata.org/id/do/PLJ-JUN15-1D</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-1D"
+              ></geodex-getfeature>
+            </p>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-1E">http://opencoredata.org/id/do/PLJ-JUN15-1E</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-1E"
+              ></geodex-getfeature>
+            </p>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-2A">http://opencoredata.org/id/do/PLJ-JUN15-2A</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-2A"
+              ></geodex-getfeature>
+            </p>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-2B">http://opencoredata.org/id/do/PLJ-JUN15-2B</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-2B"
+              ></geodex-getfeature>
+            </p>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-2C">http://opencoredata.org/id/do/PLJ-JUN15-2C</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-2C"
+              ></geodex-getfeature>
+            </p>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-3A">http://opencoredata.org/id/do/PLJ-JUN15-3A</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-3A"
+              ></geodex-getfeature>
+            </p>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-3B">http://opencoredata.org/id/do/PLJ-JUN15-3B</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-3B"
+              ></geodex-getfeature>
+            </p>
+
+            <!-- <a target="_blank" href="http://opencoredata.org/id/do/PLJ-JUN15-3C">http://opencoredata.org/id/do/PLJ-JUN15-3C</a><br> -->
+            <p style="margin-top: 15px;">
+              <geodex-getfeature
+                res-id="http://opencoredata.org/id/do/PLJ-JUN15-3C"
+              ></geodex-getfeature>
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <div id="kg"></div>
+      <footer>Funded by the National Science Foundation</footer>
+    </div>
+
+    <script type="text/javascript">
+      // Create the map
+      //refs:  https://gist.github.com/alexgleith/7112515
+
+      // Old school ajax caller..  needs updating so not on main thread sync event
+      jQuery.extend({
+        getValues: function (url) {
+          var result = null;
+          $.ajax({
+            url: url,
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (data) {
+              result = data;
+            },
+          });
+          return result;
+        },
+      });
+
+      // Set up the ESRI tiles and the initial map object
+      var tiles = L.tileLayer(
+          "https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}",
+          {
+            maxZoom: 3,
+            attribution: "&copy; ESRI",
+          }
+        ),
+        latlng = L.latLng(0.78, 102.37);
+
+      var map = L.map("map", {
+        center: latlng,
+        zoom: 5,
+        layers: [tiles],
+      });
+
+      // Get the ocean data
+      var geoJsonData = $.getValues(
+        "http://opencoredata.org/api/v1/spatial/continental/PLJ"
+      );
+      var geojsonMarkerOptions = {
+        radius: 10,
+        fillColor: "rgb(255,0,195)",
+        color: "#fff",
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 1,
+      };
+
+      var geojson = L.geoJson(geoJsonData, {
+        pointToLayer: function (feature, latlng) {
+          var popupOptions = {
+            maxWidth: 300,
+          };
+          var popupContent =
+            "<a href='" + feature.properties.URI + "'>this</a>";
+          console.log(feature);
+          return L.circleMarker(latlng, geojsonMarkerOptions).bindPopup(
+            popupContent,
+            popupOptions
+          );
+        },
+      });
+
+      // Marker cluster settings
+      var markers = L.markerClusterGroup({
+        spiderfyOnMaxZoom: false,
+        showCoverageOnHover: true,
+        zoomToBoundsOnClick: true,
+        disableClusteringAtZoom: 6,
+      });
+
+      // Finish adding things to the map and present
+      // markers.addLayer(geojson);
+      map.addLayer(geojson);
+
+      map.fitBounds(geojson.getBounds());
+      // markers.addTo(map)
+      $("#info").fadeOut(500);
+    </script>
+  </body>
+  <!-- Leaflet code--><span class="gr__tooltip"
+    ><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i
+    ><span class="gr__triangle"></span
+  ></span>
+</html>
