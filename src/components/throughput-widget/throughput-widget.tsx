@@ -1,4 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, h } from "@stencil/core";
 // import { DataDisplay } from "../data-display/data-display";
 // import { format } from "../../utils/utils";
 
