@@ -1,21 +1,34 @@
-import { Component, Prop, h, Watch } from "@stencil/core";
+import { Component, Prop, h, Watch, State, Listen } from "@stencil/core";
 
 @Component({
   tag: "data-display",
   styleUrl: "data-display.css",
-  shadow: false,
+  shadow: true,
 })
 export class DataDisplay {
-  @Prop({}) data: string;
-  @Watch("data")
+  @Prop() annotations: any = [];
+
+  @State() open: boolean = false;
+
+  @Listen("click")
+  handleClick(e) {
+    console.log("click");
+    this.open = !this.open;
+  }
+
+  @Watch("annotations")
   watchHandler(newValue, oldValue) {
     console.log(newValue, oldValue);
   }
-  private getText(): string {
-    return JSON.parse(this.data)["@context"]["@vocab"];
-  }
 
   render() {
-    return <div>{this.getText()}</div>;
+    return this.annotations.map((annotation) => (
+      <div>
+        Annotations ({this.annotations.length})
+        {this.open ? (
+          <div class="annotation">{annotation.annotation}</div>
+        ) : null}
+      </div>
+    ));
   }
 }

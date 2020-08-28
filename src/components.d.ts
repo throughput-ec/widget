@@ -7,9 +7,12 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface DataDisplay {
-        "data": string;
+        "annotations": any;
     }
     interface ThroughputWidget {
+        "identifier": string;
+        "level": string;
+        "link": any;
     }
 }
 declare global {
@@ -32,9 +35,12 @@ declare global {
 }
 declare namespace LocalJSX {
     interface DataDisplay {
-        "data"?: string;
+        "annotations"?: any;
     }
     interface ThroughputWidget {
+        "identifier"?: string;
+        "level"?: string;
+        "link"?: any;
     }
     interface IntrinsicElements {
         "data-display": DataDisplay;

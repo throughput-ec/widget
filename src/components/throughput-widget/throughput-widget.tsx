@@ -1,6 +1,4 @@
-import { Component, h } from "@stencil/core";
-// import { DataDisplay } from "../data-display/data-display";
-// import { format } from "../../utils/utils";
+import { Component, h, Prop, State, Listen } from "@stencil/core";
 
 @Component({
   tag: "throughput-widget",
@@ -8,28 +6,34 @@ import { Component, h } from "@stencil/core";
   shadow: true,
 })
 export class ThroughputWidget {
-  dataHolder: string = "";
+  @Prop() identifier: string;
+  @Prop() level: string;
+  @Prop() link: any;
+
+  @State() open: boolean;
+  @State() annotations: Array<object>;
+
   componentWillLoad() {
-    const inputs = Array.from(document.getElementsByTagName("script"));
-    for (let script of inputs) {
-      if (script.type.toLowerCase() == "application/ld+json") {
-        console.log(script.type.toLowerCase());
-        try {
-          this.dataHolder = script.innerHTML;
-          console.log(this.dataHolder);
-        } catch (e) {
-          if (e instanceof SyntaxError) {
-            console.error(e);
-          } else {
-            console.error(e);
-          }
-        }
-      }
+    console.log(this.level, this.link, this.identifier);
+    if (this.identifier) {
+      console.log(this.identifier);
+      let url =
+        "http://throughputdb.com/api/db/annotations?id=" +
+        this.identifier +
+        "&link=" +
+        this.link +
+        "&level=" +
+        this.level;
+      fetch(url).then((response) => {
+        response.json().then((json) => {
+          console.log(json);
+          this.annotations = json.data;
+        });
+      });
     }
-    // console.log(obj);
   }
 
   render() {
-    return <data-display data={this.dataHolder}></data-display>;
+    return <data-display annotations={this.annotations}></data-display>;
   }
 }
