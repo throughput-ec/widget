@@ -11,7 +11,7 @@ export class DataDisplay {
   @State() open: boolean = false;
 
   @Listen("click")
-  handleClick(e) {
+  handleClick() {
     console.log("click");
     this.open = !this.open;
   }
@@ -22,13 +22,17 @@ export class DataDisplay {
   }
 
   render() {
-    return this.annotations.map((annotation) => (
+    return (
       <div>
         Annotations ({this.annotations.length})
         {this.open ? (
-          <div class="annotation">{annotation.annotation}</div>
+          <div>
+            {this.annotations.map((annotation) => (
+              <div class="annotation">{annotation.annotation}</div>
+            ))}
+          </div>
         ) : null}
       </div>
-    ));
+    );
   }
 }
