@@ -9,6 +9,8 @@ export namespace Components {
     interface DataDisplay {
         "annotations": any;
     }
+    interface ThroughputSubmit {
+    }
     interface ThroughputWidget {
         "identifier": string;
         "level": string;
@@ -22,6 +24,12 @@ declare global {
         prototype: HTMLDataDisplayElement;
         new (): HTMLDataDisplayElement;
     };
+    interface HTMLThroughputSubmitElement extends Components.ThroughputSubmit, HTMLStencilElement {
+    }
+    var HTMLThroughputSubmitElement: {
+        prototype: HTMLThroughputSubmitElement;
+        new (): HTMLThroughputSubmitElement;
+    };
     interface HTMLThroughputWidgetElement extends Components.ThroughputWidget, HTMLStencilElement {
     }
     var HTMLThroughputWidgetElement: {
@@ -30,12 +38,15 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "data-display": HTMLDataDisplayElement;
+        "throughput-submit": HTMLThroughputSubmitElement;
         "throughput-widget": HTMLThroughputWidgetElement;
     }
 }
 declare namespace LocalJSX {
     interface DataDisplay {
         "annotations"?: any;
+    }
+    interface ThroughputSubmit {
     }
     interface ThroughputWidget {
         "identifier"?: string;
@@ -44,6 +55,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "data-display": DataDisplay;
+        "throughput-submit": ThroughputSubmit;
         "throughput-widget": ThroughputWidget;
     }
 }
@@ -52,6 +64,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "data-display": LocalJSX.DataDisplay & JSXBase.HTMLAttributes<HTMLDataDisplayElement>;
+            "throughput-submit": LocalJSX.ThroughputSubmit & JSXBase.HTMLAttributes<HTMLThroughputSubmitElement>;
             "throughput-widget": LocalJSX.ThroughputWidget & JSXBase.HTMLAttributes<HTMLThroughputWidgetElement>;
         }
     }

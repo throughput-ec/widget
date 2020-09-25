@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, Listen } from "@stencil/core";
+import { Component, h, Prop, State } from "@stencil/core";
 
 @Component({
   tag: "throughput-widget",
@@ -34,6 +34,11 @@ export class ThroughputWidget {
   }
 
   render() {
-    return <data-display annotations={this.annotations}></data-display>;
+    return (
+      <div>
+        <data-display annotations={this.annotations}></data-display>
+        <throughput-submit></throughput-submit>
+      </div>
+    );
   }
 }
