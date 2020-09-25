@@ -6,11 +6,11 @@ import { Component, h, Prop, State, Listen } from "@stencil/core";
   shadow: true,
 })
 export class ThroughputWidget {
-  @Prop() identifier: string;
-  @Prop() level: string;
-  @Prop() link: any;
+  //defaults for dev work
+  @Prop() identifier: string = "r3d100011761"; //specifies a resource eg Neotoma
+  @Prop() level: string = "site"; //specifies a dataset type eg site, core, etc
+  @Prop() link: any = 13971; //specifies the specific dataset
 
-  @State() open: boolean;
   @State() annotations: Array<object>;
 
   componentWillLoad() {
