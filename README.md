@@ -28,17 +28,15 @@ All products of the Throughput Annotation Project are licensed under an [MIT Lic
 #### Add the widget to a Vue app:
 Add a script tag to go grab the widget (public/index.html)
 
-```
-<script type="module" src="throughputwidget.js"></script>
-```
+`<script type="module" src="throughputwidget.js"></script>`
 
 Tell Vue to ignore the widget element (main.js)
 
-```Vue.config.ignoredElements = ["throughput-widget"];```
+`Vue.config.ignoredElements = ["throughput-widget"];`
 
 Add the widget to your dataset page, and pass in props (note Vue specific syntax for `link` prop)
 
-```<throughput-widget identifier="r3d100011761" level="site" :link.prop="this.dsid"></throughput-widget>```
+`<throughput-widget identifier="r3d100011761" level="site" :link.prop="this.dsid"></throughput-widget>`
 
 #### More tech stack examples to come... 
 
