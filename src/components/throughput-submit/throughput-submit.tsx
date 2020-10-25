@@ -15,6 +15,6 @@ export class ThroughputSubmit {
   }
 
   render() {
-    return <button onClick={this.handleClick}>tesst</button>;
+    return <button onClick={this.handleClick}>ORCID Login</button>;
   }
 }

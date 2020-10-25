@@ -3,6 +3,7 @@ import { Component, Prop, h, Watch, State, Listen } from "@stencil/core";
 @Component({
   tag: "data-display",
   styleUrl: "data-display.css",
+  assetsDirs: ['assets'],
   shadow: true,
 })
 export class DataDisplay {
@@ -11,9 +12,11 @@ export class DataDisplay {
   @State() open: boolean = false;
 
   @Listen("click")
-  handleClick() {
-    console.log("click");
-    this.open = !this.open;
+  handleClick(ev) {
+    console.log("click, target id = ", ev.originalTarget.id);
+    if (!this.open || (this.open && ev.originalTarget.id == "magic_x")) {
+      this.open = !this.open;
+    }
   }
 
   @Watch("annotations")
@@ -24,14 +27,9 @@ export class DataDisplay {
   render() {
     return (
       <div>
-        Annotations ({this.annotations.length})
-        {this.open ? (
-          <div>
-            {this.annotations.map((annotation) => (
-              <div class="annotation">{annotation.annotation}</div>
-            ))}
-          </div>
-        ) : null}
+        <div class="summary">{this.annotations.length > 0 ? (this.annotations.length) : "No"} Annotation(s) Found</div>
+        <div class="helptext">Click to display</div>
+        {this.open ? (<annotations-display annotations={this.annotations}></annotations-display>) : null}
       </div>
     );
   }

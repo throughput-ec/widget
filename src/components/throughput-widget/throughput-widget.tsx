@@ -9,7 +9,8 @@ export class ThroughputWidget {
   //defaults for dev work
   @Prop() identifier: string = "r3d100011761"; //specifies a resource eg Neotoma
   @Prop() level: string = "site"; //specifies a dataset type eg site, core, etc
-  @Prop() link: any = 13971; //specifies the specific dataset
+  @Prop() element: string = "annotation"; // type of DB entity to pull
+  @Prop() link: any = 13971; //specifies the specific dataset // 11349
 
   @State() annotations: Array<object>;
 
@@ -20,10 +21,12 @@ export class ThroughputWidget {
       let url =
         "http://throughputdb.com/api/db/annotations?id=" +
         this.identifier +
-        "&link=" +
-        this.link +
+        // "&link=" +
+        // this.link +
         "&level=" +
-        this.level;
+        this.level +
+        "&element=" +
+        this.element;
       fetch(url).then((response) => {
         response.json().then((json) => {
           console.log(json);
@@ -37,7 +40,6 @@ export class ThroughputWidget {
     return (
       <div>
         <data-display annotations={this.annotations}></data-display>
-        <throughput-submit></throughput-submit>
       </div>
     );
   }

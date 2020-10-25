@@ -6,23 +6,41 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface AnnotationsDisplay {
+        "annotations": any;
+    }
     interface DataDisplay {
         "annotations": any;
+    }
+    interface OrcidConnect {
     }
     interface ThroughputSubmit {
     }
     interface ThroughputWidget {
+        "element": string;
         "identifier": string;
         "level": string;
         "link": any;
     }
 }
 declare global {
+    interface HTMLAnnotationsDisplayElement extends Components.AnnotationsDisplay, HTMLStencilElement {
+    }
+    var HTMLAnnotationsDisplayElement: {
+        prototype: HTMLAnnotationsDisplayElement;
+        new (): HTMLAnnotationsDisplayElement;
+    };
     interface HTMLDataDisplayElement extends Components.DataDisplay, HTMLStencilElement {
     }
     var HTMLDataDisplayElement: {
         prototype: HTMLDataDisplayElement;
         new (): HTMLDataDisplayElement;
+    };
+    interface HTMLOrcidConnectElement extends Components.OrcidConnect, HTMLStencilElement {
+    }
+    var HTMLOrcidConnectElement: {
+        prototype: HTMLOrcidConnectElement;
+        new (): HTMLOrcidConnectElement;
     };
     interface HTMLThroughputSubmitElement extends Components.ThroughputSubmit, HTMLStencilElement {
     }
@@ -37,24 +55,34 @@ declare global {
         new (): HTMLThroughputWidgetElement;
     };
     interface HTMLElementTagNameMap {
+        "annotations-display": HTMLAnnotationsDisplayElement;
         "data-display": HTMLDataDisplayElement;
+        "orcid-connect": HTMLOrcidConnectElement;
         "throughput-submit": HTMLThroughputSubmitElement;
         "throughput-widget": HTMLThroughputWidgetElement;
     }
 }
 declare namespace LocalJSX {
+    interface AnnotationsDisplay {
+        "annotations"?: any;
+    }
     interface DataDisplay {
         "annotations"?: any;
+    }
+    interface OrcidConnect {
     }
     interface ThroughputSubmit {
     }
     interface ThroughputWidget {
+        "element"?: string;
         "identifier"?: string;
         "level"?: string;
         "link"?: any;
     }
     interface IntrinsicElements {
+        "annotations-display": AnnotationsDisplay;
         "data-display": DataDisplay;
+        "orcid-connect": OrcidConnect;
         "throughput-submit": ThroughputSubmit;
         "throughput-widget": ThroughputWidget;
     }
@@ -63,7 +91,9 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "annotations-display": LocalJSX.AnnotationsDisplay & JSXBase.HTMLAttributes<HTMLAnnotationsDisplayElement>;
             "data-display": LocalJSX.DataDisplay & JSXBase.HTMLAttributes<HTMLDataDisplayElement>;
+            "orcid-connect": LocalJSX.OrcidConnect & JSXBase.HTMLAttributes<HTMLOrcidConnectElement>;
             "throughput-submit": LocalJSX.ThroughputSubmit & JSXBase.HTMLAttributes<HTMLThroughputSubmitElement>;
             "throughput-widget": LocalJSX.ThroughputWidget & JSXBase.HTMLAttributes<HTMLThroughputWidgetElement>;
         }
