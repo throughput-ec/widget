@@ -9,7 +9,7 @@ import { Component, h } from "@stencil/core";
 export class OrcidConnect {
   openORCID() {
     console.log("Clicked ORCID connect button");
-    window.open("https://sandbox.orcid.org/oauth/authorize?client_id=APP-EDLUYOOYTPV3RMXO&response_type=code&scope=/authenticate&show_login=false&redirect_uri=https://throughputdb.org", "_blank", "toolbar=no, scrollbars=yes, width=500, height=600, top=500, left=500");
+    window.open("https://sandbox.orcid.org/oauth/authorize?client_id=APP-EDLUYOOYTPV3RMXO&response_type=code&scope=/authenticate&show_login=false&redirect_uri=localhost:3333/", "_blank", "toolbar=no, scrollbars=yes, width=500, height=600, top=500, left=500");
   }
 
   render() {
