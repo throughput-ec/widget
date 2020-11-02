@@ -13,8 +13,7 @@ export class DataDisplay {
 
   @Listen("click")
   handleClick(ev) {
-    console.log("click, target id = ", ev.originalTarget.id);
-    if (!this.open || (this.open && ev.originalTarget.id == "magic_x")) {
+    if (!this.open || (this.open && ev.originalTarget.id == "close_x")) {
       this.open = !this.open;
     }
   }

@@ -13,14 +13,15 @@ export class AnnotationsDisplay {
   render() {
     return (
       <div class="overlay">
-        <div class="annotations">
+        <div class="annotation_list">
           <div class="header">
             <img src={getAssetPath('./assets/throughput.png')} />
             <img src={getAssetPath('./assets/nsf.png')} />
             <img src={getAssetPath('./assets/earthcube.png')} />
-            ALL THE ANNOTATIONS!!!
-            <div id="magic_x" class="close_x">X</div>
+            List of Annotations
+            <img id="close_x" class="close_x" height="32" width="32" src={getAssetPath('./assets/close_x.png')} />
           </div>
+          <orcid-connect></orcid-connect>
           <div class="body">
             {this.annotations.map((annotation) => (
               <div class="annotation_item">{

@@ -1,10 +1,3 @@
-.annotation_item {
-  font-weight: normal;
-  background-color: palegoldenrod;
-  border-style: solid;
-  border-color: firebrick;
-}
-
 .overlay {
   position: fixed;
   z-index: 100000;
@@ -15,11 +8,11 @@
   background-color:rgba(0,0,0,0.5);
 }
 
-/* brg 10/22/2020 I barely understand flexbox, but this works the way I want: */
-/* .body fills the space remaining after .header without overflowing, and scrolling works correctly */
-/* without explicitly setting a height prop on .body. */
+/* brg 10/22/2020 I barely understand flexbox, but this works. */
+/* - .body fills the space remaining after .header without overflowing. */
+/* - Scrolling works without explicitly setting a height prop on .body. */
 /* https://stackoverflow.com/questions/90178/make-a-div-fill-the-height-of-the-remaining-screen-space */
-.annotations {
+.annotation_list {
   display: flex;
   flex-flow: column;
   position: absolute;
@@ -29,6 +22,13 @@
   right: 50px;
   bottom: 50px;
   background-color: goldenrod;
+}
+
+.annotation_item {
+  font-weight: normal;
+  background-color: palegoldenrod;
+  border-style: solid;
+  border-color: firebrick;
 }
 
 .body {
@@ -45,15 +45,8 @@
   font-size: 35px;
 }
 
-.summary {
-  text-align: center;
-}
-
-.helptext {
-  font-size: small;
-  text-align: center;
-}
-
 .close_x {
-  float: right;
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }
