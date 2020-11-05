@@ -13,7 +13,7 @@ export class DataDisplay {
 
   @Listen("click")
   handleClick(ev) {
-    if (!this.open || (this.open && ev.originalTarget.id == "close_x")) {
+    if (!this.open || (this.open && (ev.composedPath().length) > 0 && ev.composedPath()[0].id == "close_x")) {
       this.open = !this.open;
     }
   }
