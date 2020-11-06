@@ -10,6 +10,7 @@ import { Component, Prop, h, getAssetPath } from "@stencil/core";
 export class AnnotationsDisplay {
   @Prop() annotations: any = [];
 
+  // todo: if authenticated, replace orcid-connect with "Authenticated as [user]"?
   render() {
     return (
       <div class="overlay">

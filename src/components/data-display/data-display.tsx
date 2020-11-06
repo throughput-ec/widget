@@ -8,8 +8,14 @@ import { Component, Prop, h, Watch, State, Listen } from "@stencil/core";
 })
 export class DataDisplay {
   @Prop() annotations: any = [];
+  @Prop() authenticated: boolean = false;
 
   @State() open: boolean = false;
+
+  componentWillLoad() {
+    console.log("data-display componentWillLoad(): authenticated = ", this.authenticated);
+    this.open = this.authenticated;
+  }
 
   @Listen("click")
   handleClick(ev) {

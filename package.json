@@ -1,6 +1,7 @@
 {
   "name": "throughputwidget",
   "version": "0.0.1",
+  "private": true,
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -24,5 +25,9 @@
   "devDependencies": {
     "@stencil/core": "1.16.3"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "jsrsasign": "^10.0.5",
+    "jsrsasign-util": "^1.0.2"
+  }
 }

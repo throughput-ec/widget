@@ -11,6 +11,7 @@ export namespace Components {
     }
     interface DataDisplay {
         "annotations": any;
+        "authenticated": boolean;
     }
     interface OrcidConnect {
     }
@@ -68,6 +69,7 @@ declare namespace LocalJSX {
     }
     interface DataDisplay {
         "annotations"?: any;
+        "authenticated"?: boolean;
     }
     interface OrcidConnect {
     }
