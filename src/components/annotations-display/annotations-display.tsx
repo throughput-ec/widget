@@ -25,8 +25,10 @@ export class AnnotationsDisplay {
           <orcid-connect></orcid-connect>
           <div class="body">
             {this.annotations.map((annotation) => (
-              <div class="annotation_item">{
-                annotation.author}<br/>{annotation.date}<br/>{annotation.annotation}
+              <div class="annotation_item">
+                <div class="annotation_author">{annotation.author}</div>
+                <div class="annotation_metadata">{annotation.date}</div>
+                {annotation.annotation}
               </div>
             ))}
           </div>

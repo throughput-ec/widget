@@ -31,6 +31,16 @@
   border-color: firebrick;
 }
 
+.annotation_author {
+  font-size: large;
+  font-weight: bold;
+}
+
+/* for annotation date, etc. */
+.annotation_metadata {
+  font-size: smaller;
+}
+
 .body {
   flex: 1 1 auto;
   padding: 20px;
