@@ -34,7 +34,7 @@ export class DataDisplay {
       <div>
         <div class="summary">{this.annotations.length > 0 ? (this.annotations.length) : "No"} Annotation(s) Found</div>
         <div class="helptext">Click to display</div>
-        {this.open ? (<annotations-display annotations={this.annotations}></annotations-display>) : null}
+        {this.open ? (<annotations-display annotations={this.annotations} authenticated={this.authenticated}></annotations-display>) : null}
       </div>
     );
   }

@@ -7,7 +7,9 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AnnotationsDisplay {
+        "addAnnotation": boolean;
         "annotations": any;
+        "authenticated": boolean;
     }
     interface DataDisplay {
         "annotations": any;
@@ -65,7 +67,9 @@ declare global {
 }
 declare namespace LocalJSX {
     interface AnnotationsDisplay {
+        "addAnnotation"?: boolean;
         "annotations"?: any;
+        "authenticated"?: boolean;
     }
     interface DataDisplay {
         "annotations"?: any;
