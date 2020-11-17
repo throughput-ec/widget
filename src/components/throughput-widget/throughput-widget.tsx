@@ -36,16 +36,6 @@ export class ThroughputWidget {
       console.log("no hash");
     }
 
-    // Pure OAuth approach - including, commented, on the off-chance it
-    // might be useful going forward 11/6/2020 brg
-    // const orcid_code = url.searchParams.get('code');
-    // if (orcid_code != null) {
-    //   console.log("ORCID post-auth code = ", orcid_code);
-    //   this.fetchOrcidOAuth(orcid_code);
-    // } else {
-    //   console.log("No ORCID post-auth code found");
-    // }
-
     // console.log(this.level, this.link, this.identifier);
     if (this.identifier) {
       // console.log(this.identifier);
@@ -83,33 +73,6 @@ export class ThroughputWidget {
       alg: ['RS256'], iss: ["https:\/\/sandbox.orcid.org"] , aud: clientId, gracePeriod: 15*60 //15 mins skew allowed
     });
   }
-
-  // 11/6/2020 brg
-  // use OAuth with secret key to access user's public ORCID data
-  // orcid_code: six-character code included in redirect after ORCID authentication
-  // fetchOrcidOAuth(orcid_code: string) {
-  //   const url = "https://sandbox.orcid.org/oauth/token";
-  //   const client_id = "APP-EDLUYOOYTPV3RMXO";
-  //   const client_secret = "[SEEEEEEECRET]"; // replace with your app's ORCID secret key
-  //   let myHeaders = new Headers();
-  //   myHeaders.append('Accept', 'application/json');
-  //   myHeaders.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-  //   let params = new URLSearchParams();
-  //   params.append("client_id", client_id);
-  //   params.append("client_secret", client_secret);
-  //   params.append("grant_type", "authorization_code");
-  //   params.append("code", orcid_code);
-  //   params.append("redirect_uri", "http://localhost:3333/");
-  //   let options = {
-  //     mode: 'no-cors' as RequestMode,
-  //     method: 'POST',
-  //     headers: myHeaders,
-  //     body: params
-  //   };
-  //   fetch(url, options).then((response) => {
-  //     console.log(response);
-  //   });
-  // }
 
   render() {
     return (
