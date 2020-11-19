@@ -61,35 +61,27 @@
   right: 16px;
 }
 
-.add_button {
-  background-color: #4CAF50; /* Green */
+button {
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 5px;
   text-align: center;
-  /* text-decoration: none; */
+  text-decoration: none;
   display: inline-block;
-  font-size: 20px;
+  font-size: 18px;
   font-family: inherit;
-  width: 250px;
+  width: 150px;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.add_button {
+  background-color: #4CAF50; /* Green */
 }
 .add_button:hover {background-color: #3e8e41}
 
 .cancel_button {
-  background-color: red; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  /* text-decoration: none; */
-  display: inline-block;
-  font-size: 20px;
-  font-family: inherit;
-  width: 250px;
-  border-radius: 6px;
-  cursor: pointer;
+  background-color: red;
 }
 .cancel_button:hover {background-color: darkred}
 
