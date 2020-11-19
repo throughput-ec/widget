@@ -11,17 +11,27 @@ export class AnnotationsDisplay {
   @Prop() annotations: any = [];
   @Prop() authenticated: boolean = false;
   @Prop() addAnnotation: boolean = false;
+  @Prop() annotationText: string;
 
   @Listen("click")
   handleClick(ev) {
     if (ev.composedPath()[0].id == "add_button") {
       this.addAnnotation = true;
     } else if (ev.composedPath()[0].id == "submit_button") {
-      // TODO: submit
+      console.log("Submit clicked");
+      this.submitAnnotation();
       this.addAnnotation = false;
     } else if (ev.composedPath()[0].id == "cancel_button") {
       this.addAnnotation = false;
     }
+  }
+
+  updateAnnotationText(event) {
+    this.annotationText = event.target.value;
+  }
+
+  submitAnnotation() {
+    console.log("Annotation text = ", this.annotationText);
   }
 
   // todo: if authenticated, replace orcid-connect with "Authenticated as [user]"?
@@ -37,13 +47,13 @@ export class AnnotationsDisplay {
             <img id="close_x" class="close_x" height="32" width="32" src={getAssetPath('./assets/close_x.png')} />
           </div>
           <div class="body">
-            { !this.authenticated ? <orcid-connect /> :
-              !this.addAnnotation ?
-                <button id="add_button" class="add_button">+ Add Annotation</button> :
+            {
+              !this.authenticated ? <orcid-connect /> :
+              !this.addAnnotation ? <button id="add_button" class="add_button">+ Add Annotation</button> :
                 <div>
-                <textarea>Add your neato annotation here!</textarea>
-                <button id="submit_button" class="add_button">Submit</button>
-                <button id="cancel_button" class="cancel_button">Cancel</button>
+                  <textarea onInput={(event) => this.updateAnnotationText(event)}>Add your neato annotation here!</textarea>
+                  <button id="submit_button" class="add_button">Submit</button>
+                  <button id="cancel_button" class="cancel_button">Cancel</button>
                 </div>
             }
             {this.annotations.map((annotation) => (
