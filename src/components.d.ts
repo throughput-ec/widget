@@ -11,10 +11,12 @@ export namespace Components {
         "annotationText": string;
         "annotations": any;
         "authenticated": boolean;
+        "readOnlyMode": boolean;
     }
     interface DataDisplay {
         "annotations": any;
         "authenticated": boolean;
+        "readOnlyMode": boolean;
     }
     interface OrcidConnect {
     }
@@ -25,6 +27,7 @@ export namespace Components {
         "identifier": string;
         "level": string;
         "link": any;
+        "readOnlyMode": boolean;
     }
 }
 declare global {
@@ -72,10 +75,12 @@ declare namespace LocalJSX {
         "annotationText"?: string;
         "annotations"?: any;
         "authenticated"?: boolean;
+        "readOnlyMode"?: boolean;
     }
     interface DataDisplay {
         "annotations"?: any;
         "authenticated"?: boolean;
+        "readOnlyMode"?: boolean;
     }
     interface OrcidConnect {
     }
@@ -86,6 +91,7 @@ declare namespace LocalJSX {
         "identifier"?: string;
         "level"?: string;
         "link"?: any;
+        "readOnlyMode"?: boolean;
     }
     interface IntrinsicElements {
         "annotations-display": AnnotationsDisplay;

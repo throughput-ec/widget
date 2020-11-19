@@ -12,6 +12,7 @@ export class AnnotationsDisplay {
   @Prop() authenticated: boolean = false;
   @Prop() addAnnotation: boolean = false;
   @Prop() annotationText: string;
+  @Prop() readOnlyMode: boolean = true;
 
   @Listen("click")
   handleClick(ev) {
@@ -47,14 +48,16 @@ export class AnnotationsDisplay {
             <img id="close_x" class="close_x" height="32" width="32" src={getAssetPath('./assets/close_x.png')} />
           </div>
           <div class="body">
-            {
-              !this.authenticated ? <orcid-connect /> :
-              !this.addAnnotation ? <button id="add_button" class="add_button">+ Add Annotation</button> :
-                <div>
-                  <textarea onInput={(event) => this.updateAnnotationText(event)}>Add your neato annotation here!</textarea>
-                  <button id="submit_button" class="add_button">Submit</button>
-                  <button id="cancel_button" class="cancel_button">Cancel</button>
-                </div>
+            { !this.readOnlyMode ?
+              (
+                !this.authenticated ? <orcid-connect /> :
+                !this.addAnnotation ? <button id="add_button" class="add_button">+ Add Annotation</button> :
+                  <div>
+                    <textarea onInput={(event) => this.updateAnnotationText(event)}>Add your neato annotation here!</textarea>
+                    <button id="submit_button" class="add_button">Submit</button>
+                    <button id="cancel_button" class="cancel_button">Cancel</button>
+                  </div>
+               ) : null
             }
             {this.annotations.map((annotation) => (
               <div class="annotation_item">

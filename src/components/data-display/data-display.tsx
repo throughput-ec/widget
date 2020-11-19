@@ -9,6 +9,7 @@ import { Component, Prop, h, Watch, State, Listen } from "@stencil/core";
 export class DataDisplay {
   @Prop() annotations: any = [];
   @Prop() authenticated: boolean = false;
+  @Prop() readOnlyMode: boolean;
 
   @State() open: boolean = false;
 
@@ -34,7 +35,7 @@ export class DataDisplay {
       <div>
         <div class="summary">{this.annotations.length > 0 ? (this.annotations.length) : "No"} Annotation(s) Found</div>
         <div class="helptext">Click to display</div>
-        {this.open ? (<annotations-display annotations={this.annotations} authenticated={this.authenticated}></annotations-display>) : null}
+        {this.open ? (<annotations-display annotations={this.annotations} authenticated={this.authenticated} readOnlyMode={this.readOnlyMode}></annotations-display>) : null}
       </div>
     );
   }

@@ -12,6 +12,7 @@ export class ThroughputWidget {
   @Prop() level: string = "site"; //specifies a dataset type eg site, core, etc
   @Prop() element: string = "annotation"; // type of DB entity to pull
   @Prop() link: any = 13971; //specifies the specific dataset // 11349
+  @Prop() readOnlyMode = false; // dash-case i.e. 'read-only-mode' to set this prop in a throughput-widget tag
 
   @State() annotations: Array<object>;
   @State() authenticated: boolean;
@@ -77,7 +78,7 @@ export class ThroughputWidget {
   render() {
     return (
       <div>
-        <data-display annotations={this.annotations} authenticated={this.authenticated}></data-display>
+        <data-display annotations={this.annotations} authenticated={this.authenticated} readOnlyMode={this.readOnlyMode}></data-display>
       </div>
     );
   }
