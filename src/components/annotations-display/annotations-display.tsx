@@ -41,9 +41,7 @@ export class AnnotationsDisplay {
       <div class="overlay">
         <div class="annotation_list">
           <div class="header">
-            <img src={getAssetPath('./assets/throughput.png')} />
-            <img src={getAssetPath('./assets/nsf.png')} />
-            <img src={getAssetPath('./assets/earthcube.png')} />
+            <img src="https://raw.githubusercontent.com/throughput-ec/throughput-ec.github.io/master/resources/throughput.png" height="100" width="222"/>
             List of Annotations
             <a href="#" id="close_x" class="close" />
           </div>
