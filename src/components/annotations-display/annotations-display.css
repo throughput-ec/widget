@@ -55,12 +55,6 @@
   font-size: 35px;
 }
 
-.close_x {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-}
-
 button {
   border: none;
   color: white;
@@ -92,4 +86,31 @@ textarea {
   font-size: 20px;
   font-family: inherit;
   /* padding: 10px 20px; */
+}
+
+/* pure CSS close X - https://codepen.io/brissmyr/pen/egidw */
+.close {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
 }

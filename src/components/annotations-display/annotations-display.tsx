@@ -45,7 +45,7 @@ export class AnnotationsDisplay {
             <img src={getAssetPath('./assets/nsf.png')} />
             <img src={getAssetPath('./assets/earthcube.png')} />
             List of Annotations
-            <img id="close_x" class="close_x" height="32" width="32" src={getAssetPath('./assets/close_x.png')} />
+            <a href="#" id="close_x" class="close" />
           </div>
           <div class="body">
             { !this.readOnlyMode ?
