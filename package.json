@@ -1,8 +1,16 @@
 {
   "name": "throughputwidget",
   "version": "0.0.1",
-  "private": true,
-  "description": "Stencil Component Starter",
+  "private": false,
+  "description": "Throughput Annotations Widget",
+  "keywords": ["throughput", "EarthCube"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/throughput-ec/widget"
+  },
+  "license": "MIT",
+  "author": "Throughput",
+  "homepage": "https://throughput-ec.github.io/",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
@@ -25,7 +33,6 @@
   "devDependencies": {
     "@stencil/core": "1.16.3"
   },
-  "license": "MIT",
   "dependencies": {
     "jsrsasign": "^10.0.5",
     "jsrsasign-util": "^1.0.2"
