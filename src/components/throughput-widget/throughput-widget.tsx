@@ -12,7 +12,7 @@ export class ThroughputWidget {
   @Prop() level: string = "site"; //specifies a dataset type eg site, core, etc
   @Prop() element: string = "annotation"; // type of DB entity to pull
   @Prop() link: any = 13971; //specifies the specific dataset // 11349
-  @Prop() readOnlyMode = false; // dash-case i.e. 'read-only-mode' to set this prop in a throughput-widget tag
+  @Prop() readOnlyMode = false; // dash-case ('read-only-mode') to set this prop in throughput-widget tag
 
   @State() annotations: Array<object>;
   @State() authenticated: boolean;
@@ -37,6 +37,7 @@ export class ThroughputWidget {
       console.log("no hash");
     }
 
+    // http://throughputdb.com/api/db/annotations?id=r3d100011761&"&level=site&element=annotation
     // console.log(this.level, this.link, this.identifier);
     if (this.identifier) {
       // console.log(this.identifier);

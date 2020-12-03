@@ -1,4 +1,4 @@
-import { Component, Prop, h, getAssetPath, Listen } from "@stencil/core";
+import { Component, Prop, h, Listen } from "@stencil/core";
 
 @Component({
   tag: "annotations-display",
@@ -8,11 +8,11 @@ import { Component, Prop, h, getAssetPath, Listen } from "@stencil/core";
 })
 
 export class AnnotationsDisplay {
-  @Prop() annotations: any = [];
   @Prop() authenticated: boolean = false;
   @Prop() addAnnotation: boolean = false;
-  @Prop() annotationText: string;
   @Prop() readOnlyMode: boolean = true;
+  @Prop() annotations: any = [];
+  @Prop() annotationText: string;
 
   @Listen("click")
   handleClick(ev) {
@@ -33,9 +33,9 @@ export class AnnotationsDisplay {
 
   submitAnnotation() {
     console.log("Annotation text = ", this.annotationText);
+    // TODO: submit annotation to Throughput
   }
 
-  // todo: if authenticated, replace orcid-connect with "Authenticated as [user]"?
   render() {
     return (
       <div class="overlay">
@@ -51,7 +51,7 @@ export class AnnotationsDisplay {
                 !this.authenticated ? <orcid-connect /> :
                 !this.addAnnotation ? <button id="add_button" class="add_button">+ Add Annotation</button> :
                   <div>
-                    <textarea onInput={(event) => this.updateAnnotationText(event)}>Add your neato annotation here!</textarea>
+                    <textarea onInput={(event) => this.updateAnnotationText(event)}>Add your annotation here.</textarea>
                     <button id="submit_button" class="add_button">Submit</button>
                     <button id="cancel_button" class="cancel_button">Cancel</button>
                   </div>
