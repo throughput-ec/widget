@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "private": false,
   "description": "Throughput Annotations Widget",
-  "keywords": ["throughput", "EarthCube"],
+  "keywords": [
+    "throughput",
+    "EarthCube"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/throughput-ec/widget"
