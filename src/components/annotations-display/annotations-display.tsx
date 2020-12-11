@@ -35,6 +35,18 @@ export class AnnotationsDisplay {
     // TODO: submit annotation to Throughput
   }
 
+  getFormattedDate(date) {
+    const properDate = new Date(date);
+    return (
+      properDate.getMonth() +
+      1 +
+      "/" +
+      properDate.getDate() +
+      "/" +
+      properDate.getFullYear()
+    );
+  }
+
   render() {
     return (
       <div class="overlay">
@@ -76,9 +88,27 @@ export class AnnotationsDisplay {
             ) : null}
             {this.annotations.map((annotation) => (
               <div class="annotation_item">
-                <div class="annotation_author">{annotation.author}</div>
-                <div class="annotation_metadata">{annotation.date}</div>
                 {annotation.annotation}
+                <div class="annotation_metadata">
+                  <div class="annotation_author">{annotation.author}</div>
+                  <div class="orcidLink">
+                    <a
+                      href={"https://orcid.org/" + annotation.orcid}
+                      target="_blank"
+                    >
+                      <img
+                        id="orcid-id-icon"
+                        src="https://orcid.org/sites/default/files/images/orcid_24x24.png"
+                        width="14"
+                        height="14"
+                        alt="ORCID iD icon"
+                      />
+                    </a>
+                  </div>
+                  <div class="annotation_author">
+                    ({this.getFormattedDate(annotation.date)}){" "}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
