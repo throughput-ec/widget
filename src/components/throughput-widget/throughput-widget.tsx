@@ -42,7 +42,7 @@ export class ThroughputWidget {
     if (this.identifier) {
       // console.log(this.identifier);
       let url =
-        "http://throughputdb.com/api/db/annotations?id=" +
+        "https://throughputdb.com/api/db/annotations?id=" +
         this.identifier +
         // "&link=" +
         // this.link +
