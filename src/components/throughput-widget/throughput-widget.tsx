@@ -28,7 +28,7 @@ export class ThroughputWidget {
       if (id_token !== null) {
         const sigIsValid = this.checkSig(id_token, client_id);
         console.log("sigIsValid = ", sigIsValid);
-        console.log(KJUR.jws.JWS.parse(id_token).payloadPP)
+        console.log(KJUR.jws.JWS.parse(id_token).payloadPP);
         this.authenticated = true;
       } else {
         console.log("no id_token found");
@@ -42,7 +42,7 @@ export class ThroughputWidget {
     if (this.identifier) {
       // console.log(this.identifier);
       let url =
-        "http://throughputdb.com/api/db/annotations?id=" +
+        "https://throughputdb.com/api/db/annotations?id=" +
         this.identifier +
         // "&link=" +
         // this.link +
@@ -65,21 +65,37 @@ export class ThroughputWidget {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\#&]" + name + "=([^&#]*)");
     var results = regex.exec(window.location.hash);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    return results === null
+      ? ""
+      : decodeURIComponent(results[1].replace(/\+/g, " "));
   }
 
   checkSig(idToken, clientId) {
-    const orcidCert = {"kty":"RSA","e":"AQAB","use":"sig","kid":"sandbox-orcid-org-3hpgosl3b6lapenh1ewsgdob3fawepoj","n":"pl-jp-kTAGf6BZUrWIYUJTvqqMVd4iAnoLS6vve-KNV0q8TxKvMre7oi9IulDcqTuJ1alHrZAIVlgrgFn88MKirZuTqHG6LCtEsr7qGD9XyVcz64oXrb9vx4FO9tLNQxvdnIWCIwyPAYWtPMHMSSD5oEVUtVL_5IaxfCJvU-FchdHiwfxvXMWmA-i3mcEEe9zggag2vUPPIqUwbPVUFNj2hE7UsZbasuIToEMFRZqSB6juc9zv6PEUueQ5hAJCEylTkzMwyBMibrt04TmtZk2w9DfKJR91555s2ZMstX4G_su1_FqQ6p9vgcuLQ6tCtrW77tta-Rw7McF_tyPmvnhQ"};
+    const orcidCert = {
+      kty: "RSA",
+      e: "AQAB",
+      use: "sig",
+      kid: "sandbox-orcid-org-3hpgosl3b6lapenh1ewsgdob3fawepoj",
+      n:
+        "pl-jp-kTAGf6BZUrWIYUJTvqqMVd4iAnoLS6vve-KNV0q8TxKvMre7oi9IulDcqTuJ1alHrZAIVlgrgFn88MKirZuTqHG6LCtEsr7qGD9XyVcz64oXrb9vx4FO9tLNQxvdnIWCIwyPAYWtPMHMSSD5oEVUtVL_5IaxfCJvU-FchdHiwfxvXMWmA-i3mcEEe9zggag2vUPPIqUwbPVUFNj2hE7UsZbasuIToEMFRZqSB6juc9zv6PEUueQ5hAJCEylTkzMwyBMibrt04TmtZk2w9DfKJR91555s2ZMstX4G_su1_FqQ6p9vgcuLQ6tCtrW77tta-Rw7McF_tyPmvnhQ",
+    };
     const pubKey = KEYUTIL.getKey(orcidCert);
     return KJUR.jws.JWS.verifyJWT(idToken, pubKey, {
-      alg: ['RS256'], iss: ["https:\/\/sandbox.orcid.org"] , aud: clientId, gracePeriod: 15*60 //15 mins skew allowed
+      alg: ["RS256"],
+      iss: ["https://sandbox.orcid.org"],
+      aud: clientId,
+      gracePeriod: 15 * 60, //15 mins skew allowed
     });
   }
 
   render() {
     return (
       <div>
-        <data-display annotations={this.annotations} authenticated={this.authenticated} readOnlyMode={this.readOnlyMode}></data-display>
+        <data-display
+          annotations={this.annotations}
+          authenticated={this.authenticated}
+          readOnlyMode={this.readOnlyMode}
+        ></data-display>
       </div>
     );
   }

@@ -45,7 +45,8 @@ export class DataDisplay {
           {this.annotations.length > 0 ? this.annotations.length : "No"}{" "}
           Annotation(s) Found
         </div>
-        <div class="helptext">Click to display</div>
+        <div class="helptext">Click to add or display</div>
+
         {this.open ? (
           <annotations-display
             annotations={this.annotations}
