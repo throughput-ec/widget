@@ -37,15 +37,15 @@ export class ThroughputWidget {
       console.log("no hash");
     }
 
-    // http://throughputdb.com/api/db/annotations?id=r3d100011761&"&level=site&element=annotation
+    // http://throughputdb.com/api/db/annotations?id=r3d100011761&level=site&element=annotation
     // console.log(this.level, this.link, this.identifier);
     if (this.identifier) {
       // console.log(this.identifier);
       let url =
         "https://throughputdb.com/api/db/annotations?id=" +
         this.identifier +
-        // "&link=" +
-        // this.link +
+        "&link=" +
+        this.link +
         "&level=" +
         this.level +
         "&element=" +
