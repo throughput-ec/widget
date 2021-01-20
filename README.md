@@ -1,21 +1,18 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![NSF-XXXXXXX](https://img.shields.io/badge/NSF-XXXXXXX-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=XXXXXXX) [![NSF-XXXXXXX](https://img.shields.io/badge/NSF-XXXXXXX-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=XXXXXXX)
+[![NSF-1928366](https://img.shields.io/badge/NSF-1928366-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1928366)
 
-# Project Name
+# Throughput Annotation Widget
 
-A short, one paragraph description of the project goes here.
+The Throughput Annotation Widget is a lightweight web component that allows web users to view Throughput annotations on a dataset, and to add new annotations after authenticating through [ORCID](https://orcid.org/).
 
-  * Please add all project Award numbers to the Badges above.  This will allow us to crawl and add these repositories to the graph, and also show NSF that we are being good citizens.
-  * Please ensure that all contributors from Throughput have ORCIDs and that these are linked below in the contributors section.
-  * Please consider a clear directory structure early on, and report it below in the "How to use this repository".
-  * Please define which data products
+Built with the [Stencil](https://stenciljs.com) toolchain, the widget is easy to integrate into  Vue, React, and Angular applications, or a static HTML webpage.
 
 ## Contributors
 
 This project is an open project, and contributions are welcome from any individual.  All contributors to this project are bound by a [code of conduct](CODE_OF_CONDUCT.md).  Please review and follow this code of conduct as part of your contribution.
 
-  * [Contributor Name1](http://example.com/contributor_url1) [![orcid](https://img.shields.io/badge/orcid-XXXX--XXXX--XXXX--XXXX-brightgreen.svg)](https://orcid.org/XXXX-XXXX-XXXX-XXXX)
-  * [Contributor Name2](http://example.com/contributor_url2) [![orcid](https://img.shields.io/badge/orcid-XXXX--XXXX--XXXX--XXXX-brightgreen.svg)](https://orcid.org/XXXX-XXXX-XXXX-XXXX)
+  * [Shane Loeffler](https://orcid.org/0000-0003-1445-5615) [![orcid](https://img.shields.io/badge/orcid-0000--0003--1445--5615-brightgreen.svg)](https://orcid.org/0000-0003-1445-5615)
+  * [Brian Grivna](https://orcid.org/0000-0002-1662-5318) [![orcid](https://img.shields.io/badge/orcid-0000--0002--1662--5318-brightgreen.svg)](https://orcid.org/0000-0002-1662-5318)
 
 ### Tips for Contributing
 
@@ -25,24 +22,105 @@ All products of the Throughput Annotation Project are licensed under an [MIT Lic
 
 ## How to use this repository
 
-A description of the files and directory structure in the repository.
+Minimal examples of widget integration into Vue, React, Angular, and static HTML can be found in the [examples directory](https://github.com/throughput-ec/widget/tree/examples).
+
+#### Add the widget to a Vue app:
+Install the widget with npm:
+
+`npm install throughput-widget`
+
+In main.js, import the widget and tell Vue to ignore the widget element:
+
+```
+import { applyPolyfills, defineCustomElements } from 'throughput-widget/loader';
+Vue.config.ignoredElements = ["throughput-widget"];
+applyPolyfills().then(() => {
+  defineCustomElements();
+});
+```
+
+Add the widget to your dataset template, and pass in props. Note the Vue-specific syntax for the `link` prop. `this.dsid` is the dataset page's ID.
+
+`<throughput-widget identifier="r3d100011761" level="site" :link.prop="this.dsid" />`
+
+#### Add the widget to a React app:
+Install the widget with npm:
+
+`npm install throughput-widget`
+
+In App.js, import the widget:
+```
+import { applyPolyfills, defineCustomElements } from 'throughput-widget/loader';
+applyPolyfills().then(() => {
+  defineCustomElements();
+});
+```
+
+Add the widget to your dataset template, and pass in props. Note the React-specific syntax for the `link` prop. `dsid` is the dataset page's ID.
+
+`<throughput-widget identifier="r3d100011761" level="site" link={dsid} />`
+
+#### Add the widget to an Angular app:
+
+In app.module.ts, add `CUSTOM_ELEMENTS_SCHEMA` to the imports from `@angular/core`,
+then include it in AppModule's `schemas` list. Repeat for other modules that use the widget.
+
+```
+// ...
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'; // import CUSTOM_ELEMENTS_SCHEMA
+
+@NgModule({
+  // ...
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] // add CUSTOM_ELEMENTS_SCHEMA to AppModule and other modules using the widget
+})
+export class AppModule { }
+```
+
+In main.ts, import and call `defineCustomElements()`:
+
+```
+// ...
+import { defineCustomElements } from 'throughput-widget/loader';
+
+// ...
+defineCustomElements();
+```
+
+Add the widget to your dataset template, and pass in props. Note the Angular-specific syntax for the `link` prop. `dsid` is the dataset page's ID.
+`<throughput-widget identifier="r3d100011761" level="site" link="{{ dsid }}"></throughput-widget>`
+
+#### Add the widget to a static HTML page:
+Import the widget with a script tag:
+
+`<script type="module" src="https://unpkg.com/throughput-widget/dist/throughputwidget/throughputwidget.esm.js"></script>`
+
+Add the widget to your dataset page(s):
+
+`<throughput-widget identifier="r3d100011761" level="site" link="[your dataset ID]"></throughput-widget>`
+
+#### \<throughput-widget\> properties
+- identifier: ID for top-level resource e.g. Neotoma.
+- link: ID for dataset within top-level resource.
+- level: Default: 'site'.
+- element: Type of database entity to display. Default: 'annotation'.
+- read-only-mode: View existing annotations only. 'true' or 'false'.
 
 ### Workflow Overview
-
-Th project uses X core information, manages it and passes our some stuff.
+[in progress]
 
 ### System Requirements
 
-This project is developed using (Python? R?).  It runs on a Windows system (?).  Continuous integration uses TravisCI (?).
+This project is developed with [Stencil](https://stenciljs.com).
 
 ### Data Requirements
 
-The project pulls data from (?).
+The widget pulls annotations from throughputdb.com.
 
 ### Key Outputs
 
-This project generates (an API, some log files, what?)
+Once a user authenticates through ORCID, the widget can be used to annotate a dataset.
+These annotations are maintained on throughputdb.com.
 
-## Metrics
+### Metrics
 
-This project is to be evaluated using the following metrics. . .
+This project is to be evaluated using the following metrics...
