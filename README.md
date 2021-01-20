@@ -87,6 +87,7 @@ defineCustomElements();
 ```
 
 Add the widget to your dataset template, and pass in props. Note the Angular-specific syntax for the `link` prop. `dsid` is the dataset page's ID.
+
 `<throughput-widget identifier="r3d100011761" level="site" link="{{ dsid }}"></throughput-widget>`
 
 #### Add the widget to a static HTML page:
