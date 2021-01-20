@@ -22,7 +22,7 @@ All products of the Throughput Annotation Project are licensed under an [MIT Lic
 
 ## How to use this repository
 
-Minimal examples of widget integration into Vue, React, Angular, and static HTML can be found in the [examples directory](https://github.com/throughput-ec/widget/tree/examples).
+Minimal examples of widget integration into Vue, React, Angular, and static HTML can be found in the [examples directory](https://github.com/throughput-ec/widget/tree/orcid/examples).
 
 #### Add the widget to a Vue app:
 Install the widget with npm:
