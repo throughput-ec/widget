@@ -1,11 +1,12 @@
 .overlay {
+  cursor: default;
   position: fixed;
   z-index: 100000;
   height: 100%;
   width: 100%;
   top: 0px;
   left: 0px;
-  background-color:rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* brg 10/22/2020 I barely understand flexbox, but this works. */
@@ -15,44 +16,81 @@
 .annotation_list {
   display: flex;
   flex-flow: column;
-  position: absolute;
+  /* position: absolute; */
   z-index: 100001;
-  top: 50px;
-  left: 50px;
-  right: 50px;
-  bottom: 50px;
-  background-color: goldenrod;
+  margin: 10vh auto;
+  width: 50vw;
+  max-height: 80vh;
+  min-width: 300px;
+  background-color: white;
+  border-radius: 4px;
 }
 
 .annotation_item {
   font-weight: normal;
-  background-color: palegoldenrod;
-  border-style: solid;
-  border-color: firebrick;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin-bottom: 10px;
+  border-radius: 4px;
+  cursor: default;
+  /* border-style: solid; */
+  /* border-color: white; */
 }
 
 .annotation_author {
-  font-size: large;
-  font-weight: bold;
+  /* font-size: large;
+  font-weight: bold; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.orcidLink {
+  cursor: pointer;
+  padding-right: 10px;
+  padding-left: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.orcidLink a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* for annotation date, etc. */
 .annotation_metadata {
   font-size: smaller;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-top: 5px;
 }
 
 .body {
-  flex: 1 1 auto;
+  /* flex: 1 1 auto; */
   padding: 20px;
+  padding-top: 0px;
   overflow-y: scroll;
-  background-color: lightgoldenrodyellow;
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
-  flex: 0 1 auto;
-  display: block;
-  background-color: bisque;
-  font-size: 35px;
+  color: #3b99e0;
+  /* flex: 0 1 auto;
+  display: block; */
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
+  z-index: 10000000;
+  background-color: white;
+  font-size: 20px;
+  border-radius: 4px;
+  text-align: center;
+  padding-bottom: 25px;
 }
 
 button {
@@ -70,14 +108,18 @@ button {
 }
 
 .add_button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
 }
-.add_button:hover {background-color: #3e8e41}
+.add_button:hover {
+  background-color: #3e8e41;
+}
 
 .cancel_button {
   background-color: red;
 }
-.cancel_button:hover {background-color: darkred}
+.cancel_button:hover {
+  background-color: darkred;
+}
 
 textarea {
   resize: none;
@@ -88,11 +130,15 @@ textarea {
   /* padding: 10px 20px; */
 }
 
+.closeContainer {
+  display: flex;
+  flex-direction: row-reverse;
+}
 /* pure CSS close X - https://codepen.io/brissmyr/pen/egidw */
 .close {
-  position: absolute;
+  /* position: absolute;
   right: 32px;
-  top: 32px;
+  top: 32px; */
   width: 32px;
   height: 32px;
   opacity: 0.3;
@@ -100,10 +146,12 @@ textarea {
 .close:hover {
   opacity: 1;
 }
-.close:before, .close:after {
+.close:before,
+.close:after {
   position: absolute;
-  left: 15px;
-  content: ' ';
+  top: 10vh;
+  margin-left: 12px;
+  content: " ";
   height: 33px;
   width: 2px;
   background-color: #333;

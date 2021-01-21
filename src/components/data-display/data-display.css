@@ -6,3 +6,8 @@
   font-size: small;
   text-align: center;
 }
+
+.badge {
+  cursor: pointer;
+  padding: 3px;
+}
