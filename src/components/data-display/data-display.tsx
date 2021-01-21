@@ -3,17 +3,34 @@ import { Component, Prop, h, Watch, State, Listen } from "@stencil/core";
 @Component({
   tag: "data-display",
   styleUrl: "data-display.css",
+  assetsDirs: ["assets"],
   shadow: true,
 })
 export class DataDisplay {
   @Prop() annotations: any = [];
+  @Prop() authenticated: boolean = false;
+  @Prop() readOnlyMode: boolean;
 
   @State() open: boolean = false;
 
+  componentWillLoad() {
+    console.log(
+      "data-display componentWillLoad(): authenticated = ",
+      this.authenticated
+    );
+    this.open = this.authenticated;
+  }
+
   @Listen("click")
-  handleClick() {
-    console.log("click");
-    this.open = !this.open;
+  handleClick(ev) {
+    if (
+      !this.open ||
+      (this.open &&
+        ev.composedPath().length > 0 &&
+        ev.composedPath()[0].id == "close_x")
+    ) {
+      this.open = !this.open;
+    }
   }
 
   @Watch("annotations")
@@ -23,14 +40,19 @@ export class DataDisplay {
 
   render() {
     return (
-      <div>
-        Annotations ({this.annotations.length})
+      <div class="badge">
+        <div class="summary">
+          {this.annotations.length > 0 ? this.annotations.length : "No"}{" "}
+          Annotation(s) Found
+        </div>
+        <div class="helptext">Click to add or display</div>
+
         {this.open ? (
-          <div>
-            {this.annotations.map((annotation) => (
-              <div class="annotation">{annotation.annotation}</div>
-            ))}
-          </div>
+          <annotations-display
+            annotations={this.annotations}
+            authenticated={this.authenticated}
+            readOnlyMode={this.readOnlyMode}
+          ></annotations-display>
         ) : null}
       </div>
     );
