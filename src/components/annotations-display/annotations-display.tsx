@@ -12,6 +12,7 @@ export class AnnotationsDisplay {
   @Prop() readOnlyMode: boolean = true;
   @Prop() annotations: any = [];
   @Prop() annotationText: string;
+  DEFAULT_ANNOTATION_TEXT: string = "Add your annotation here.";
 
   @Listen("click")
   handleClick(ev) {
@@ -30,9 +31,16 @@ export class AnnotationsDisplay {
     this.annotationText = event.target.value;
   }
 
+  // If text box contains default text, clear it on click.
+  clearDefaultAnnotationText(event) {
+    if (event.target.value === this.DEFAULT_ANNOTATION_TEXT) {
+      event.target.value = '';
+    }
+  }
+
   submitAnnotation() {
     console.log("Annotation text = ", this.annotationText);
-    // TODO: submit annotation to Throughput
+    // TODO: POST annotation to api.throughputdb.com/api/widget
   }
 
   getFormattedDate(date) {
@@ -74,8 +82,9 @@ export class AnnotationsDisplay {
                 <div>
                   <textarea
                     onInput={(event) => this.updateAnnotationText(event)}
+                    onFocus={(event) => this.clearDefaultAnnotationText(event)}
                   >
-                    Add your annotation here.
+                    {this.DEFAULT_ANNOTATION_TEXT}
                   </textarea>
                   <button id="submit_button" class="add_button">
                     Submit
