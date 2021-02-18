@@ -23,9 +23,8 @@ export namespace Components {
     interface ThroughputSubmit {
     }
     interface ThroughputWidget {
-        "element": string;
+        "additionalType": string;
         "identifier": string;
-        "level": string;
         "link": any;
         "readOnlyMode": boolean;
     }
@@ -87,9 +86,8 @@ declare namespace LocalJSX {
     interface ThroughputSubmit {
     }
     interface ThroughputWidget {
-        "element"?: string;
+        "additionalType"?: string;
         "identifier"?: string;
-        "level"?: string;
         "link"?: any;
         "readOnlyMode"?: boolean;
     }
