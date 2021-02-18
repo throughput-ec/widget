@@ -50,7 +50,7 @@ export class ThroughputWidget {
         url += "&additionalType=" + this.additionalType;
       }
       if (this.link) {
-        url += "&link=" + this.link;
+        url += "&id=" + this.link;
       }
       // brg 2/17/2021 element seems to be ignored at present
       // if (this.element) {
