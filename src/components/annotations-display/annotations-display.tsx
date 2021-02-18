@@ -12,7 +12,7 @@ export class AnnotationsDisplay {
   @Prop() readOnlyMode: boolean = true;
   @Prop() annotations: any = [];
   @Prop() annotationText: string;
-  DEFAULT_ANNOTATION_TEXT: string = "Add your annotation here.";
+  DEFAULT_ANNOTATION_TEXT: string = "Enter your annotation here.";
 
   @Listen("click")
   handleClick(ev) {
