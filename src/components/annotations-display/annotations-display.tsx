@@ -126,7 +126,7 @@ export class AnnotationsDisplay {
               <div class="annotation_item">
                 {annotation.annotation}
                 <div class="annotation_metadata">
-                  <div class="annotation_author">{annotation.author}</div>
+                  <div class="annotation_author">{annotation.annotationauthor ? annotation.annotationauthor : "[null author]"}</div>
                   <div class="orcidLink">
                     <a
                       href={"https://orcid.org/" + annotation.orcid}
