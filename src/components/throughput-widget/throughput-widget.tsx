@@ -64,6 +64,8 @@ export class ThroughputWidget {
           this.annotations = json.data;
         });
       });
+    } else {
+      console.error("Throughput widget: missing required property 'identifier'.")
     }
   }
 
