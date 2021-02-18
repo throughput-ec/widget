@@ -21,7 +21,7 @@ export class AnnotationsDisplay {
     } else if (ev.composedPath()[0].id == "submit_button") {
       console.log("Submit clicked");
       this.submitAnnotation();
-      this.addAnnotation = false;
+      this.addAnnotation = false; // TODO: only close if submit successful?
     } else if (ev.composedPath()[0].id == "cancel_button") {
       this.addAnnotation = false;
     }
@@ -39,8 +39,35 @@ export class AnnotationsDisplay {
   }
 
   submitAnnotation() {
-    console.log("Annotation text = ", this.annotationText);
-    // TODO: POST annotation to api.throughputdb.com/api/widget
+    console.log("Submitting annotation text: ", this.annotationText);
+    // POST new annotation to Throughput
+    // TODO: remove hard-codings
+    const annotation = {
+      dbid: "r3d100011761", // hard-code (Neotoma)
+      orcid: "0000-0002-6229-7677", // hard-code
+      additionalType: "site", // hard-code
+      id: 1113, // hard-code
+      body: this.annotationText,
+      token: "[CCDR-specific token...don't post in public repo!]" // TODO: retrieve from environment variable
+    };
+    const url = "https://throughputdb.com/api/widget/";
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(annotation)
+    }).then((response) => {
+      response.json().then((json) => {
+        console.log(json);
+        const success = json.status && json.status === "success"; // TODO: how to return success var from submitAnnotation?
+        if (!success) {
+          const errmsg = "Submit annotation failed: " + (json.message ? json.message : "[no message provided]");
+          console.error(errmsg);
+          alert(errmsg);
+        }
+      });
+    });
   }
 
   getFormattedDate(date) {
