@@ -7,12 +7,11 @@ import { KEYUTIL, KJUR } from "jsrsasign";
   shadow: true,
 })
 export class ThroughputWidget {
-  //defaults for dev work
-  @Prop() identifier: string = "r3d100011761"; //specifies a resource eg Neotoma
-  @Prop() level: string = "site"; //specifies a dataset type eg site, core, etc
-  @Prop() element: string = "annotation"; // type of DB entity to pull
-  @Prop() link: any = 13971; //specifies the specific dataset // 11349
-  @Prop() readOnlyMode = false; // dash-case ('read-only-mode') to set this prop in throughput-widget tag
+  @Prop() identifier: string = null; //"r3d100011761"; // specifies a resource eg Neotoma
+  @Prop() additionalType: string = null; // specifies a dataset type eg site, core, etc
+  // @Prop() element: string = "annotation"; // type of DB entity to pull
+  @Prop() link: any = null; // specifies the resource-specific dataset
+  @Prop() readOnlyMode = false; // if true, hide add annotation UI elements
 
   @State() annotations: Array<object>;
   @State() authenticated: boolean;
@@ -20,16 +19,16 @@ export class ThroughputWidget {
   componentWillLoad() {
     const client_id = "APP-EDLUYOOYTPV3RMXO";
 
-    // OpenID approach
+    // ORCID authentication with OpenID
     // if we've loaded with #...id_token etc in the body, work OpenID magic
     this.authenticated = false;
     if (window.location.hash != "") {
       const id_token = this.getFragmentParameterByName("id_token");
       if (id_token !== null) {
         const sigIsValid = this.checkSig(id_token, client_id);
-        console.log("sigIsValid = ", sigIsValid);
+        console.log("ORCID id_token signature is valid: ", sigIsValid);
         console.log(KJUR.jws.JWS.parse(id_token).payloadPP);
-        this.authenticated = true;
+        this.authenticated = sigIsValid;
       } else {
         console.log("no id_token found");
       }
@@ -37,19 +36,28 @@ export class ThroughputWidget {
       console.log("no hash");
     }
 
-    // http://throughputdb.com/api/db/annotations?id=r3d100011761&level=site&element=annotation
-    // console.log(this.level, this.link, this.identifier);
+    // Pull Throughput annotations
+    // example: https://throughputdb.com/api/ccdrs/annotations?dbid=r3d100011761&additionalType=site
+    console.log(this.identifier, this.additionalType);
+    // brg 2/17/2021: some returned JSON keys differ from corresponding search params:
+    // [search param] -> [returned JSON key]
+    // dbid -> ccdr
+    // link -> id
     if (this.identifier) {
       // console.log(this.identifier);
-      let url =
-        "https://throughputdb.com/api/db/annotations?id=" +
-        this.identifier +
-        "&link=" +
-        this.link +
-        "&level=" +
-        this.level +
-        "&element=" +
-        this.element;
+      let url = "https://throughputdb.com/api/ccdrs/annotations?dbid=" + this.identifier;
+      if (this.additionalType) {
+        url += "&additionalType=" + this.additionalType;
+      }
+      if (this.link) {
+        url += "&link=" + this.link;
+      }
+      // brg 2/17/2021 element seems to be ignored at present
+      // if (this.element) {
+      //   url += "&element" + this.element;
+      // }
+      url += "&limit=9999"; // default limit is 25
+      console.log(url);
       fetch(url).then((response) => {
         response.json().then((json) => {
           console.log(json);
