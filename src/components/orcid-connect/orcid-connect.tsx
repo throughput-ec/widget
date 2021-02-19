@@ -7,8 +7,13 @@ import { Component, h } from "@stencil/core";
 })
 export class OrcidConnect {
   openORCID() {
+    const redirect_uri = window.location.href.toString().split('#')[0]; // remove anchor '#' and everything to right
+    const orcid_auth_uri =
+      "https://sandbox.orcid.org/oauth/authorize?response_type=token&redirect_uri=" +
+      redirect_uri +
+      "&client_id=APP-EDLUYOOYTPV3RMXO&scope=openid&nonce=ThroughputWidgetNonce";
     window.open(
-      "https://sandbox.orcid.org/oauth/authorize?response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A3333%2F&client_id=APP-EDLUYOOYTPV3RMXO&scope=openid&nonce=ThroughputWidgetNonce",
+      orcid_auth_uri,
       "_self"
     );
   }
