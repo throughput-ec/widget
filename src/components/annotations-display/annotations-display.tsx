@@ -89,7 +89,13 @@ export class AnnotationsDisplay {
       <div class="overlay">
         <div class="annotation_list">
           <div class="closeContainer">
-            <a href="#" id="close_x" class="close" />
+            {/* <div id="close_x" class="close" /> */}
+            {/* brg 2/18/2021 Removing the href='#' to avoid appending '#' to window.location.href
+              when annotations-display is opened. Otherwise we have to chop it off when we pass
+              window.location.href as our redirect_uri when opening the ORCID auth page. Unsure if
+              this is the "right way" to do this or not. The above <div> tag also seems to work right.
+            <a href="#" id="close_x" class="close" /> */}
+            <a id="close_x" class="close" />
           </div>
           <div class="header">
             {/* <img
