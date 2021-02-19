@@ -104,6 +104,9 @@ export class ThroughputWidget {
         <data-display
           annotations={this.annotations}
           authenticated={this.authenticated}
+          identifier={this.identifier}
+          additionalType={this.additionalType}
+          link={this.link}
           readOnlyMode={this.readOnlyMode}
         ></data-display>
       </div>

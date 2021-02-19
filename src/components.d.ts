@@ -8,14 +8,20 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AnnotationsDisplay {
         "addAnnotation": boolean;
+        "additionalType": string;
         "annotationText": string;
         "annotations": any;
         "authenticated": boolean;
+        "identifier": string;
+        "link": any;
         "readOnlyMode": boolean;
     }
     interface DataDisplay {
+        "additionalType": string;
         "annotations": any;
         "authenticated": boolean;
+        "identifier": string;
+        "link": any;
         "readOnlyMode": boolean;
     }
     interface OrcidConnect {
@@ -71,14 +77,20 @@ declare global {
 declare namespace LocalJSX {
     interface AnnotationsDisplay {
         "addAnnotation"?: boolean;
+        "additionalType"?: string;
         "annotationText"?: string;
         "annotations"?: any;
         "authenticated"?: boolean;
+        "identifier"?: string;
+        "link"?: any;
         "readOnlyMode"?: boolean;
     }
     interface DataDisplay {
+        "additionalType"?: string;
         "annotations"?: any;
         "authenticated"?: boolean;
+        "identifier"?: string;
+        "link"?: any;
         "readOnlyMode"?: boolean;
     }
     interface OrcidConnect {

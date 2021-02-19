@@ -9,6 +9,9 @@ import { Component, Prop, h, Listen } from "@stencil/core";
 export class AnnotationsDisplay {
   @Prop() authenticated: boolean = false;
   @Prop() addAnnotation: boolean = false;
+  @Prop() identifier: string;
+  @Prop() additionalType: string;
+  @Prop() link: any;
   @Prop() readOnlyMode: boolean = true;
   @Prop() annotations: any = [];
   @Prop() annotationText: string;
@@ -41,12 +44,11 @@ export class AnnotationsDisplay {
   submitAnnotation() {
     console.log("Submitting annotation text: ", this.annotationText);
     // POST new annotation to Throughput
-    // TODO: remove hard-codings
     const annotation = {
-      dbid: "r3d100011761", // hard-code (Neotoma)
-      orcid: "0000-0002-6229-7677", // hard-code
-      additionalType: "site", // hard-code
-      id: 1113, // hard-code
+      dbid: this.identifier,
+      orcid: "0000-0002-6229-7677", // TODO: hard-coding
+      additionalType: this.additionalType,
+      id: this.link,
       body: this.annotationText,
       token: "[CCDR-specific token...don't post in public repo!]" // TODO: retrieve from environment variable
     };
