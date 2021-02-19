@@ -22,12 +22,41 @@ All products of the Throughput Annotation Project are licensed under an [MIT Lic
 
 ## How to use this repository
 
-Minimal examples of widget integration into Vue, React, Angular, and static HTML can be found in the [examples directory](https://github.com/throughput-ec/widget/tree/orcid/examples).
+### Developing the widget locally
+Install [npm](https://www.npmjs.com/).
+Clone the repository and run `npm install` in its root directory.
+Run with `npm run start`.
+View the widget in a browser at `http://localhost:3333`.
+Hack away and send us pull requests!
 
-#### Add the widget to a Vue app:
-Install the widget with npm:
+### Integrating the widget into an existing application/website
+Minimal examples of widget integration into Vue, React, Angular, and static HTML can be found in the [examples directory](https://github.com/throughput-ec/widget/tree/master/examples).
+
+For Vue, React, and Angular applications, install the widget with [npm](https://www.npmjs.com/):
 
 `npm install throughput-widget`
+
+For static HTML pages, import the widget with the following tag:
+
+```
+<script type="module" src="https://unpkg.com/throughput-widget/dist/throughputwidget/throughputwidget.esm.js"></script>
+```
+
+Vue, React, and Angular can use this tag as an alternative to npm.
+
+#### \<throughput-widget\> properties
+Once installed, your application will have access to the `<throughput-widget>` component.
+It accepts the following properties:
+
+- `identifier` Required. Throughput-provided identifier for top-level data resource.
+- `link` Required(?). Identifies a dataset within the top-level data resource.
+- `additional-type` Optional. Identifies the data type associated with `link`
+- `read-only-mode` Optional, must be 'true' or 'false'. If true, add annotation UI will be hidden.
+
+Vue, React, and Angular each require additional changes to make use of the widget,
+detailed below.
+
+#### Vue
 
 In main.js, import the widget and tell Vue to ignore the widget element:
 
@@ -41,12 +70,9 @@ applyPolyfills().then(() => {
 
 Add the widget to your dataset template, and pass in props. Note the Vue-specific syntax for the `link` prop. `this.dsid` is the dataset page's ID.
 
-`<throughput-widget identifier="r3d100011761" level="site" :link.prop="this.dsid" />`
+`<throughput-widget identifier="r3d100011761" additional-type="site" :link.prop="this.dsid" />`
 
-#### Add the widget to a React app:
-Install the widget with npm:
-
-`npm install throughput-widget`
+#### React
 
 In App.js, import the widget:
 ```
@@ -58,9 +84,9 @@ applyPolyfills().then(() => {
 
 Add the widget to your dataset template, and pass in props. Note the React-specific syntax for the `link` prop. `dsid` is the dataset page's ID.
 
-`<throughput-widget identifier="r3d100011761" level="site" link={dsid} />`
+`<throughput-widget identifier="r3d100011761" additional-type="site" link={dsid} />`
 
-#### Add the widget to an Angular app:
+#### Angular
 
 In app.module.ts, add `CUSTOM_ELEMENTS_SCHEMA` to the imports from `@angular/core`,
 then include it in AppModule's `schemas` list. Repeat for other modules that use the widget.
@@ -88,23 +114,15 @@ defineCustomElements();
 
 Add the widget to your dataset template, and pass in props. Note the Angular-specific syntax for the `link` prop. `dsid` is the dataset page's ID.
 
-`<throughput-widget identifier="r3d100011761" level="site" link="{{ dsid }}"></throughput-widget>`
+`<throughput-widget identifier="r3d100011761" additional-type="site" link="{{ dsid }}"></throughput-widget>`
 
-#### Add the widget to a static HTML page:
-Import the widget with a script tag:
+#### Static HTML
 
-`<script type="module" src="https://unpkg.com/throughput-widget/dist/throughputwidget/throughputwidget.esm.js"></script>`
+Simply add the widget to your dataset page(s):
 
-Add the widget to your dataset page(s):
-
-`<throughput-widget identifier="r3d100011761" level="site" link="[your dataset ID]"></throughput-widget>`
-
-#### \<throughput-widget\> properties
-- identifier: ID for top-level resource e.g. Neotoma.
-- link: ID for dataset within top-level resource.
-- level: Default: 'site'.
-- element: Type of database entity to display. Default: 'annotation'.
-- read-only-mode: View existing annotations only. 'true' or 'false'.
+```
+<throughput-widget identifier="r3d100011761" additional-type="site" link="[your dataset ID]"></throughput-widget>
+```
 
 ### Workflow Overview
 [in progress]
