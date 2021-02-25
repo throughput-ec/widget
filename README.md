@@ -25,6 +25,7 @@ All products of the Throughput Annotation Project are licensed under an [MIT Lic
 ### Developing the widget locally
 Install [npm](https://www.npmjs.com/).
 Clone the repository and run `npm install` in its root directory.
+In `index.html`, add `identifier`, `link`, `additional-type`, and `token` (or set `read-only-mode` to `false`) properties.
 Run with `npm run start`.
 View the widget in a browser at `http://localhost:3333`.
 Hack away and send us pull requests!
@@ -48,13 +49,13 @@ Vue, React, and Angular can use this tag as an alternative to npm.
 Once installed, your application will have access to the `<throughput-widget>` component.
 It accepts the following properties:
 
-- `identifier` Required. Throughput-provided identifier for top-level data resource.
-- `link` Required(?). Identifies a dataset within the top-level data resource.
-- `additional-type` Optional. Identifies the data type associated with `link`
-- `read-only-mode` Optional, must be 'true' or 'false'. If true, add annotation UI will be hidden.
+- `identifier` Required. [re3data](https://www.re3data.org/) identifier for top-level data resource.
+- `link` Required. Identifies a dataset within the top-level data resource.
+- `additional-type` Required. Identifies the data type associated with `link`.
+- `read-only-mode` Optional, boolean. Defaults to `false`. If `true`, add annotation UI will be hidden.
+- `token` Required if `read-only-mode` is `false`. Throughput-provided secret. Required to add annotations.
 
-Vue, React, and Angular each require additional changes to make use of the widget,
-detailed below.
+Vue, React, and Angular each require additional changes to make use of the widget, detailed below.
 
 #### Vue
 
@@ -70,7 +71,9 @@ applyPolyfills().then(() => {
 
 Add the widget to your dataset template, and pass in props. Note the Vue-specific syntax for the `link` prop. `this.dsid` is the dataset page's ID.
 
-`<throughput-widget identifier="r3d100011761" additional-type="site" :link.prop="this.dsid" />`
+```
+<throughput-widget identifier="[your re3data ID]" :link.prop="this.dsid" additional-type="[your dataset type]" token="[your token]"/>
+```
 
 #### React
 
@@ -84,12 +87,13 @@ applyPolyfills().then(() => {
 
 Add the widget to your dataset template, and pass in props. Note the React-specific syntax for the `link` prop. `dsid` is the dataset page's ID.
 
-`<throughput-widget identifier="r3d100011761" additional-type="site" link={dsid} />`
+```
+<throughput-widget identifier="[your re3data ID]" link={dsid} additional-type="[your dataset type]" token="[your token]"/>
+```
 
 #### Angular
 
-In app.module.ts, add `CUSTOM_ELEMENTS_SCHEMA` to the imports from `@angular/core`,
-then include it in AppModule's `schemas` list. Repeat for other modules that use the widget.
+In app.module.ts, add `CUSTOM_ELEMENTS_SCHEMA` to the imports from `@angular/core`, then include it in AppModule's `schemas` list. Repeat for other modules that use the widget.
 
 ```
 // ...
@@ -114,14 +118,16 @@ defineCustomElements();
 
 Add the widget to your dataset template, and pass in props. Note the Angular-specific syntax for the `link` prop. `dsid` is the dataset page's ID.
 
-`<throughput-widget identifier="r3d100011761" additional-type="site" link="{{ dsid }}"></throughput-widget>`
+```
+<throughput-widget identifier="[your re3data ID]" link="{{ dsid }}" additional-type="[your dataset type]" token="[your token]"></throughput-widget>`
+```
 
 #### Static HTML
 
 Simply add the widget to your dataset page(s):
 
 ```
-<throughput-widget identifier="r3d100011761" additional-type="site" link="[your dataset ID]"></throughput-widget>
+<throughput-widget identifier="[your re3data ID]" link="[your dataset ID]" additional-type="[your dataset type]" token="[your token]"></throughput-widget>
 ```
 
 ### Workflow Overview
