@@ -23,11 +23,11 @@ All products of the Throughput Annotation Project are licensed under an [MIT Lic
 ## How to use this repository
 
 ### Developing the widget locally
-Install [npm](https://www.npmjs.com/).
-Clone the repository and run `npm install` in its root directory.
-In `index.html`, add `identifier`, `link`, `additional-type`, and `token` (or set `read-only-mode` to `false`) properties.
-Run with `npm run start`.
-View the widget in a browser at `http://localhost:3333`.
+Install [npm](https://www.npmjs.com/).\
+Clone the repository and run `npm install` in its root directory.\
+In `index.html`, add `identifier`, `link`, `additional-type`, and `token` (or set `read-only-mode` to `false`) properties.\
+Run with `npm run start`.\
+View the widget in a browser at `http://localhost:3333`.\
 Hack away and send us pull requests!
 
 ### Integrating the widget into an existing application/website
