@@ -7,16 +7,20 @@ import { KEYUTIL, KJUR } from "jsrsasign";
   shadow: true,
 })
 export class ThroughputWidget {
-  @Prop() identifier: string = null; //"r3d100011761"; // specifies a resource eg Neotoma
+  @Prop() identifier: string = null; // specifies a resource eg Neotoma
   @Prop() additionalType: string = null; // specifies a dataset type eg site, core, etc
-  // @Prop() element: string = "annotation"; // type of DB entity to pull
   @Prop() link: any = null; // specifies the resource-specific dataset
   @Prop() readOnlyMode = false; // if true, hide add annotation UI elements
-
+  // @Prop() element: string = "annotation"; // type of DB entity to pull
+  
   @State() annotations: Array<object>;
   @State() authenticated: boolean;
 
   componentWillLoad() {
+    if (!this.hasRequiredProps()) {
+      return;
+    }
+
     const client_id = "APP-EDLUYOOYTPV3RMXO";
 
     // ORCID authentication with OpenID
@@ -37,36 +41,38 @@ export class ThroughputWidget {
     }
 
     // Pull Throughput annotations
-    // example: https://throughputdb.com/api/ccdrs/annotations?dbid=r3d100011761&additionalType=site
-    console.log(this.identifier, this.additionalType);
-    // brg 2/17/2021: some returned JSON keys differ from corresponding search params:
-    // [search param] -> [returned JSON key]
-    // dbid -> ccdr
-    // link -> id
-    if (this.identifier) {
-      // console.log(this.identifier);
-      let url = "https://throughputdb.com/api/ccdrs/annotations?dbid=" + this.identifier;
-      if (this.additionalType) {
-        url += "&additionalType=" + this.additionalType;
-      }
-      if (this.link) {
-        url += "&id=" + this.link;
-      }
-      // brg 2/17/2021 element seems to be ignored at present
-      // if (this.element) {
-      //   url += "&element" + this.element;
-      // }
-      url += "&limit=9999"; // default limit is 25
-      console.log(url);
-      fetch(url).then((response) => {
-        response.json().then((json) => {
-          console.log(json);
-          this.annotations = json.data;
-        });
+    // example: https://throughputdb.com/api/ccdrs/annotations?dbid=r3d100011761&id=1114&additionalType=site
+    const ANNOTATION_SEARCH_ENDPOINT = "https://throughputdb.com/api/ccdrs/annotations?";
+    let url =
+      ANNOTATION_SEARCH_ENDPOINT +
+      "dbid=" + this.identifier +
+      "&additionalType=" + this.additionalType +
+      "&id=" + this.link;
+    // brg 2/17/2021 element is ignored at present
+    // if (this.element) {
+    //   url += "&element" + this.element;
+    // }
+    url += "&limit=9999"; // default limit is 25
+    console.log(url);
+    fetch(url).then((response) => {
+      response.json().then((json) => {
+        console.log(json);
+        this.annotations = json.data;
       });
-    } else {
+    });
+  }
+
+  hasRequiredProps() {
+    if (!this.identifier) {
       console.error("Throughput widget: missing required property 'identifier'.")
     }
+    if (!this.link) {
+      console.error("Throughput widget: missing required property 'link'.")
+    }
+    if (!this.additionalType) {
+      console.error("Throughput widget: missing required property 'additional-type'.")
+    }
+    return (this.identifier && this.link && this.additionalType);
   }
 
   // ORCID OpenID handling lifted from
