@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <throughput-widget identifier="r3d100011761" level="site" :link.prop="this.dsid" read-only-mode="false" />
+    <throughput-widget identifier="r3d100011761" :link.prop="this.dsid" additional-type="site" read-only-mode="true" />
   </div>
 </template>
 
