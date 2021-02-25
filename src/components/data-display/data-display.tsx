@@ -12,6 +12,7 @@ export class DataDisplay {
   @Prop() identifier: string;
   @Prop() additionalType: string;
   @Prop() link: any;
+  @Prop() token: string;
   @Prop() readOnlyMode: boolean;
 
   @State() open: boolean = false;
@@ -59,6 +60,7 @@ export class DataDisplay {
             identifier={this.identifier}
             additionalType={this.additionalType}
             link={this.link}
+            token={this.token}
             readOnlyMode={this.readOnlyMode}
           ></annotations-display>
         ) : null}

@@ -15,6 +15,7 @@ export namespace Components {
         "identifier": string;
         "link": any;
         "readOnlyMode": boolean;
+        "token": string;
     }
     interface DataDisplay {
         "additionalType": string;
@@ -23,6 +24,7 @@ export namespace Components {
         "identifier": string;
         "link": any;
         "readOnlyMode": boolean;
+        "token": string;
     }
     interface OrcidConnect {
     }
@@ -33,6 +35,7 @@ export namespace Components {
         "identifier": string;
         "link": any;
         "readOnlyMode": boolean;
+        "token": string;
     }
 }
 declare global {
@@ -84,6 +87,7 @@ declare namespace LocalJSX {
         "identifier"?: string;
         "link"?: any;
         "readOnlyMode"?: boolean;
+        "token"?: string;
     }
     interface DataDisplay {
         "additionalType"?: string;
@@ -92,6 +96,7 @@ declare namespace LocalJSX {
         "identifier"?: string;
         "link"?: any;
         "readOnlyMode"?: boolean;
+        "token"?: string;
     }
     interface OrcidConnect {
     }
@@ -102,6 +107,7 @@ declare namespace LocalJSX {
         "identifier"?: string;
         "link"?: any;
         "readOnlyMode"?: boolean;
+        "token"?: string;
     }
     interface IntrinsicElements {
         "annotations-display": AnnotationsDisplay;

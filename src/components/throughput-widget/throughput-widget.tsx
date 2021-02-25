@@ -10,6 +10,8 @@ export class ThroughputWidget {
   @Prop() identifier: string = null; // specifies a resource eg Neotoma
   @Prop() additionalType: string = null; // specifies a dataset type eg site, core, etc
   @Prop() link: any = null; // specifies the resource-specific dataset
+  // resource-specific token required to add annotations; required if readOnlyMode = false
+  @Prop() token: string = null;
   @Prop() readOnlyMode = false; // if true, hide add annotation UI elements
   // @Prop() element: string = "annotation"; // type of DB entity to pull
   
@@ -72,7 +74,11 @@ export class ThroughputWidget {
     if (!this.additionalType) {
       console.error("Throughput widget: missing required property 'additional-type'.")
     }
-    return (this.identifier && this.link && this.additionalType);
+    const missingToken = !this.readOnlyMode && !this.token;
+    if (missingToken) {
+      console.error("Throughput widget: 'token' property required if 'read-only-mode' is false.")
+    }
+    return (this.identifier && this.link && this.additionalType && !missingToken);
   }
 
   // ORCID OpenID handling lifted from
@@ -113,6 +119,7 @@ export class ThroughputWidget {
           identifier={this.identifier}
           additionalType={this.additionalType}
           link={this.link}
+          token={this.token}
           readOnlyMode={this.readOnlyMode}
         ></data-display>
       </div>

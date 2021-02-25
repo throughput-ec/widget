@@ -12,6 +12,7 @@ export class AnnotationsDisplay {
   @Prop() identifier: string;
   @Prop() additionalType: string;
   @Prop() link: any;
+  @Prop() token: string;
   @Prop() readOnlyMode: boolean = true;
   @Prop() annotations: any = [];
   @Prop() annotationText: string;
@@ -50,7 +51,7 @@ export class AnnotationsDisplay {
       additionalType: this.additionalType,
       id: this.link,
       body: this.annotationText,
-      token: "[CCDR-specific token...don't post in public repo!]" // TODO: retrieve from environment variable
+      token: this.token
     };
     const url = "https://throughputdb.com/api/widget/";
     fetch(url, {
