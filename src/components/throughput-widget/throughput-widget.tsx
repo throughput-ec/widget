@@ -117,8 +117,8 @@ export class ThroughputWidget {
   }
 
   render() {
-    return (
-      <div>
+    return this.hasRequiredProps() ?
+      (<div>
         <data-display
           annotations={this.annotations}
           authenticated={this.authenticated}
@@ -130,7 +130,7 @@ export class ThroughputWidget {
           orcidClientId={this.orcidClientId}
           useOrcidSandbox={this.useOrcidSandbox}
         ></data-display>
-      </div>
-    );
+      </div>) :
+      (<div>Error: see console for details</div>);
   }
 }
