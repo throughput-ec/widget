@@ -14,8 +14,10 @@ export namespace Components {
         "authenticated": boolean;
         "identifier": string;
         "link": any;
+        "orcidClientId": string;
         "readOnlyMode": boolean;
         "token": string;
+        "useOrcidSandbox": boolean;
     }
     interface DataDisplay {
         "additionalType": string;
@@ -23,10 +25,14 @@ export namespace Components {
         "authenticated": boolean;
         "identifier": string;
         "link": any;
+        "orcidClientId": string;
         "readOnlyMode": boolean;
         "token": string;
+        "useOrcidSandbox": boolean;
     }
     interface OrcidConnect {
+        "orcidClientId": string;
+        "useOrcidSandbox": boolean;
     }
     interface ThroughputSubmit {
     }
@@ -34,8 +40,10 @@ export namespace Components {
         "additionalType": string;
         "identifier": string;
         "link": any;
+        "orcidClientId": string;
         "readOnlyMode": boolean;
         "token": string;
+        "useOrcidSandbox": boolean;
     }
 }
 declare global {
@@ -86,8 +94,10 @@ declare namespace LocalJSX {
         "authenticated"?: boolean;
         "identifier"?: string;
         "link"?: any;
+        "orcidClientId"?: string;
         "readOnlyMode"?: boolean;
         "token"?: string;
+        "useOrcidSandbox"?: boolean;
     }
     interface DataDisplay {
         "additionalType"?: string;
@@ -95,10 +105,14 @@ declare namespace LocalJSX {
         "authenticated"?: boolean;
         "identifier"?: string;
         "link"?: any;
+        "orcidClientId"?: string;
         "readOnlyMode"?: boolean;
         "token"?: string;
+        "useOrcidSandbox"?: boolean;
     }
     interface OrcidConnect {
+        "orcidClientId"?: string;
+        "useOrcidSandbox"?: boolean;
     }
     interface ThroughputSubmit {
     }
@@ -106,8 +120,10 @@ declare namespace LocalJSX {
         "additionalType"?: string;
         "identifier"?: string;
         "link"?: any;
+        "orcidClientId"?: string;
         "readOnlyMode"?: boolean;
         "token"?: string;
+        "useOrcidSandbox"?: boolean;
     }
     interface IntrinsicElements {
         "annotations-display": AnnotationsDisplay;

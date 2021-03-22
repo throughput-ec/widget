@@ -14,6 +14,8 @@ export class DataDisplay {
   @Prop() link: any;
   @Prop() token: string;
   @Prop() readOnlyMode: boolean;
+  @Prop() orcidClientId: string;
+  @Prop() useOrcidSandbox: boolean;
 
   @State() open: boolean = false;
 
@@ -62,6 +64,8 @@ export class DataDisplay {
             link={this.link}
             token={this.token}
             readOnlyMode={this.readOnlyMode}
+            orcidClientId={this.orcidClientId}
+            useOrcidSandbox={this.useOrcidSandbox}
           ></annotations-display>
         ) : null}
       </div>

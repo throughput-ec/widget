@@ -1,4 +1,4 @@
-import { Component, h } from "@stencil/core";
+import { Component, h, Listen, Prop } from "@stencil/core";
 
 @Component({
   tag: "orcid-connect",
@@ -6,12 +6,28 @@ import { Component, h } from "@stencil/core";
   shadow: true,
 })
 export class OrcidConnect {
+  @Prop() orcidClientId: string;
+  @Prop() useOrcidSandbox: boolean;
+
+  @Listen('click')
+  handleClick(ev) {
+    const clicked_id = ev.composedPath()[0].id;
+    if (clicked_id) {
+      this.openORCID();
+    }
+  }
+
   openORCID() {
     const redirect_uri = window.location.href.toString().split('#')[0]; // remove anchor '#' and everything to right
     const orcid_auth_uri =
-      "https://sandbox.orcid.org/oauth/authorize?response_type=token&redirect_uri=" +
+      (this.useOrcidSandbox ? "https://sandbox.orcid.org" : "https://orcid.org") +
+      "/oauth/authorize?response_type=token&redirect_uri=" +
       redirect_uri +
-      "&client_id=APP-EDLUYOOYTPV3RMXO&scope=openid&nonce=ThroughputWidgetNonce";
+      "&client_id=" + this.orcidClientId +
+      "&scope=openid&nonce=ThroughputWidgetNonce";
+
+    console.log("opening URL ", orcid_auth_uri);
+
     window.open(
       orcid_auth_uri,
       "_self"
@@ -21,7 +37,7 @@ export class OrcidConnect {
   render() {
     return (
       <div class="connect-orcid-button-wrapper">
-        <button id="connect-orcid-button" onClick={this.openORCID}>
+        <button id="connect-orcid-button">
           To Submit Annotations - Connect your ORCID iD
           <img
             id="orcid-id-icon"

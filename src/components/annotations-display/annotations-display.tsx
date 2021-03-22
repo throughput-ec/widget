@@ -14,6 +14,8 @@ export class AnnotationsDisplay {
   @Prop() link: any;
   @Prop() token: string;
   @Prop() readOnlyMode: boolean = true;
+  @Prop() orcidClientId: string;
+  @Prop() useOrcidSandbox: boolean;
   @Prop() annotations: any = [];
   @Prop() annotationText: string;
   DEFAULT_ANNOTATION_TEXT: string = "Enter your annotation here.";
@@ -119,7 +121,10 @@ export class AnnotationsDisplay {
           <div class="body">
             {!this.readOnlyMode ? (
               !this.authenticated ? (
-                <orcid-connect />
+                <orcid-connect
+                  orcidClientId={this.orcidClientId}
+                  useOrcidSandbox={this.useOrcidSandbox}
+                />
               ) : !this.addAnnotation ? (
                 <button id="add_button" class="add_button">
                   + Add Annotation
