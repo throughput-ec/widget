@@ -48,7 +48,7 @@ For Vue, React, and Angular applications, install the widget with [npm](https://
 
 `npm install throughput-widget`
 
-For static HTML pages, import the widget with the following tag:
+<a name="import"></a>For static HTML pages, import the widget with the following tag:
 
 ```
 <script type="module" src="https://unpkg.com/throughput-widget/dist/throughputwidget/throughputwidget.esm.js"></script>
@@ -85,7 +85,13 @@ applyPolyfills().then(() => {
 Add the widget to your dataset template, and pass in props. Note the Vue-specific syntax for the `link` prop. `this.dsid` is the dataset page's ID.
 
 ```
-<throughput-widget identifier="[your re3data ID]" :link.prop="this.dsid" additional-type="[your dataset type]" token="[your token]"/>
+<throughput-widget
+  identifier="[your re3data ID]"
+  :link.prop="this.dsid"
+  additional-type="[your dataset type]"
+  orcid-client-id="[your ORCID client ID]"
+  token="[your token]"
+/>
 ```
 
 #### React
@@ -101,7 +107,13 @@ applyPolyfills().then(() => {
 Add the widget to your dataset template, and pass in props. Note the React-specific syntax for the `link` prop. `dsid` is the dataset page's ID.
 
 ```
-<throughput-widget identifier="[your re3data ID]" link={dsid} additional-type="[your dataset type]" token="[your token]"/>
+<throughput-widget
+  identifier="[your re3data ID]"
+  link={dsid}
+  additional-type="[your dataset type]"
+  orcid-client-id="[your ORCID client ID]"
+  token="[your token]"
+/>
 ```
 
 #### Angular
@@ -132,15 +144,27 @@ defineCustomElements();
 Add the widget to your dataset template, and pass in props. Note the Angular-specific syntax for the `link` prop. `dsid` is the dataset page's ID.
 
 ```
-<throughput-widget identifier="[your re3data ID]" link="{{ dsid }}" additional-type="[your dataset type]" token="[your token]"></throughput-widget>`
+<throughput-widget
+  identifier="[your re3data ID]"
+  link="{{ dsid }}"
+  additional-type="[your dataset type]"
+  orcid-client-id="[your ORCID client ID]"
+  token="[your token]"
+></throughput-widget>
 ```
 
 #### Static HTML
 
-Simply add the widget to your dataset page(s):
+Add the [imported](#import) `<throughput-widget>` tag to your dataset page(s):
 
 ```
-<throughput-widget identifier="[your re3data ID]" link="[your dataset ID]" additional-type="[your dataset type]" token="[your token]"></throughput-widget>
+<throughput-widget
+  identifier="[your re3data ID]"
+  link="[your dataset ID]"
+  additional-type="[your dataset type]"
+  orcid-client-id="[your ORCID client ID]"
+  token="[your token]"
+></throughput-widget>
 ```
 
 ### Workflow Overview
