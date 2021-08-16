@@ -32,7 +32,13 @@ export class ThroughputWidget {
         const sigIsValid = this.checkSig(id_token);
         console.log("ORCID id_token signature is valid: ", sigIsValid);
         console.log(KJUR.jws.JWS.parse(id_token).payloadPP);
-        this.authenticated = sigIsValid;
+        if (sigIsValid) {
+         this.getThroughputToken(id_token).then((response) => {
+           console.log(response)
+         })
+        } 
+
+        // this.authenticated = sigIsValid;
       } else {
         console.log("no id_token found");
       }
@@ -114,6 +120,16 @@ export class ThroughputWidget {
       aud: this.orcidClientId,
       gracePeriod: 15 * 60, //15 mins skew allowed
     });
+  }
+
+  async getThroughputToken(orcidToken) {
+    let response = await fetch('https://throughputdb.com/auth/orcid', {
+      method:'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({token: orcidToken})
+    })
+    console.log(response)
+    return response;
   }
 
   render() {
