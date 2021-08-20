@@ -17,6 +17,7 @@ export class ThroughputWidget {
   
   @State() annotations: Array<object>;
   @State() authenticated: boolean;
+  @State() orcidName: string;
 
   componentWillLoad() {
     if (!this.hasRequiredProps()) {
@@ -25,20 +26,29 @@ export class ThroughputWidget {
 
     // ORCID authentication with OpenID
     // if we've loaded with #...id_token etc in the body, work OpenID magic
+    // #...access_token is our Bearer Token to be passed to throughputdb.com
     this.authenticated = false;
     if (window.location.hash != "") {
+      const bearerToken = this.getFragmentParameterByName("access_token");
       const id_token = this.getFragmentParameterByName("id_token");
       if (id_token !== null) {
         const sigIsValid = this.checkSig(id_token);
+        console.log("ORCID bearer token (access_token key of window.location.hash): ", bearerToken);
         console.log("ORCID id_token signature is valid: ", sigIsValid);
+        console.log("Decrypted token contents:")
         console.log(KJUR.jws.JWS.parse(id_token).payloadPP);
         if (sigIsValid) {
-         this.getThroughputToken(id_token).then((response) => {
-           console.log(response)
-         })
-        } 
-
-        // this.authenticated = sigIsValid;
+          this.getThroughputToken(bearerToken).then((response) => {
+            response.json().then((json) => {
+              console.log("JSON response: ", json);
+              this.authenticated = json.status == "success";
+              this.orcidName = json.user.name;
+              console.log("Got Throughput token for user ", this.orcidName);
+            });
+          });
+        } else {
+          console.error("id_token signature is invalid");
+        }
       } else {
         console.log("no id_token found");
       }
@@ -122,13 +132,30 @@ export class ThroughputWidget {
     });
   }
 
-  async getThroughputToken(orcidToken) {
+  // After user authentication, exchange the short-lived ORCID bearer token
+  // for, among other things, a persistent throughputdb.com token, required
+  // to add new annotations.
+  async getThroughputToken(orcidBearerToken) {
     let response = await fetch('https://throughputdb.com/auth/orcid', {
       method:'POST',
       mode: 'no-cors',
-      body: JSON.stringify({token: orcidToken})
+      body: JSON.stringify({token: orcidBearerToken})
     })
-    console.log(response)
+    
+    // expected response is JSON of form:
+    // {
+    // "status": "success",
+    // "data": {
+    //     "token": "zI1NiIsInR5cCI6IkpXVkddxCJ9.eyJvcmNpZCI6eyJpZCI6Imh0dHBzOi8vb3JjaWQub3JnLzAwMDAtMDAwMi0yNzAwLTQ2MDUiLCJzdWIiOiIwMDAwLTAwMDItMjcwMC00NjA1IiwibmFtEdvcmluZyIsImZhbWlseV9uYW1lIjoiR29yaW5nIiwiZ2l2ZW5fbmFtZSI6IlNpbW9uIn0sImlhdCI6MTYyNzUwOTI5NiwiZXhwIjoxNjI3NTA5Mjk4fQ.Y9BZmQdU3wT3smgtWxPieAQAyNlr4bZ-XAXtcpb6Ltw",
+    //     "user": {
+    //         "id": "https://orcid.org/0000-1111-2222-3333",
+    //         "sub": "0000-1111-2222-3333",
+    //         "name": "Some Guy",
+    //         "family_name": "Guy",
+    //         "given_name": "Some"
+    //     }
+    // },
+    // "message": "Throughput token expires in 1wk"
     return response;
   }
 
