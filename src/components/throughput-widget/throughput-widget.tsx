@@ -42,7 +42,7 @@ export class ThroughputWidget {
             response.json().then((json) => {
               console.log("JSON response: ", json);
               this.authenticated = json.status == "success";
-              this.orcidName = json.user.name;
+              this.orcidName = json.data.user.name;
               console.log("Got Throughput token for user ", this.orcidName);
             });
           });
