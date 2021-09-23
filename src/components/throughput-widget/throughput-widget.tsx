@@ -39,11 +39,14 @@ export class ThroughputWidget {
         console.log(KJUR.jws.JWS.parse(id_token).payloadPP);
         if (sigIsValid) {
           this.getThroughputToken(bearerToken).then((response) => {
+            console.log("Throughput response: ", response);
             response.json().then((json) => {
               console.log("JSON response: ", json);
-              this.authenticated = json.status == "success";
-              this.orcidName = json.data.user.name;
-              console.log("Got Throughput token for user ", this.orcidName);
+              if (json.status == "success") {
+                this.authenticated = true;
+                this.orcidName = json.data.user.name;
+                console.log("Got Throughput token for user ", this.orcidName);
+              }
             });
           });
         } else {
@@ -138,9 +141,8 @@ export class ThroughputWidget {
   async getThroughputToken(orcidBearerToken) {
     let response = await fetch('https://throughputdb.com/auth/orcid', {
       method:'POST',
-      mode: 'no-cors',
       body: JSON.stringify({token: orcidBearerToken})
-    })
+    });
     
     // expected response is JSON of form:
     // {
