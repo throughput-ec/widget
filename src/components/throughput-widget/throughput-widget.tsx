@@ -31,6 +31,10 @@ export class ThroughputWidget {
     if (window.location.hash != "") {
       const bearerToken = this.getFragmentParameterByName("access_token");
       const id_token = this.getFragmentParameterByName("id_token");
+      // clear #... in address bar so we don't hit this block every time
+      // the page reloads when changing code!!!
+      // https://stackoverflow.com/questions/1397329/how-to-remove-the-hash-from-window-location-url-with-javascript-without-page-r/5298684#5298684
+      history.replaceState("", document.title, window.location.pathname + window.location.search);
       if (id_token !== null) {
         const sigIsValid = this.checkSig(id_token);
         console.log("ORCID bearer token (access_token key of window.location.hash): ", bearerToken);
