@@ -16,7 +16,7 @@ export class ThroughputWidget {
   
   @State() annotations: Array<object>;
   @State() authenticated: boolean = false;
-  @State() orcidName: string;
+  @State() orcidName: string; // if authenticated, user's name in ORCID
   @State() throughputToken: string = null;
 
   componentWillLoad() {
@@ -24,9 +24,8 @@ export class ThroughputWidget {
       return;
     }
 
-    // ORCID authentication with OpenID
-    // if we've loaded with #...id_token etc in the body, work OpenID magic
-    // #...access_token is our Bearer Token to be passed to throughputdb.com
+    // Presence of #...id_token...  in window.location indicates redirect from successful
+    // ORCID authentication. Exchange ORCID bearer token for Throughput token.
     this.authenticated = false;
     if (window.location.hash != "") {
       const bearerToken = this.getFragmentParameterByName("access_token");
@@ -61,9 +60,12 @@ export class ThroughputWidget {
     } else {
       console.log("no hash");
     }
-
-    // Pull Throughput annotations
-    // example: https://throughputdb.com/api/ccdrs/annotations?dbid=r3d100011761&id=1114&additionalType=site
+    this.getAnnotations();
+  }
+  
+  // Pull Throughput annotations
+  // example: https://throughputdb.com/api/ccdrs/annotations?dbid=r3d100011761&id=1114&additionalType=site
+  getAnnotations() {
     const ANNOTATION_SEARCH_ENDPOINT = "https://throughputdb.com/api/ccdrs/annotations?";
     let url =
       ANNOTATION_SEARCH_ENDPOINT +
@@ -78,6 +80,20 @@ export class ThroughputWidget {
         this.annotations = json.data;
       });
     });
+  }
+
+  // After user authentication, exchange the short-lived ORCID bearer token
+  // for a more persistent throughputdb.com token used when adding annotations.
+  async getThroughputToken(orcidBearerToken) {
+    // console.log("Passing bearer token to Throughput:", orcidBearerToken);
+    let response = await fetch('https://throughputdb.com/auth/orcid', {
+      method:'POST',
+      body: JSON.stringify({token: orcidBearerToken}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return response;
   }
 
   hasRequiredProps() {
@@ -132,21 +148,6 @@ export class ThroughputWidget {
       aud: this.orcidClientId,
       gracePeriod: 15 * 60, //15 mins skew allowed
     });
-  }
-
-  // After user authentication, exchange the short-lived ORCID bearer token
-  // for, among other things, a persistent throughputdb.com token, required
-  // to add new annotations.
-  async getThroughputToken(orcidBearerToken) {
-    // console.log("Passing bearer token to Throughput:", orcidBearerToken);
-    let response = await fetch('https://throughputdb.com/auth/orcid', {
-      method:'POST',
-      body: JSON.stringify({token: orcidBearerToken}),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    return response;
   }
 
   render() {
