@@ -13,7 +13,6 @@ export class DataDisplay {
   @Prop() identifier: string;
   @Prop() additionalType: string;
   @Prop() link: any;
-  @Prop() token: string;
   @Prop() readOnlyMode: boolean;
   @Prop() orcidClientId: string;
   @Prop() useOrcidSandbox: boolean;
@@ -64,7 +63,6 @@ export class DataDisplay {
             identifier={this.identifier}
             additionalType={this.additionalType}
             link={this.link}
-            token={this.token}
             readOnlyMode={this.readOnlyMode}
             orcidClientId={this.orcidClientId}
             useOrcidSandbox={this.useOrcidSandbox}

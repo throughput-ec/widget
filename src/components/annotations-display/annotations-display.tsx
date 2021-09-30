@@ -13,7 +13,6 @@ export class AnnotationsDisplay {
   @Prop() additionalType: string;
   @Prop() link: any;
   @Prop() throughputToken: string = null;
-  @Prop() token: string;
   @Prop() readOnlyMode: boolean = true;
   @Prop() orcidClientId: string;
   @Prop() useOrcidSandbox: boolean;

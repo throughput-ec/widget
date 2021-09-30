@@ -13,7 +13,6 @@ export class ThroughputWidget {
   @Prop() readOnlyMode: boolean = false; // if true, hide add annotation UI elements
   @Prop() orcidClientId: string = null; // required if readOnlyMode = false
   @Prop() useOrcidSandbox: boolean = false; // use sandbox.orcid.org if true, else orcid.org (production)
-  @Prop() token: string = null; // obsolete, but retaining until API no longer requires token
   
   @State() annotations: Array<object>;
   @State() authenticated: boolean = false;
@@ -160,7 +159,6 @@ export class ThroughputWidget {
           identifier={this.identifier}
           additionalType={this.additionalType}
           link={this.link}
-          token={this.token}
           readOnlyMode={this.readOnlyMode}
           orcidClientId={this.orcidClientId}
           useOrcidSandbox={this.useOrcidSandbox}

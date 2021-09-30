@@ -17,7 +17,6 @@ export namespace Components {
         "orcidClientId": string;
         "readOnlyMode": boolean;
         "throughputToken": string;
-        "token": string;
         "useOrcidSandbox": boolean;
     }
     interface DataDisplay {
@@ -29,7 +28,6 @@ export namespace Components {
         "orcidClientId": string;
         "readOnlyMode": boolean;
         "throughputToken": string;
-        "token": string;
         "useOrcidSandbox": boolean;
     }
     interface OrcidConnect {
@@ -44,7 +42,6 @@ export namespace Components {
         "link": any;
         "orcidClientId": string;
         "readOnlyMode": boolean;
-        "token": string;
         "useOrcidSandbox": boolean;
     }
 }
@@ -99,7 +96,6 @@ declare namespace LocalJSX {
         "orcidClientId"?: string;
         "readOnlyMode"?: boolean;
         "throughputToken"?: string;
-        "token"?: string;
         "useOrcidSandbox"?: boolean;
     }
     interface DataDisplay {
@@ -111,7 +107,6 @@ declare namespace LocalJSX {
         "orcidClientId"?: string;
         "readOnlyMode"?: boolean;
         "throughputToken"?: string;
-        "token"?: string;
         "useOrcidSandbox"?: boolean;
     }
     interface OrcidConnect {
@@ -126,7 +121,6 @@ declare namespace LocalJSX {
         "link"?: any;
         "orcidClientId"?: string;
         "readOnlyMode"?: boolean;
-        "token"?: string;
         "useOrcidSandbox"?: boolean;
     }
     interface IntrinsicElements {
