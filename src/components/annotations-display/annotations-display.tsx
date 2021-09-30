@@ -12,6 +12,7 @@ export class AnnotationsDisplay {
   @Prop() identifier: string;
   @Prop() additionalType: string;
   @Prop() link: any;
+  @Prop() throughputToken: string = null;
   @Prop() token: string;
   @Prop() readOnlyMode: boolean = true;
   @Prop() orcidClientId: string;
@@ -60,16 +61,15 @@ export class AnnotationsDisplay {
     console.log("Submitting annotation text: ", this.annotationText);
     const annotation = {
       dbid: this.identifier,
-      orcid: "0000-0002-6229-7677", // TODO: hard-coding
       additionalType: this.additionalType,
       id: this.link,
       body: this.annotationText,
-      token: this.token
     };
     const url = "https://throughputdb.com/api/widget/";
     const response = await fetch(url, {
       method: 'POST',
       headers: {
+        'Authorization': this.throughputToken,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(annotation)

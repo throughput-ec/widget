@@ -16,6 +16,7 @@ export namespace Components {
         "link": any;
         "orcidClientId": string;
         "readOnlyMode": boolean;
+        "throughputToken": string;
         "token": string;
         "useOrcidSandbox": boolean;
     }
@@ -27,6 +28,7 @@ export namespace Components {
         "link": any;
         "orcidClientId": string;
         "readOnlyMode": boolean;
+        "throughputToken": string;
         "token": string;
         "useOrcidSandbox": boolean;
     }
@@ -96,6 +98,7 @@ declare namespace LocalJSX {
         "link"?: any;
         "orcidClientId"?: string;
         "readOnlyMode"?: boolean;
+        "throughputToken"?: string;
         "token"?: string;
         "useOrcidSandbox"?: boolean;
     }
@@ -107,6 +110,7 @@ declare namespace LocalJSX {
         "link"?: any;
         "orcidClientId"?: string;
         "readOnlyMode"?: boolean;
+        "throughputToken"?: string;
         "token"?: string;
         "useOrcidSandbox"?: boolean;
     }

@@ -16,8 +16,9 @@ export class ThroughputWidget {
   @Prop() token: string = null; // obsolete, but retaining until API no longer requires token
   
   @State() annotations: Array<object>;
-  @State() authenticated: boolean;
+  @State() authenticated: boolean = false;
   @State() orcidName: string;
+  @State() throughputToken: string = null;
 
   componentWillLoad() {
     if (!this.hasRequiredProps()) {
@@ -37,19 +38,18 @@ export class ThroughputWidget {
       history.replaceState("", document.title, window.location.pathname + window.location.search);
       if (id_token !== null) {
         const sigIsValid = this.checkSig(id_token);
-        console.log("ORCID bearer token (access_token key of window.location.hash): ", bearerToken);
-        console.log("ORCID id_token signature is valid: ", sigIsValid);
-        console.log("Decrypted token contents:")
-        console.log(KJUR.jws.JWS.parse(id_token).payloadPP);
+        console.log("ORCID bearer token (access_token key of window.location.hash):", bearerToken);
+        // console.log("ORCID id_token signature is valid:", sigIsValid);
+        // console.log("Decrypted token contents:", KJUR.jws.JWS.parse(id_token).payloadPP);
         if (sigIsValid) {
           this.getThroughputToken(bearerToken).then((response) => {
-            console.log("Throughput response: ", response);
+            // console.log("Throughput response:", response);
             response.json().then((json) => {
-              console.log("JSON response: ", json);
               if (json.status == "success") {
                 this.authenticated = true;
-                this.orcidName = json.data.user.name;
-                console.log("Got Throughput token for user ", this.orcidName);
+                this.orcidName = json.data.user.given_name + " " + json.data.user.family_name;
+                this.throughputToken = json.data.token;
+                // console.log("Got Throughput token for user", this.orcidName);
               }
             });
           });
@@ -71,10 +71,6 @@ export class ThroughputWidget {
       "dbid=" + this.identifier +
       "&additionalType=" + this.additionalType +
       "&id=" + this.link;
-    // brg 2/17/2021 element is ignored at present
-    // if (this.element) {
-    //   url += "&element" + this.element;
-    // }
     url += "&limit=9999"; // default limit is 25
     console.log(url);
     fetch(url).then((response) => {
@@ -143,25 +139,14 @@ export class ThroughputWidget {
   // for, among other things, a persistent throughputdb.com token, required
   // to add new annotations.
   async getThroughputToken(orcidBearerToken) {
+    // console.log("Passing bearer token to Throughput:", orcidBearerToken);
     let response = await fetch('https://throughputdb.com/auth/orcid', {
       method:'POST',
-      body: JSON.stringify({token: orcidBearerToken})
+      body: JSON.stringify({token: orcidBearerToken}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
-    
-    // expected response is JSON of form:
-    // {
-    // "status": "success",
-    // "data": {
-    //     "token": "zI1NiIsInR5cCI6IkpXVkddxCJ9.eyJvcmNpZCI6eyJpZCI6Imh0dHBzOi8vb3JjaWQub3JnLzAwMDAtMDAwMi0yNzAwLTQ2MDUiLCJzdWIiOiIwMDAwLTAwMDItMjcwMC00NjA1IiwibmFtEdvcmluZyIsImZhbWlseV9uYW1lIjoiR29yaW5nIiwiZ2l2ZW5fbmFtZSI6IlNpbW9uIn0sImlhdCI6MTYyNzUwOTI5NiwiZXhwIjoxNjI3NTA5Mjk4fQ.Y9BZmQdU3wT3smgtWxPieAQAyNlr4bZ-XAXtcpb6Ltw",
-    //     "user": {
-    //         "id": "https://orcid.org/0000-1111-2222-3333",
-    //         "sub": "0000-1111-2222-3333",
-    //         "name": "Some Guy",
-    //         "family_name": "Guy",
-    //         "given_name": "Some"
-    //     }
-    // },
-    // "message": "Throughput token expires in 1wk"
     return response;
   }
 
@@ -171,6 +156,7 @@ export class ThroughputWidget {
         <data-display
           annotations={this.annotations}
           authenticated={this.authenticated}
+          throughputToken={this.throughputToken}
           identifier={this.identifier}
           additionalType={this.additionalType}
           link={this.link}
