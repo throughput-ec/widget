@@ -25,13 +25,13 @@ All products of the Throughput Annotation Project are licensed under an [MIT Lic
 ### Developing the widget locally
 Install [npm](https://www.npmjs.com/).\
 Clone the repository and run `npm install` in its root directory.\
-In `index.html`, add `identifier`, `link`, `additional-type`, and `token` (or set `read-only-mode` to `false`) properties.\
+In `src/index.html`, set `identifier`, `link`, `additional-type` properties for the data resource to be annotated. Additionally, set `orcid-client-id`, which is required unless the optional `read-only-mode` property is set to `true`.\
 Run with `npm run start`.\
 View the widget in a browser at `http://localhost:3333`.\
 Hack away and send us pull requests!
 
 ### Integrating the widget into an existing application/website
-Minimal examples of widget integration into Vue, React, Angular, and static HTML can be found in the [examples directory](https://github.com/throughput-ec/widget/tree/master/examples).
+Minimal examples of widget integration into Vue, React, Angular, and static HTML can be found in the [examples directory](https://github.com/throughput-ec/widget/tree/master/examples). All examples use `read-only-mode`.
 
 #### Register with ORCID
 *If you plan to use the widget in* `read-only-mode`, *skip this step.*
@@ -66,7 +66,6 @@ It accepts the following properties:
 - `read-only-mode` Optional, boolean, default `false`. If `true`, add annotation UI will be hidden.
 - `orcid-client-id` Required if `read-only-mode` is `false`. The ORCID client ID to be used for authentication.
 - `use-orcid-sandbox` Optional, boolean, default `false`. If `false`, use [ORCID production](https://orcid.org) for authentication. If `true`, use [ORCID sandbox](https://sandbox.orcid.org/).
-- `token` Required if `read-only-mode` is `false`. Throughput-provided secret. Required to add annotations.
 
 Vue, React, and Angular each require additional changes to make use of the widget, detailed below.
 
@@ -90,7 +89,6 @@ Add the widget to your dataset template, and pass in props. Note the Vue-specifi
   :link.prop="this.dsid"
   additional-type="[your dataset type]"
   orcid-client-id="[your ORCID client ID]"
-  token="[your token]"
 />
 ```
 
@@ -112,7 +110,6 @@ Add the widget to your dataset template, and pass in props. Note the React-speci
   link={dsid}
   additional-type="[your dataset type]"
   orcid-client-id="[your ORCID client ID]"
-  token="[your token]"
 />
 ```
 
@@ -149,7 +146,6 @@ Add the widget to your dataset template, and pass in props. Note the Angular-spe
   link="{{ dsid }}"
   additional-type="[your dataset type]"
   orcid-client-id="[your ORCID client ID]"
-  token="[your token]"
 ></throughput-widget>
 ```
 
@@ -163,7 +159,6 @@ Add the [imported](#import) `<throughput-widget>` tag to your dataset page(s):
   link="[your dataset ID]"
   additional-type="[your dataset type]"
   orcid-client-id="[your ORCID client ID]"
-  token="[your token]"
 ></throughput-widget>
 ```
 
