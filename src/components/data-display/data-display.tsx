@@ -9,6 +9,7 @@ import { Component, Prop, h, Watch, State, Listen } from "@stencil/core";
 export class DataDisplay {
   @Prop() annotations: any = [];
   @Prop() authenticated: boolean = false;
+  @Prop() orcidName: string;
   @Prop() throughputToken: string = null;
   @Prop() identifier: string;
   @Prop() additionalType: string;
@@ -59,6 +60,7 @@ export class DataDisplay {
           <annotations-display
             annotations={this.annotations}
             authenticated={this.authenticated}
+            orcidName={this.orcidName}
             throughputToken={this.throughputToken}
             identifier={this.identifier}
             additionalType={this.additionalType}

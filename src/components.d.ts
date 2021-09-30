@@ -7,14 +7,13 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AnnotationsDisplay {
-        "addAnnotation": boolean;
         "additionalType": string;
-        "annotationText": string;
         "annotations": any;
         "authenticated": boolean;
         "identifier": string;
         "link": any;
         "orcidClientId": string;
+        "orcidName": string;
         "readOnlyMode": boolean;
         "throughputToken": string;
         "useOrcidSandbox": boolean;
@@ -26,12 +25,15 @@ export namespace Components {
         "identifier": string;
         "link": any;
         "orcidClientId": string;
+        "orcidName": string;
         "readOnlyMode": boolean;
         "throughputToken": string;
         "useOrcidSandbox": boolean;
     }
     interface OrcidConnect {
+        "authenticated": boolean;
         "orcidClientId": string;
+        "orcidName": string;
         "useOrcidSandbox": boolean;
     }
     interface ThroughputSubmit {
@@ -86,14 +88,13 @@ declare global {
 }
 declare namespace LocalJSX {
     interface AnnotationsDisplay {
-        "addAnnotation"?: boolean;
         "additionalType"?: string;
-        "annotationText"?: string;
         "annotations"?: any;
         "authenticated"?: boolean;
         "identifier"?: string;
         "link"?: any;
         "orcidClientId"?: string;
+        "orcidName"?: string;
         "readOnlyMode"?: boolean;
         "throughputToken"?: string;
         "useOrcidSandbox"?: boolean;
@@ -105,12 +106,15 @@ declare namespace LocalJSX {
         "identifier"?: string;
         "link"?: any;
         "orcidClientId"?: string;
+        "orcidName"?: string;
         "readOnlyMode"?: boolean;
         "throughputToken"?: string;
         "useOrcidSandbox"?: boolean;
     }
     interface OrcidConnect {
+        "authenticated"?: boolean;
         "orcidClientId"?: string;
+        "orcidName"?: string;
         "useOrcidSandbox"?: boolean;
     }
     interface ThroughputSubmit {

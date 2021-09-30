@@ -8,6 +8,8 @@ import { Component, h, Listen, Prop } from "@stencil/core";
 export class OrcidConnect {
   @Prop() orcidClientId: string;
   @Prop() useOrcidSandbox: boolean;
+  @Prop() authenticated: boolean;
+  @Prop() orcidName: string;
 
   @Listen('click')
   handleClick(ev) {
@@ -35,18 +37,28 @@ export class OrcidConnect {
   }
 
   render() {
+    const orcidIcon =
+     <img
+      id="orcid-id-icon"
+      src="https://orcid.org/sites/default/files/images/orcid_24x24.png"
+      width="24"
+      height="24"
+      alt="ORCID iD icon"
+    />;
+
     return (
       <div class="connect-orcid-button-wrapper">
-        <button id="connect-orcid-button">
-          To Submit Annotations - Connect your ORCID iD
-          <img
-            id="orcid-id-icon"
-            src="https://orcid.org/sites/default/files/images/orcid_24x24.png"
-            width="24"
-            height="24"
-            alt="ORCID iD icon"
-          />
-        </button>
+        {this.authenticated ? (
+          <div>
+            {orcidIcon}
+            <span>Authenticated as {this.orcidName}</span>
+          </div>
+        ) : (
+          <button id="connect-orcid-button">
+            To Submit Annotations - Connect your ORCID iD
+            {orcidIcon}
+          </button>
+        )}
       </div>
     );
   }

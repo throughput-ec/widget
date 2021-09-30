@@ -156,6 +156,7 @@ export class ThroughputWidget {
         <data-display
           annotations={this.annotations}
           authenticated={this.authenticated}
+          orcidName={this.orcidName}
           throughputToken={this.throughputToken}
           identifier={this.identifier}
           additionalType={this.additionalType}

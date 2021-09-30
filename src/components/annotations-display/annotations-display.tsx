@@ -1,4 +1,4 @@
-import { Component, Prop, h, Listen } from "@stencil/core";
+import { Component, Prop, State, h, Listen } from "@stencil/core";
 
 @Component({
   tag: "annotations-display",
@@ -8,7 +8,7 @@ import { Component, Prop, h, Listen } from "@stencil/core";
 })
 export class AnnotationsDisplay {
   @Prop() authenticated: boolean = false;
-  @Prop() addAnnotation: boolean = false; // show add annotation UI
+  @Prop() orcidName: string;
   @Prop() identifier: string;
   @Prop() additionalType: string;
   @Prop() link: any;
@@ -17,8 +17,10 @@ export class AnnotationsDisplay {
   @Prop() orcidClientId: string;
   @Prop() useOrcidSandbox: boolean;
   @Prop() annotations: any = [];
-  @Prop() annotationText: string;
   DEFAULT_ANNOTATION_TEXT: string = "Enter your annotation here.";
+  
+  @State() addAnnotation: boolean; // show add annotation text area, Submit/Cancel buttons
+  @State() annotationText: string;
 
   @Listen("click")
   async handleClick(ev) {
@@ -97,6 +99,30 @@ export class AnnotationsDisplay {
   }
 
   render() {
+    // Show "Add Annotation" button or add annotation UI (text area, Submit/Cancel buttons)
+    // depending on state of this.addAnnotation. Doing this here to avoid hard-to-read
+    // nested conditions in rendering code.
+    let annotationElement;
+    if (this.addAnnotation) {
+      annotationElement =
+      <div>
+        <textarea
+          onInput={(event) => this.updateAnnotationText(event)}
+          onFocus={(event) => this.clearDefaultAnnotationText(event)}
+        >
+          {this.DEFAULT_ANNOTATION_TEXT}
+        </textarea>
+        <button id="submit_button" class="add_button">
+          Submit
+        </button>
+        <button id="cancel_button" class="cancel_button">
+          Cancel
+        </button>
+      </div>;
+    } else {
+      annotationElement = <button id="add_button" class="add_button">+ Add Annotation</button>;
+    }
+
     return (
       <div class="overlay">
         <div class="annotation_list">
@@ -119,32 +145,18 @@ export class AnnotationsDisplay {
           </div>
           <div class="body">
             {!this.readOnlyMode ? (
-              !this.authenticated ? (
                 <orcid-connect
                   orcidClientId={this.orcidClientId}
                   useOrcidSandbox={this.useOrcidSandbox}
+                  authenticated={this.authenticated}
+                  orcidName={this.orcidName}
                 />
-              ) : !this.addAnnotation ? (
-                <button id="add_button" class="add_button">
-                  + Add Annotation
-                </button>
-              ) : (
-                <div>
-                  <textarea
-                    onInput={(event) => this.updateAnnotationText(event)}
-                    onFocus={(event) => this.clearDefaultAnnotationText(event)}
-                  >
-                    {this.DEFAULT_ANNOTATION_TEXT}
-                  </textarea>
-                  <button id="submit_button" class="add_button">
-                    Submit
-                  </button>
-                  <button id="cancel_button" class="cancel_button">
-                    Cancel
-                  </button>
-                </div>
-              )
             ) : null}
+
+            {/* Show annotationElement if this.authenticated = true (https://reactjs.org/docs/conditional-rendering.html) */}
+            {this.authenticated && annotationElement}
+
+            {/* Show annotations */}
             {this.annotations.map((annotation) => (
               <div class="annotation_item">
                 {annotation.annotation}
