@@ -59,7 +59,6 @@ export class AnnotationsDisplay {
 
   // POST new annotation to Throughput
   async submitAnnotation() {
-    console.log("Submitting annotation text: ", this.annotationText);
     const annotation = {
       dbid: this.identifier,
       additionalType: this.additionalType,
@@ -75,11 +74,10 @@ export class AnnotationsDisplay {
       },
       body: JSON.stringify(annotation)
     })
-    const json_thing = await response.json();
-    console.log(json_thing);
-    const success = json_thing.status && json_thing.status === "success";
+    const json = await response.json();
+    const success = json.status && json.status === "success";
     if (!success) {
-      const errmsg = "Submit annotation failed: " + (json_thing.message ? json_thing.message : "[no message provided]");
+      const errmsg = "Submit annotation failed: " + (json.message ? json.message : "[no message provided]");
       console.error(errmsg);
       alert(errmsg);
     }
