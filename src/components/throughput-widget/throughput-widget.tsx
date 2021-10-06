@@ -69,7 +69,7 @@ export class ThroughputWidget {
     const ANNOTATION_SEARCH_ENDPOINT = "https://throughputdb.com/api/ccdrs/annotations?";
     const params = new URLSearchParams({
         dbid: this.identifier,
-        additionaltype: this.additionalType,
+        additionalType: this.additionalType,
         id: this.link,
         limit: "9999"
     });
