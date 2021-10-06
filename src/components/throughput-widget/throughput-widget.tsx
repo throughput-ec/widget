@@ -67,14 +67,13 @@ export class ThroughputWidget {
   // example: https://throughputdb.com/api/ccdrs/annotations?dbid=r3d100011761&id=1114&additionalType=site
   getAnnotations() {
     const ANNOTATION_SEARCH_ENDPOINT = "https://throughputdb.com/api/ccdrs/annotations?";
-    let url =
-      ANNOTATION_SEARCH_ENDPOINT +
-      "dbid=" + this.identifier +
-      "&additionalType=" + this.additionalType +
-      "&id=" + this.link;
-    url += "&limit=9999"; // default limit is 25
-    console.log(url);
-    fetch(url).then((response) => {
+    const params = new URLSearchParams({
+        dbid: this.identifier,
+        additionaltype: this.additionalType,
+        id: this.link,
+        limit: "9999"
+    });
+    fetch(ANNOTATION_SEARCH_ENDPOINT + params).then((response) => {
       response.json().then((json) => {
         console.log(json);
         this.annotations = json.data;
