@@ -1,4 +1,4 @@
-import { Component, h, Listen, Prop } from "@stencil/core";
+import { Component, h, Listen } from "@stencil/core";
 import state from "../../store";
 
 @Component({
@@ -7,10 +7,6 @@ import state from "../../store";
   shadow: true,
 })
 export class OrcidConnect {
-  @Prop() orcidClientId: string;
-  @Prop() useOrcidSandbox: boolean;
-  @Prop() orcidName: string;
-
   @Listen('click')
   handleClick(ev) {
     const clicked_id = ev.composedPath()[0].id;
@@ -22,10 +18,10 @@ export class OrcidConnect {
   openORCID() {
     const redirect_uri = window.location.href.toString().split('#')[0]; // remove anchor '#' and everything to right
     const orcid_auth_uri =
-      (this.useOrcidSandbox ? "https://sandbox.orcid.org" : "https://orcid.org") +
+      (state.useOrcidSandbox ? "https://sandbox.orcid.org" : "https://orcid.org") +
       "/oauth/authorize?response_type=token&redirect_uri=" +
       redirect_uri +
-      "&client_id=" + this.orcidClientId +
+      "&client_id=" + state.orcidClientId +
       "&scope=openid&nonce=ThroughputWidgetNonce";
 
     console.log("opening URL ", orcid_auth_uri);
@@ -51,7 +47,7 @@ export class OrcidConnect {
         {state.authenticated ? (
           <div>
             {orcidIcon}
-            <span>Authenticated as {this.orcidName}</span>
+            <span>Authenticated as {state.orcidName}</span>
           </div>
         ) : (
           <button id="connect-orcid-button">

@@ -1,4 +1,4 @@
-import { Component, Prop, State, h, Listen } from "@stencil/core";
+import { Component, State, h, Listen } from "@stencil/core";
 import state from "../../store";
 
 
@@ -9,20 +9,10 @@ import state from "../../store";
   shadow: true,
 })
 export class AnnotationsDisplay {
-  // @Prop() authenticated: boolean = false;
-  @Prop() orcidName: string;
-  @Prop() identifier: string;
-  @Prop() additionalType: string;
-  @Prop() link: any;
-  @Prop() throughputToken: string = null;
-  @Prop() readOnlyMode: boolean = true;
-  @Prop() orcidClientId: string;
-  @Prop() useOrcidSandbox: boolean;
-  @Prop() annotations: any = [];
   DEFAULT_ANNOTATION_TEXT: string = "Enter your annotation here.";
   
   @State() addAnnotation: boolean; // show add annotation text area, Submit/Cancel buttons
-  @State() annotationText: string;
+  @State() annotationText: string; // current annotation text
 
   @Listen("click")
   async handleClick(ev) {
@@ -62,16 +52,16 @@ export class AnnotationsDisplay {
   // POST new annotation to Throughput
   async submitAnnotation() {
     const annotation = {
-      dbid: this.identifier,
-      additionalType: this.additionalType,
-      id: this.link,
+      dbid: state.identifier,
+      additionalType: state.additionalType,
+      id: state.link,
       body: this.annotationText,
     };
     const url = "https://throughputdb.com/api/widget/";
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Authorization': this.throughputToken,
+        'Authorization': state.throughputToken,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(annotation)
@@ -82,6 +72,8 @@ export class AnnotationsDisplay {
       const errmsg = "Submit annotation failed: " + (json.message ? json.message : "[no message provided]");
       console.error(errmsg);
       alert(errmsg);
+    } else {
+      state.getAnnotations();
     }
     return success;
   }
@@ -144,19 +136,15 @@ export class AnnotationsDisplay {
             Throughput Annotations
           </div>
           <div class="body">
-            {!this.readOnlyMode ? (
-                <orcid-connect
-                  orcidClientId={this.orcidClientId}
-                  useOrcidSandbox={this.useOrcidSandbox}
-                  orcidName={this.orcidName}
-                />
+            {!state.readOnlyMode ? (
+                <orcid-connect></orcid-connect>
             ) : null}
 
             {/* Show annotationElement if this.authenticated = true (https://reactjs.org/docs/conditional-rendering.html) */}
             {state.authenticated && annotationElement}
 
             {/* Show annotations */}
-            {this.annotations.map((annotation) => (
+            {state.annotations.map((annotation) => (
               <div class="annotation_item">
                 {annotation.annotation}
                 <div class="annotation_metadata">

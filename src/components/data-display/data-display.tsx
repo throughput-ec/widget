@@ -1,4 +1,4 @@
-import { Component, Prop, h, Watch, State, Listen } from "@stencil/core";
+import { Component, h, State, Listen } from "@stencil/core";
 import state from "../../store";
 
 @Component({
@@ -8,24 +8,10 @@ import state from "../../store";
   shadow: true,
 })
 export class DataDisplay {
-  @Prop() annotations: any = [];
-  // @Prop() authenticated: boolean = false;
-  @Prop() orcidName: string;
-  @Prop() throughputToken: string = null;
-  @Prop() identifier: string;
-  @Prop() additionalType: string;
-  @Prop() link: any;
-  @Prop() readOnlyMode: boolean;
-  @Prop() orcidClientId: string;
-  @Prop() useOrcidSandbox: boolean;
-
-  @State() open: boolean = false;
+  @State() open: boolean = false; // is overlay being displayed?
 
   componentWillLoad() {
-    console.log(
-      "data-display componentWillLoad(): authenticated = ",
-      state.authenticated
-    );
+    console.log("data-display componentWillLoad(): authenticated =", state.authenticated);
     this.open = state.authenticated;
   }
 
@@ -41,34 +27,19 @@ export class DataDisplay {
     }
   }
 
-  @Watch("annotations")
-  watchHandler(newValue, oldValue) {
-    console.log(newValue, oldValue);
-  }
-
   render() {
     return (
       <div class="badge">
         <div class="summary">
-          {this.annotations.length > 0 ? this.annotations.length : "No"}{" "}
+          {state.annotationCount > 0 ? state.annotationCount : "No"}{" "}
           Annotation(s) Found
         </div>
         <div class="helptext">Click to add
-          {this.annotations.length > 0 ? " or display" : ""}
+          {state.annotationCount > 0 ? " or display" : ""}
         </div>
 
         {this.open ? (
-          <annotations-display
-            annotations={this.annotations}
-            orcidName={this.orcidName}
-            throughputToken={this.throughputToken}
-            identifier={this.identifier}
-            additionalType={this.additionalType}
-            link={this.link}
-            readOnlyMode={this.readOnlyMode}
-            orcidClientId={this.orcidClientId}
-            useOrcidSandbox={this.useOrcidSandbox}
-          ></annotations-display>
+          <annotations-display></annotations-display>
         ) : null}
       </div>
     );

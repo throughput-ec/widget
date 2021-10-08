@@ -1,4 +1,4 @@
-# data-display
+# annotations-display
 
 
 
@@ -16,7 +16,7 @@
 | `link`            | `link`              |             | `any`     | `undefined` |
 | `orcidClientId`   | `orcid-client-id`   |             | `string`  | `undefined` |
 | `orcidName`       | `orcid-name`        |             | `string`  | `undefined` |
-| `readOnlyMode`    | `read-only-mode`    |             | `boolean` | `undefined` |
+| `readOnlyMode`    | `read-only-mode`    |             | `boolean` | `true`      |
 | `throughputToken` | `throughput-token`  |             | `string`  | `null`      |
 | `useOrcidSandbox` | `use-orcid-sandbox` |             | `boolean` | `undefined` |
 
@@ -25,19 +25,18 @@
 
 ### Used by
 
- - [throughput-widget](../throughput-widget)
+ - [data-display](../data-display)
 
 ### Depends on
 
-- [annotations-display](../annotations-display)
+- [orcid-connect](../orcid-connect)
 
 ### Graph
 ```mermaid
 graph TD;
-  data-display --> annotations-display
   annotations-display --> orcid-connect
-  throughput-widget --> data-display
-  style data-display fill:#f9f,stroke:#333,stroke-width:4px
+  data-display --> annotations-display
+  style annotations-display fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

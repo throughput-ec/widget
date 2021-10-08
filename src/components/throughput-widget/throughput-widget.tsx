@@ -1,4 +1,4 @@
-import { Component, h, Prop, State } from "@stencil/core";
+import { Component, h, Prop } from "@stencil/core";
 import { KEYUTIL, KJUR } from "jsrsasign";
 import state from "../../store";
 
@@ -14,17 +14,24 @@ export class ThroughputWidget {
   @Prop() readOnlyMode: boolean = false; // if true, hide add annotation UI elements
   @Prop() orcidClientId: string = null; // required if readOnlyMode = false
   @Prop() useOrcidSandbox: boolean = false; // use sandbox.orcid.org if true, else orcid.org (production)
-  
-  @State() annotations: Array<object>;
-  // @State() authenticated: boolean = false;
-  @State() orcidName: string; // if authenticated, user's name in ORCID
-  @State() throughputToken: string = null;
 
   componentWillLoad() {
-    // todo: check authenticated state in localStorage and set state.authenticated
-
     if (!this.hasRequiredProps()) {
       return;
+    }
+
+    // todo: check authenticated state in localStorage and set state.authenticated
+
+    // Update our state object with passed-in props and getAnnotations() method
+    // so annotations-display can refresh annotations after annotations are added.
+    if (state.getAnnotations == null) {
+      state.getAnnotations = this.getAnnotations;
+      state.identifier = this.identifier;
+      state.additionalType = this.additionalType;
+      state.link = this.link;
+      state.readOnlyMode = this.readOnlyMode;
+      state.orcidClientId = this.orcidClientId;
+      state.useOrcidSandbox = this.useOrcidSandbox;
     }
 
     // Presence of #...id_token...  in window.location indicates redirect from successful
@@ -48,9 +55,8 @@ export class ThroughputWidget {
             response.json().then((json) => {
               if (json.status == "success") {
                 state.authenticated = true;
-                this.orcidName = json.data.user.given_name + " " + json.data.user.family_name;
-                this.throughputToken = json.data.token;
-                // console.log("Got Throughput token for user", this.orcidName);
+                state.throughputToken = json.data.token;
+                state.orcidName = json.data.user.given_name + " " + json.data.user.family_name;
               }
             });
           });
@@ -71,21 +77,21 @@ export class ThroughputWidget {
   getAnnotations() {
     const ANNOTATION_SEARCH_ENDPOINT = "https://throughputdb.com/api/ccdrs/annotations?";
     const params = new URLSearchParams({
-        dbid: this.identifier,
-        additionalType: this.additionalType,
-        id: this.link,
+        dbid: state.identifier,
+        additionalType: state.additionalType,
+        id: state.link,
         limit: "9999"
     });
     fetch(ANNOTATION_SEARCH_ENDPOINT + params).then((response) => {
       response.json().then((json) => {
         console.log(json);
-        this.annotations = json.data;
+        state.annotations = json.data;
       });
     });
   }
 
-  // After user authentication, exchange the short-lived ORCID bearer token
-  // for a more persistent throughputdb.com token used when adding annotations.
+  // After user authentication, exchange the short-lived ORCID bearer token for a
+  // more persistent throughputdb.com token to be used when adding annotations.
   async getThroughputToken(orcidBearerToken) {
     // console.log("Passing bearer token to Throughput:", orcidBearerToken);
     let response = await fetch('https://throughputdb.com/auth/orcid', {
@@ -155,17 +161,7 @@ export class ThroughputWidget {
   render() {
     return this.hasRequiredProps() ?
       (<div>
-        <data-display
-          annotations={this.annotations}
-          orcidName={this.orcidName}
-          throughputToken={this.throughputToken}
-          identifier={this.identifier}
-          additionalType={this.additionalType}
-          link={this.link}
-          readOnlyMode={this.readOnlyMode}
-          orcidClientId={this.orcidClientId}
-          useOrcidSandbox={this.useOrcidSandbox}
-        ></data-display>
+        <data-display></data-display>
       </div>) :
       (<div>Error: see console for details</div>);
   }
