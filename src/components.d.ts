@@ -9,7 +9,6 @@ export namespace Components {
     interface AnnotationsDisplay {
         "additionalType": string;
         "annotations": any;
-        "authenticated": boolean;
         "identifier": string;
         "link": any;
         "orcidClientId": string;
@@ -21,7 +20,6 @@ export namespace Components {
     interface DataDisplay {
         "additionalType": string;
         "annotations": any;
-        "authenticated": boolean;
         "identifier": string;
         "link": any;
         "orcidClientId": string;
@@ -31,7 +29,6 @@ export namespace Components {
         "useOrcidSandbox": boolean;
     }
     interface OrcidConnect {
-        "authenticated": boolean;
         "orcidClientId": string;
         "orcidName": string;
         "useOrcidSandbox": boolean;
@@ -90,7 +87,6 @@ declare namespace LocalJSX {
     interface AnnotationsDisplay {
         "additionalType"?: string;
         "annotations"?: any;
-        "authenticated"?: boolean;
         "identifier"?: string;
         "link"?: any;
         "orcidClientId"?: string;
@@ -102,7 +98,6 @@ declare namespace LocalJSX {
     interface DataDisplay {
         "additionalType"?: string;
         "annotations"?: any;
-        "authenticated"?: boolean;
         "identifier"?: string;
         "link"?: any;
         "orcidClientId"?: string;
@@ -112,7 +107,6 @@ declare namespace LocalJSX {
         "useOrcidSandbox"?: boolean;
     }
     interface OrcidConnect {
-        "authenticated"?: boolean;
         "orcidClientId"?: string;
         "orcidName"?: string;
         "useOrcidSandbox"?: boolean;

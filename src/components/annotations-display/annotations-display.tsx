@@ -1,4 +1,6 @@
 import { Component, Prop, State, h, Listen } from "@stencil/core";
+import state from "../../store";
+
 
 @Component({
   tag: "annotations-display",
@@ -7,7 +9,7 @@ import { Component, Prop, State, h, Listen } from "@stencil/core";
   shadow: true,
 })
 export class AnnotationsDisplay {
-  @Prop() authenticated: boolean = false;
+  // @Prop() authenticated: boolean = false;
   @Prop() orcidName: string;
   @Prop() identifier: string;
   @Prop() additionalType: string;
@@ -146,13 +148,12 @@ export class AnnotationsDisplay {
                 <orcid-connect
                   orcidClientId={this.orcidClientId}
                   useOrcidSandbox={this.useOrcidSandbox}
-                  authenticated={this.authenticated}
                   orcidName={this.orcidName}
                 />
             ) : null}
 
             {/* Show annotationElement if this.authenticated = true (https://reactjs.org/docs/conditional-rendering.html) */}
-            {this.authenticated && annotationElement}
+            {state.authenticated && annotationElement}
 
             {/* Show annotations */}
             {this.annotations.map((annotation) => (

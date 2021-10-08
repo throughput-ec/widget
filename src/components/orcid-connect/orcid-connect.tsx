@@ -1,4 +1,5 @@
 import { Component, h, Listen, Prop } from "@stencil/core";
+import state from "../../store";
 
 @Component({
   tag: "orcid-connect",
@@ -8,7 +9,6 @@ import { Component, h, Listen, Prop } from "@stencil/core";
 export class OrcidConnect {
   @Prop() orcidClientId: string;
   @Prop() useOrcidSandbox: boolean;
-  @Prop() authenticated: boolean;
   @Prop() orcidName: string;
 
   @Listen('click')
@@ -48,7 +48,7 @@ export class OrcidConnect {
 
     return (
       <div class="connect-orcid-button-wrapper">
-        {this.authenticated ? (
+        {state.authenticated ? (
           <div>
             {orcidIcon}
             <span>Authenticated as {this.orcidName}</span>

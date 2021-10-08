@@ -1,5 +1,6 @@
 import { Component, h, Prop, State } from "@stencil/core";
 import { KEYUTIL, KJUR } from "jsrsasign";
+import state from "../../store";
 
 @Component({
   tag: "throughput-widget",
@@ -15,18 +16,20 @@ export class ThroughputWidget {
   @Prop() useOrcidSandbox: boolean = false; // use sandbox.orcid.org if true, else orcid.org (production)
   
   @State() annotations: Array<object>;
-  @State() authenticated: boolean = false;
+  // @State() authenticated: boolean = false;
   @State() orcidName: string; // if authenticated, user's name in ORCID
   @State() throughputToken: string = null;
 
   componentWillLoad() {
+    // todo: check authenticated state in localStorage and set state.authenticated
+
     if (!this.hasRequiredProps()) {
       return;
     }
 
     // Presence of #...id_token...  in window.location indicates redirect from successful
     // ORCID authentication. Exchange ORCID bearer token for Throughput token.
-    this.authenticated = false;
+    state.authenticated = false;
     if (window.location.hash != "") {
       const bearerToken = this.getFragmentParameterByName("access_token");
       const id_token = this.getFragmentParameterByName("id_token");
@@ -44,7 +47,7 @@ export class ThroughputWidget {
             // console.log("Throughput response:", response);
             response.json().then((json) => {
               if (json.status == "success") {
-                this.authenticated = true;
+                state.authenticated = true;
                 this.orcidName = json.data.user.given_name + " " + json.data.user.family_name;
                 this.throughputToken = json.data.token;
                 // console.log("Got Throughput token for user", this.orcidName);
@@ -154,7 +157,6 @@ export class ThroughputWidget {
       (<div>
         <data-display
           annotations={this.annotations}
-          authenticated={this.authenticated}
           orcidName={this.orcidName}
           throughputToken={this.throughputToken}
           identifier={this.identifier}

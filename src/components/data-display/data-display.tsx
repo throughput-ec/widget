@@ -1,4 +1,5 @@
 import { Component, Prop, h, Watch, State, Listen } from "@stencil/core";
+import state from "../../store";
 
 @Component({
   tag: "data-display",
@@ -8,7 +9,7 @@ import { Component, Prop, h, Watch, State, Listen } from "@stencil/core";
 })
 export class DataDisplay {
   @Prop() annotations: any = [];
-  @Prop() authenticated: boolean = false;
+  // @Prop() authenticated: boolean = false;
   @Prop() orcidName: string;
   @Prop() throughputToken: string = null;
   @Prop() identifier: string;
@@ -23,9 +24,9 @@ export class DataDisplay {
   componentWillLoad() {
     console.log(
       "data-display componentWillLoad(): authenticated = ",
-      this.authenticated
+      state.authenticated
     );
-    this.open = this.authenticated;
+    this.open = state.authenticated;
   }
 
   @Listen("click")
@@ -59,7 +60,6 @@ export class DataDisplay {
         {this.open ? (
           <annotations-display
             annotations={this.annotations}
-            authenticated={this.authenticated}
             orcidName={this.orcidName}
             throughputToken={this.throughputToken}
             identifier={this.identifier}
