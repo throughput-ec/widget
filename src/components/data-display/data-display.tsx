@@ -27,17 +27,37 @@ export class DataDisplay {
     }
   }
 
+  getCountText() {
+    let text = null;
+    if (state.annotationCount == 0) {
+      text = "No Annotations Found";
+    } else if (state.annotationCount == 1) {
+      text = "1 Annotation Found";
+    } else {
+      text = state.annotationCount + " Annotations Found";
+    }
+    return text;
+  }
+
+  getHelpText() {
+    let text = null;
+    if (state.readOnlyMode) {
+      text = state.annotationCount > 0 ? "Click to view" : "";
+    } else {
+      text = state.annotationCount > 0 ? "Click to view or add" : "Click to add";
+    }
+    return text;
+  }
+
   render() {
     return (
       <div class="badge">
         <div class="summary">
-          {state.annotationCount > 0 ? state.annotationCount : "No"}{" "}
-          Annotation(s) Found
+          { this.getCountText() }
         </div>
-        <div class="helptext">Click to add
-          {state.annotationCount > 0 ? " or display" : ""}
+        <div class="helptext">
+          { this.getHelpText() }
         </div>
-
         {this.open ? (
           <annotations-display></annotations-display>
         ) : null}
