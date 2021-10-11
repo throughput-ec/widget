@@ -10,11 +10,6 @@ import state from "../../store";
 export class DataDisplay {
   @State() open: boolean = false; // is overlay being displayed?
 
-  componentWillLoad() {
-    console.log("data-display componentWillLoad(): authenticated =", state.authenticated);
-    this.open = state.authenticated;
-  }
-
   @Listen("click")
   handleClick(ev) {
     if (
