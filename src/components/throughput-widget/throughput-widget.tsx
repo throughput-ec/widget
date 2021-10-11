@@ -20,7 +20,25 @@ export class ThroughputWidget {
       return;
     }
 
-    // todo: check authenticated state in localStorage and set state.authenticated
+    if (typeof(Storage) !== "undefined") {
+      if ("ThroughputWidgetToken" in window.localStorage) {
+        state.authenticated = true;
+        state.throughputToken = window.localStorage.getItem("ThroughputWidgetToken");
+        state.orcidName = window.localStorage.getItem("ThroughputWidgetName");
+      }
+    } else {
+      console.warn("Web Storage unavailable, authentication state will not be preserved on page change or refresh.");
+    }
+
+    if (window.location.hash) {
+      if (this.getFragmentParameterByName("access_token") !== "" && this.getFragmentParameterByName("id_token") !== "") {
+        // access_token and id_token keys in window.location indicate redirect from successful
+        // ORCID authentication. Exchange ORCID bearer token for Throughput token.
+        this.processOrcidAuthResponse();
+      } else {
+        console.log("non-ORCID auth hash found, ignoring");
+      }
+    }
 
     // Update our state object with passed-in props and getAnnotations() method
     // so annotations-display can refresh annotations after annotations are added.
@@ -34,42 +52,54 @@ export class ThroughputWidget {
       state.useOrcidSandbox = this.useOrcidSandbox;
     }
 
-    // Presence of #...id_token...  in window.location indicates redirect from successful
-    // ORCID authentication. Exchange ORCID bearer token for Throughput token.
-    state.authenticated = false;
-    if (window.location.hash != "") {
-      const bearerToken = this.getFragmentParameterByName("access_token");
-      const id_token = this.getFragmentParameterByName("id_token");
-      // clear #... in address bar so we don't hit this block every time
-      // the page reloads when changing code!!!
-      // https://stackoverflow.com/questions/1397329/how-to-remove-the-hash-from-window-location-url-with-javascript-without-page-r/5298684#5298684
-      history.replaceState("", document.title, window.location.pathname + window.location.search);
-      if (id_token !== null) {
-        const sigIsValid = this.checkSig(id_token);
-        console.log("ORCID bearer token (access_token key of window.location.hash):", bearerToken);
-        // console.log("ORCID id_token signature is valid:", sigIsValid);
-        // console.log("Decrypted token contents:", KJUR.jws.JWS.parse(id_token).payloadPP);
-        if (sigIsValid) {
-          this.getThroughputToken(bearerToken).then((response) => {
-            // console.log("Throughput response:", response);
-            response.json().then((json) => {
-              if (json.status == "success") {
-                state.authenticated = true;
-                state.throughputToken = json.data.token;
-                state.orcidName = json.data.user.given_name + " " + json.data.user.family_name;
-              }
-            });
+    this.getAnnotations();
+  }
+
+  // Exchange ORCID bearer token for Throughput token.
+  processOrcidAuthResponse() {
+    const bearerToken = this.getFragmentParameterByName("access_token");
+    const idToken = this.getFragmentParameterByName("id_token");
+    // clear #... in address bar so we don't repeatedly process the ORCID response on page refresh
+    // https://stackoverflow.com/questions/1397329/how-to-remove-the-hash-from-window-location-url-with-javascript-without-page-r/5298684#5298684
+    history.replaceState("", document.title, window.location.pathname + window.location.search);
+    if (bearerToken !== "" && idToken !== "") {
+      const sigIsValid = this.checkSig(idToken);
+      // console.log("ORCID bearer token (access_token key of window.location.hash):", bearerToken);
+      // console.log("ORCID id_token signature is valid:", sigIsValid);
+      // console.log("Decrypted token contents:", KJUR.jws.JWS.parse(id_token).payloadPP);
+      if (sigIsValid) {
+        this.getThroughputToken(bearerToken).then((response) => {
+          // console.log("Throughput response:", response);
+          response.json().then((json) => {
+            if (json.status == "success") {
+              state.authenticated = true;
+              state.throughputToken = json.data.token;
+              state.orcidName = json.data.user.given_name + " " + json.data.user.family_name;
+              window.localStorage.setItem("ThroughputWidgetToken", state.throughputToken);
+              window.localStorage.setItem("ThroughputWidgetName", state.orcidName);
+            }
           });
-        } else {
-          console.error("id_token signature is invalid");
-        }
+        });
       } else {
-        console.log("no id_token found");
+        console.error("id_token signature is invalid");
       }
     } else {
-      console.log("no hash");
+      console.error("no access_token or id_token found");
     }
-    this.getAnnotations();
+  }
+
+  // After ORCID authentication, exchange the short-lived ORCID bearer token for a
+  // more persistent throughputdb.com token to be used when adding annotations.
+  async getThroughputToken(orcidBearerToken) {
+    // console.log("Passing bearer token to Throughput:", orcidBearerToken);
+    let response = await fetch('https://throughputdb.com/auth/orcid', {
+      method:'POST',
+      body: JSON.stringify({token: orcidBearerToken}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return response;
   }
   
   // Pull Throughput annotations
@@ -88,20 +118,6 @@ export class ThroughputWidget {
         state.annotations = json.data;
       });
     });
-  }
-
-  // After user authentication, exchange the short-lived ORCID bearer token for a
-  // more persistent throughputdb.com token to be used when adding annotations.
-  async getThroughputToken(orcidBearerToken) {
-    // console.log("Passing bearer token to Throughput:", orcidBearerToken);
-    let response = await fetch('https://throughputdb.com/auth/orcid', {
-      method:'POST',
-      body: JSON.stringify({token: orcidBearerToken}),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    return response;
   }
 
   hasRequiredProps() {
