@@ -10,9 +10,9 @@ const { state, onChange } = createStore({
     link: null, // resource-specific dataset identifier
     orcidName: null, // if authenticated, user's ORCID name
     throughputToken: null, // Throughput authentication token
-    readOnlyMode: false,
-    orcidClientId: null,
-    useOrcidSandbox: false
+    readOnlyMode: false, // if true, hide ORCID login and add annotation UI elements
+    orcidClientId: null, // ORCID API key; required if readOnlyMode = false
+    useOrcidSandbox: false // use sandbox.orcid.org if true, else orcid.org (production)
 });
 
 onChange('annotations', value => {

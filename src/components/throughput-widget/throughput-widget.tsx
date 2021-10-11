@@ -12,7 +12,7 @@ export class ThroughputWidget {
   @Prop() additionalType: string = null; // specifies a dataset type eg site, core, etc
   @Prop() link: any = null; // specifies the resource-specific dataset
   @Prop() readOnlyMode: boolean = false; // if true, hide add annotation UI elements
-  @Prop() orcidClientId: string = null; // required if readOnlyMode = false
+  @Prop() orcidClientId: string = null; // ORCID API key; required if readOnlyMode = false
   @Prop() useOrcidSandbox: boolean = false; // use sandbox.orcid.org if true, else orcid.org (production)
 
   componentWillLoad() {
