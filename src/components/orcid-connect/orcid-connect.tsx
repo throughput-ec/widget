@@ -10,8 +10,10 @@ export class OrcidConnect {
   @Listen('click')
   handleClick(ev) {
     const clicked_id = ev.composedPath()[0].id;
-    if (clicked_id) {
+    if (clicked_id == "connect-orcid-button") {
       this.openORCID();
+    } else if (clicked_id == "logout-button") {
+      state.logout();
     }
   }
 
@@ -47,7 +49,7 @@ export class OrcidConnect {
         {state.authenticated ? (
           <div>
             {orcidIcon}
-            <span>Authenticated as {state.orcidName}</span>
+            <span>Authenticated as {state.orcidName} <button id="logout-button" class="logout_button">Sign Out</button></span>
           </div>
         ) : (
           <button id="connect-orcid-button">

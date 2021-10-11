@@ -35,3 +35,22 @@
   padding: 0;
   float: left;
 }
+
+button {
+  border: none;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  /* font-size: 10px; */
+  font-family: inherit;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout_button {
+  background-color: lightgray;
+}
+.logout_button:hover {
+  background-color: gray;
+}

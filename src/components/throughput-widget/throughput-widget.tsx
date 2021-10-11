@@ -44,6 +44,7 @@ export class ThroughputWidget {
     // so annotations-display can refresh annotations after annotations are added.
     if (state.getAnnotations == null) {
       state.getAnnotations = this.getAnnotations;
+      state.logout = this.logout;
       state.identifier = this.identifier;
       state.additionalType = this.additionalType;
       state.link = this.link;
@@ -118,6 +119,15 @@ export class ThroughputWidget {
         state.annotations = json.data;
       });
     });
+  }
+
+  // Clear authentication data in localStorage, reset auth state variables.
+  logout() {
+    window.localStorage.removeItem("ThroughputWidgetToken");
+    window.localStorage.removeItem("ThroughputWidgetName");
+    state.authenticated = false;
+    state.throughputToken = null;
+    state.orcidName = null;
   }
 
   hasRequiredProps() {
