@@ -12,6 +12,9 @@ export class DataDisplay {
 
   @Listen("click")
   handleClick(ev) {
+    if (state.annotationCount === 0 && state.readOnlyMode) {
+      return;
+    }
     if (
       !this.open ||
       (this.open &&
