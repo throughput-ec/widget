@@ -1,9 +1,10 @@
 :host {
+  color: var(--badge-font-color, black); 
   display: inline-block;
-  background-color: white;
-  width: 200px;
+  background-color:var(--badge-background-color, white);
+  width: 165px;
   border-style: solid;
   border-radius: 5px;
-  border-color: skyblue;
-  font-family: Montserrat, sans-serif;
+  border-color: var(--badge-border-color, skyblue);
+  font-family: var(--widget-font-family, Montserrat, sans-serif) !important;
 }
