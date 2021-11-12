@@ -28,11 +28,11 @@ export class DataDisplay {
   getCountText() {
     let text = null;
     if (state.annotationCount == 0) {
-      text = "No Annotations Found";
+      text = "No Annotations";
     } else if (state.annotationCount == 1) {
-      text = "1 Annotation Found";
+      text = "1 Annotation";
     } else {
-      text = state.annotationCount + " Annotations Found";
+      text = state.annotationCount + " Annotations";
     }
     return text;
   }
@@ -42,23 +42,27 @@ export class DataDisplay {
     if (state.readOnlyMode) {
       text = state.annotationCount > 0 ? "Click to view" : "";
     } else {
-      text = state.annotationCount > 0 ? "Click to view or add" : "Click to add";
+      text =
+        state.annotationCount > 0 ? "Click to view or add" : "Click to add";
     }
     return text;
   }
 
   render() {
     return (
-      <div class="badge">
-        <div class="summary">
-          { this.getCountText() }
+      <div class="badge" title-="Throughput Annotation Widget. Learn more at throughputdb.com">
+        <div class='throughput-logo'>
+          <img
+            src="https://github.com/throughput-ec/widget/blob/qol/figures/TPlogo_small.png?raw=true"
+            title="Throughput"
+          />
         </div>
-        <div class="helptext">
-          { this.getHelpText() }
+        <div class="summary-container">
+          <div class="summary">{this.getCountText()}</div>
+        <div class="helptext">{this.getHelpText()}</div>
         </div>
-        {this.open ? (
-          <annotations-display></annotations-display>
-        ) : null}
+        
+        {this.open ? <annotations-display></annotations-display> : null}
       </div>
     );
   }
