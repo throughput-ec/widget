@@ -185,10 +185,6 @@ export class ThroughputWidget {
   }
 
   render() {
-    return this.hasRequiredProps() ?
-      (<div>
-        <data-display></data-display>
-      </div>) :
-      (<div>Error: see console for details</div>);
+    return this.hasRequiredProps() ? <data-display></data-display> : null;
   }
 }

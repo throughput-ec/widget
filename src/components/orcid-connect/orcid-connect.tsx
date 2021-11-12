@@ -47,9 +47,16 @@ export class OrcidConnect {
     return (
       <div class="connect-orcid-button-wrapper">
         {state.authenticated ? (
-          <div>
-            {orcidIcon}
-            <span>Authenticated as {state.orcidName} <button id="logout-button" class="logout_button">Sign Out</button></span>
+          <div class='author-name'>
+            <div class='item'>
+              {orcidIcon}
+            </div>
+            <div class='item'>
+              Authenticated as {state.orcidName}
+            </div>
+            <div class='item'>
+               <button id="logout-button" class="logout_button">Sign Out</button>
+            </div>
           </div>
         ) : (
           <button id="connect-orcid-button">

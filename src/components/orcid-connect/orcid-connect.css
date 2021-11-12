@@ -6,6 +6,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin: 5px;
 }
 
 #connect-orcid-button {
@@ -46,6 +47,18 @@ button {
   font-family: inherit;
   border-radius: 4px;
   cursor: pointer;
+  margin-left: 5px;
+}
+
+.author-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly
+}
+.author-name .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .logout_button {
