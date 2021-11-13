@@ -183,11 +183,11 @@ These currently include:
   ```CSS
   --badge-background-color
   --badge-border-color
-  --widget-font-family
   --badge-font-color
   --modal-background-color
   --modal-font-color
   --modal-card-color
+  --widget-font-family
   ```
   
  They can be added to your site's CSS like so: 
