@@ -175,9 +175,27 @@ Add the [imported](#import) `<throughput-widget>` tag to your dataset page(s):
 ></throughput-widget>
 ```
 
-### System Requirements
+### Styling Options
+There are several CSS variables available for styling. 
 
-This project is developed with [Stencil](https://stenciljs.com).
+These currently include: 
+
+  ```CSS
+  --badge-background-color
+  --badge-border-color
+  --widget-font-family
+  --badge-font-color
+  --modal-background-color
+  --modal-font-color
+  --modal-card-color
+  ```
+  
+ They can be added to your site's CSS like so: 
+```css
+throughput-widget {
+  --badge-background-color: red; 
+}
+```
 
 ### Data Requirements
 
