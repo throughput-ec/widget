@@ -1,5 +1,5 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![NSF-1928366](https://img.shields.io/badge/NSF-1928366-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1928366) [![NPM](https://nodei.co/npm/throughput-widget.png)](https://npmjs.org/package/throughput-widget)
+[![NSF-1928366](https://img.shields.io/badge/NSF-1928366-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1928366) [![Node version](https://img.shields.io/node/v/throughput-widget.svg?style=flat)](http://nodejs.org/download/)
 
 # Throughput Annotation Widget
 
@@ -213,3 +213,5 @@ This project is to be evaluated using the following metrics:
 * Download activity for the `npm` module
 * Number of data services using the Throughput widget
 * Number of annotations added using the widget
+
+[![NPM](https://nodei.co/npm/throughput-widget.png)](https://npmjs.org/package/throughput-widget)
