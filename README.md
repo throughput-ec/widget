@@ -1,5 +1,5 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![NSF-1928366](https://img.shields.io/badge/NSF-1928366-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1928366) [![Node version](https://img.shields.io/node/v/throughput-widget.svg?style=flat)](http://nodejs.org/download/)
+[![NSF-1928366](https://img.shields.io/badge/NSF-1928366-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1928366) [![Node version](https://badge.fury.io/js/throughput-widget.svg?style=flat)](https://www.npmjs.com/package/throughput-widget)
 
 # Throughput Annotation Widget
 
