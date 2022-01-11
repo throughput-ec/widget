@@ -1,5 +1,4 @@
-import { Component, h, State, Listen } from "@stencil/core";
-import state from "../../store";
+import { Component, h, Prop, State, Listen } from "@stencil/core";
 
 @Component({
   tag: "data-display",
@@ -8,11 +7,22 @@ import state from "../../store";
   shadow: true,
 })
 export class DataDisplay {
+  @Prop() annotations: any = [];
+  @Prop() authenticated: boolean = false;
+  @Prop() orcidName: string;
+  @Prop() throughputToken: string = null;
+  @Prop() identifier: string;
+  @Prop() additionalType: string;
+  @Prop() link: any;
+  @Prop() readOnlyMode: boolean;
+  @Prop() orcidClientId: string;
+  @Prop() useOrcidSandbox: boolean;  
+
   @State() open: boolean = false; // is overlay being displayed?
 
   @Listen("click")
   handleClick(ev) {
-    if (state.annotationCount === 0 && state.readOnlyMode) {
+    if (this.annotations.length === 0 && this.readOnlyMode) {
       return;
     }
     if (
@@ -27,23 +37,22 @@ export class DataDisplay {
 
   getCountText() {
     let text = null;
-    if (state.annotationCount == 0) {
+    if (this.annotations.length == 0) {
       text = "No Annotations";
-    } else if (state.annotationCount == 1) {
+    } else if (this.annotations.length == 1) {
       text = "1 Annotation";
     } else {
-      text = state.annotationCount + " Annotations";
+      text = this.annotations.length + " Annotations";
     }
     return text;
   }
 
   getHelpText() {
     let text = null;
-    if (state.readOnlyMode) {
-      text = state.annotationCount > 0 ? "Click to view" : "";
+    if (this.readOnlyMode) {
+      text = this.annotations.length > 0 ? "Click to view" : "";
     } else {
-      text =
-        state.annotationCount > 0 ? "Click to view or add" : "Click to add";
+      text = this.annotations.length > 0 ? "Click to view or add" : "Click to add";
     }
     return text;
   }
@@ -62,7 +71,20 @@ export class DataDisplay {
         <div class="helptext">{this.getHelpText()}</div>
         </div>
         
-        {this.open ? <annotations-display></annotations-display> : null}
+        {this.open ? (
+          <annotations-display
+            annotations={this.annotations}
+            authenticated={this.authenticated}
+            orcidName={this.orcidName}
+            throughputToken={this.throughputToken}
+            identifier={this.identifier}
+            additionalType={this.additionalType}
+            link={this.link}
+            readOnlyMode={this.readOnlyMode}
+            orcidClientId={this.orcidClientId}
+            useOrcidSandbox={this.useOrcidSandbox}
+          ></annotations-display>
+        ) : null}
       </div>
     );
   }

@@ -1,6 +1,5 @@
-import { Component, h, Prop } from "@stencil/core";
+import { Component, h, Listen, Prop, State } from "@stencil/core";
 import { KEYUTIL, KJUR } from "jsrsasign";
-import state from "../../store";
 
 @Component({
   tag: "throughput-widget",
@@ -15,6 +14,21 @@ export class ThroughputWidget {
   @Prop() orcidClientId: string = null; // ORCID API key; required if readOnlyMode = false
   @Prop() useOrcidSandbox: boolean = false; // use sandbox.orcid.org if true, else orcid.org (production)
 
+  @State() annotations: Array<object>;
+  @State() authenticated: boolean = false;
+  @State() orcidName: string; // if authenticated, user's name in ORCID
+  @State() throughputToken: string = null;
+
+  @Listen('annotationAdded')
+  annotationAddedHandler(_: CustomEvent<Object>) {
+    this.getAnnotations();
+  }
+
+  @Listen('orcidLogout')
+  orcidLogouthandler(_: CustomEvent<Object>) {
+    this.logout();
+  }
+
   componentWillLoad() {
     if (!this.hasRequiredProps()) {
       return;
@@ -22,9 +36,9 @@ export class ThroughputWidget {
 
     if (typeof(Storage) !== "undefined") {
       if ("ThroughputWidgetToken" in window.localStorage) {
-        state.authenticated = true;
-        state.throughputToken = window.localStorage.getItem("ThroughputWidgetToken");
-        state.orcidName = window.localStorage.getItem("ThroughputWidgetName");
+        this.authenticated = true;
+        this.throughputToken = window.localStorage.getItem("ThroughputWidgetToken");
+        this.orcidName = window.localStorage.getItem("ThroughputWidgetName");
       }
     } else {
       console.warn("Web Storage unavailable, authentication state will not be preserved on page change or refresh.");
@@ -38,19 +52,6 @@ export class ThroughputWidget {
       } else {
         console.log("non-ORCID auth hash found, ignoring");
       }
-    }
-
-    // Update our state object with passed-in props and getAnnotations() method
-    // so annotations-display can refresh annotations after annotations are added.
-    if (state.getAnnotations == null) {
-      state.getAnnotations = this.getAnnotations;
-      state.logout = this.logout;
-      state.identifier = this.identifier;
-      state.additionalType = this.additionalType;
-      state.link = this.link;
-      state.readOnlyMode = this.readOnlyMode;
-      state.orcidClientId = this.orcidClientId;
-      state.useOrcidSandbox = this.useOrcidSandbox;
     }
 
     this.getAnnotations();
@@ -73,11 +74,11 @@ export class ThroughputWidget {
           // console.log("Throughput response:", response);
           response.json().then((json) => {
             if (json.status == "success") {
-              state.authenticated = true;
-              state.throughputToken = json.data.token;
-              state.orcidName = json.data.user.given_name + " " + json.data.user.family_name;
-              window.localStorage.setItem("ThroughputWidgetToken", state.throughputToken);
-              window.localStorage.setItem("ThroughputWidgetName", state.orcidName);
+              this.authenticated = true;
+              this.throughputToken = json.data.token;
+              this.orcidName = json.data.user.given_name + " " + json.data.user.family_name;
+              window.localStorage.setItem("ThroughputWidgetToken", this.throughputToken);
+              window.localStorage.setItem("ThroughputWidgetName", this.orcidName);
             }
           });
         });
@@ -108,15 +109,15 @@ export class ThroughputWidget {
   getAnnotations() {
     const ANNOTATION_SEARCH_ENDPOINT = "https://throughputdb.com/api/ccdrs/annotations?";
     const params = new URLSearchParams({
-        dbid: state.identifier,
-        additionalType: state.additionalType,
-        id: state.link,
+        dbid: this.identifier,
+        additionalType: this.additionalType,
+        id: this.link,
         limit: "9999"
     });
     fetch(ANNOTATION_SEARCH_ENDPOINT + params).then((response) => {
       response.json().then((json) => {
         console.log(json);
-        state.annotations = json.data;
+        this.annotations = json.data;
       });
     });
   }
@@ -125,9 +126,9 @@ export class ThroughputWidget {
   logout() {
     window.localStorage.removeItem("ThroughputWidgetToken");
     window.localStorage.removeItem("ThroughputWidgetName");
-    state.authenticated = false;
-    state.throughputToken = null;
-    state.orcidName = null;
+    this.authenticated = false;
+    this.throughputToken = null;
+    this.orcidName = null;
   }
 
   hasRequiredProps() {
@@ -185,6 +186,19 @@ export class ThroughputWidget {
   }
 
   render() {
-    return this.hasRequiredProps() ? <data-display></data-display> : null;
+    return this.hasRequiredProps() ? 
+      (<div>
+        <data-display
+          annotations={this.annotations}
+          authenticated={this.authenticated}
+          orcidName={this.orcidName}
+          throughputToken={this.throughputToken}
+          identifier={this.identifier}
+          additionalType={this.additionalType}
+          link={this.link}
+          readOnlyMode={this.readOnlyMode}
+          orcidClientId={this.orcidClientId}
+          useOrcidSandbox={this.useOrcidSandbox}
+      ></data-display></div>) : null;
   }
 }
