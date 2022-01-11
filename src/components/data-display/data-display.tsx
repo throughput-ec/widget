@@ -62,7 +62,7 @@ export class DataDisplay {
       <div class="badge" title-="Throughput Annotation Widget. Learn more at throughputdb.com">
         <div class='throughput-logo'>
           <img
-            src="https://github.com/throughput-ec/widget/blob/qol/figures/TPlogo_small.png?raw=true"
+            src="https://github.com/throughput-ec/widget/blob/master/figures/TPlogo_small.png?raw=true"
             title="Throughput"
           />
         </div>
