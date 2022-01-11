@@ -1,6 +1,4 @@
-import { Component, State, h, Listen } from "@stencil/core";
-import state from "../../store";
-
+import { Component, Event, EventEmitter, Prop, State, h, Listen } from "@stencil/core";
 
 @Component({
   tag: "annotations-display",
@@ -9,10 +7,27 @@ import state from "../../store";
   shadow: true,
 })
 export class AnnotationsDisplay {
+  @Prop() authenticated: boolean = false;
+  @Prop() orcidName: string;
+  @Prop() identifier: string;
+  @Prop() additionalType: string;
+  @Prop() link: any;
+  @Prop() throughputToken: string = null;
+  @Prop() readOnlyMode: boolean = true;
+  @Prop() orcidClientId: string;
+  @Prop() useOrcidSandbox: boolean;
+  @Prop() annotations: any = [];  
   DEFAULT_ANNOTATION_TEXT: string = "Enter your annotation here.";
   
   @State() addAnnotation: boolean; // show add annotation text area, Submit/Cancel buttons
   @State() annotationText: string; // current annotation text
+
+  @Event({
+    eventName: 'annotationAdded',
+    bubbles: true,
+    cancelable: false,
+    composed: true
+  }) annotationAdded: EventEmitter<Object>;
 
   @Listen("click")
   async handleClick(ev) {
@@ -52,16 +67,16 @@ export class AnnotationsDisplay {
   // POST new annotation to Throughput
   async submitAnnotation() {
     const annotation = {
-      dbid: state.identifier,
-      additionalType: state.additionalType,
-      id: state.link,
+      dbid: this.identifier,
+      additionalType: this.additionalType,
+      id: this.link,
       body: this.annotationText,
     };
     const url = "https://throughputdb.com/api/widget/";
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Authorization': state.throughputToken,
+        'Authorization': this.throughputToken,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(annotation)
@@ -73,7 +88,8 @@ export class AnnotationsDisplay {
       console.error(errmsg);
       alert(errmsg);
     } else {
-      state.getAnnotations();
+      // alert root of new annotation so it can refresh and re-render component tree
+      this.annotationAdded.emit({});
     }
     return success;
   }
@@ -136,15 +152,20 @@ export class AnnotationsDisplay {
             Throughput Annotations
           </div>
           <div class="body">
-            {!state.readOnlyMode ? (
-                <orcid-connect></orcid-connect>
+            {!this.readOnlyMode ? (
+                <orcid-connect
+                  orcidClientId={this.orcidClientId}
+                  useOrcidSandbox={this.useOrcidSandbox}
+                  authenticated={this.authenticated}
+                  orcidName={this.orcidName}
+                />
             ) : null}
 
             {/* Show annotationElement if this.authenticated = true (https://reactjs.org/docs/conditional-rendering.html) */}
-            {state.authenticated && annotationElement}
+            {this.authenticated && annotationElement}
 
             {/* Show annotations */}
-            {state.annotations.map((annotation) => (
+            {this.annotations.map((annotation) => (
               <div class="annotation_item">
                 {annotation.annotation}
                 <div class="annotation_metadata">

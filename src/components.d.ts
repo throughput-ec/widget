@@ -7,10 +7,34 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AnnotationsDisplay {
+        "additionalType": string;
+        "annotations": any;
+        "authenticated": boolean;
+        "identifier": string;
+        "link": any;
+        "orcidClientId": string;
+        "orcidName": string;
+        "readOnlyMode": boolean;
+        "throughputToken": string;
+        "useOrcidSandbox": boolean;
     }
     interface DataDisplay {
+        "additionalType": string;
+        "annotations": any;
+        "authenticated": boolean;
+        "identifier": string;
+        "link": any;
+        "orcidClientId": string;
+        "orcidName": string;
+        "readOnlyMode": boolean;
+        "throughputToken": string;
+        "useOrcidSandbox": boolean;
     }
     interface OrcidConnect {
+        "authenticated": boolean;
+        "orcidClientId": string;
+        "orcidName": string;
+        "useOrcidSandbox": boolean;
     }
     interface ThroughputWidget {
         "additionalType": string;
@@ -55,10 +79,36 @@ declare global {
 }
 declare namespace LocalJSX {
     interface AnnotationsDisplay {
+        "additionalType"?: string;
+        "annotations"?: any;
+        "authenticated"?: boolean;
+        "identifier"?: string;
+        "link"?: any;
+        "onAnnotationAdded"?: (event: CustomEvent<Object>) => void;
+        "orcidClientId"?: string;
+        "orcidName"?: string;
+        "readOnlyMode"?: boolean;
+        "throughputToken"?: string;
+        "useOrcidSandbox"?: boolean;
     }
     interface DataDisplay {
+        "additionalType"?: string;
+        "annotations"?: any;
+        "authenticated"?: boolean;
+        "identifier"?: string;
+        "link"?: any;
+        "orcidClientId"?: string;
+        "orcidName"?: string;
+        "readOnlyMode"?: boolean;
+        "throughputToken"?: string;
+        "useOrcidSandbox"?: boolean;
     }
     interface OrcidConnect {
+        "authenticated"?: boolean;
+        "onOrcidLogout"?: (event: CustomEvent<Object>) => void;
+        "orcidClientId"?: string;
+        "orcidName"?: string;
+        "useOrcidSandbox"?: boolean;
     }
     interface ThroughputWidget {
         "additionalType"?: string;

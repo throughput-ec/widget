@@ -1,5 +1,4 @@
-import { Component, h, Listen } from "@stencil/core";
-import state from "../../store";
+import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core";
 
 @Component({
   tag: "orcid-connect",
@@ -7,23 +6,35 @@ import state from "../../store";
   shadow: true,
 })
 export class OrcidConnect {
+  @Prop() orcidClientId: string;
+  @Prop() useOrcidSandbox: boolean;
+  @Prop() authenticated: boolean;
+  @Prop() orcidName: string;
+
+  @Event({
+    eventName: 'orcidLogout',
+    bubbles: true,
+    cancelable: false,
+    composed: true
+  }) orcidLogout: EventEmitter<Object>;    
+
   @Listen('click')
   handleClick(ev) {
     const clicked_id = ev.composedPath()[0].id;
     if (clicked_id == "connect-orcid-button") {
       this.openORCID();
     } else if (clicked_id == "logout-button") {
-      state.logout();
+      this.orcidLogout.emit({}); // orcidLogout event for root to handle
     }
   }
 
   openORCID() {
     const redirect_uri = window.location.href.toString().split('#')[0]; // remove anchor '#' and everything to right
     const orcid_auth_uri =
-      (state.useOrcidSandbox ? "https://sandbox.orcid.org" : "https://orcid.org") +
+      (this.useOrcidSandbox ? "https://sandbox.orcid.org" : "https://orcid.org") +
       "/oauth/authorize?response_type=token&redirect_uri=" +
       redirect_uri +
-      "&client_id=" + state.orcidClientId +
+      "&client_id=" + this.orcidClientId +
       "&scope=openid&nonce=ThroughputWidgetNonce";
 
     console.log("opening URL ", orcid_auth_uri);
@@ -46,13 +57,13 @@ export class OrcidConnect {
 
     return (
       <div class="connect-orcid-button-wrapper">
-        {state.authenticated ? (
+        {this.authenticated ? (
           <div class='author-name'>
             <div class='item'>
               {orcidIcon}
             </div>
             <div class='item'>
-              Authenticated as {state.orcidName}
+              Authenticated as {this.orcidName}
             </div>
             <div class='item'>
                <button id="logout-button" class="logout_button">Sign Out</button>
