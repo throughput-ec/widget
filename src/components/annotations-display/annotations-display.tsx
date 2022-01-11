@@ -44,6 +44,9 @@ export class AnnotationsDisplay {
       case "cancel_button":
         this.addAnnotation = false;
         break;
+      case "info_i":
+        alert("Here's a blurb about the Throughput Database! Learn more at throughputdb.com");
+        break;
       case "close_x":
         // Ignore close_x here, it's handled in DataDisplay.handleClick(), which
         // is called after this.handleClick(). Otherwise we hit default below.
@@ -149,7 +152,7 @@ export class AnnotationsDisplay {
               height="100"
               width="222"
             /> */}
-            Throughput Annotations
+            Throughput Annotations <a id="info_i">&#9432;</a>
           </div>
           <div class="body">
             {!this.readOnlyMode ? (
