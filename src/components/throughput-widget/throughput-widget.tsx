@@ -20,12 +20,12 @@ export class ThroughputWidget {
   @State() throughputToken: string = null;
 
   @Listen('annotationAdded')
-  annotationAddedHandler(_: CustomEvent<Object>) {
+  annotationAddedHandler(_: CustomEvent<void>) {
     this.getAnnotations();
   }
 
   @Listen('orcidLogout')
-  orcidLogouthandler(_: CustomEvent<Object>) {
+  orcidLogouthandler(_: CustomEvent<void>) {
     this.logout();
   }
 

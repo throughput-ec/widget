@@ -27,7 +27,7 @@ export class AnnotationsDisplay {
     bubbles: true,
     cancelable: false,
     composed: true
-  }) annotationAdded: EventEmitter<Object>;
+  }) annotationAdded: EventEmitter<void>;
 
   @Listen("click")
   async handleClick(ev) {
@@ -92,7 +92,7 @@ export class AnnotationsDisplay {
       alert(errmsg);
     } else {
       // alert root of new annotation so it can refresh and re-render component tree
-      this.annotationAdded.emit({});
+      this.annotationAdded.emit();
     }
     return success;
   }

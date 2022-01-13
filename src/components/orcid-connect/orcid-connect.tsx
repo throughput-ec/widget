@@ -16,7 +16,7 @@ export class OrcidConnect {
     bubbles: true,
     cancelable: false,
     composed: true
-  }) orcidLogout: EventEmitter<Object>;    
+  }) orcidLogout: EventEmitter<void>;    
 
   @Listen('click')
   handleClick(ev) {
@@ -24,7 +24,7 @@ export class OrcidConnect {
     if (clicked_id == "connect-orcid-button") {
       this.openORCID();
     } else if (clicked_id == "logout-button") {
-      this.orcidLogout.emit({}); // orcidLogout event for root to handle
+      this.orcidLogout.emit(); // orcidLogout event for root to handle
     }
   }
 

@@ -84,7 +84,7 @@ declare namespace LocalJSX {
         "authenticated"?: boolean;
         "identifier"?: string;
         "link"?: any;
-        "onAnnotationAdded"?: (event: CustomEvent<Object>) => void;
+        "onAnnotationAdded"?: (event: CustomEvent<void>) => void;
         "orcidClientId"?: string;
         "orcidName"?: string;
         "readOnlyMode"?: boolean;
@@ -105,7 +105,7 @@ declare namespace LocalJSX {
     }
     interface OrcidConnect {
         "authenticated"?: boolean;
-        "onOrcidLogout"?: (event: CustomEvent<Object>) => void;
+        "onOrcidLogout"?: (event: CustomEvent<void>) => void;
         "orcidClientId"?: string;
         "orcidName"?: string;
         "useOrcidSandbox"?: boolean;
