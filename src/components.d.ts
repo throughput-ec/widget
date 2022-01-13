@@ -85,6 +85,7 @@ declare namespace LocalJSX {
         "identifier"?: string;
         "link"?: any;
         "onAnnotationAdded"?: (event: CustomEvent<void>) => void;
+        "onCheckAuth"?: (event: CustomEvent<void>) => void;
         "orcidClientId"?: string;
         "orcidName"?: string;
         "readOnlyMode"?: boolean;

@@ -25,8 +25,13 @@ export class ThroughputWidget {
   }
 
   @Listen('orcidLogout')
-  orcidLogouthandler(_: CustomEvent<void>) {
+  orcidLogoutHandler(_: CustomEvent<void>) {
     this.logout();
+  }
+
+  @Listen('checkAuth')
+  checkAuthHandler(_: CustomEvent<void>) {
+    this.checkAuth();
   }
 
   componentWillLoad() {
@@ -34,15 +39,7 @@ export class ThroughputWidget {
       return;
     }
 
-    if (typeof(Storage) !== "undefined") {
-      if ("ThroughputWidgetToken" in window.localStorage) {
-        this.authenticated = true;
-        this.throughputToken = window.localStorage.getItem("ThroughputWidgetToken");
-        this.orcidName = window.localStorage.getItem("ThroughputWidgetName");
-      }
-    } else {
-      console.warn("Web Storage unavailable, authentication state will not be preserved on page change or refresh.");
-    }
+    this.checkAuth();
 
     if (window.location.hash) {
       if (this.getFragmentParameterByName("access_token") !== "" && this.getFragmentParameterByName("id_token") !== "") {
@@ -55,6 +52,23 @@ export class ThroughputWidget {
     }
 
     this.getAnnotations();
+  }
+
+  // Check Throughput authentication state.
+  checkAuth() {
+    if (typeof(Storage) !== "undefined") {
+      if ("ThroughputWidgetToken" in window.localStorage) {
+        this.authenticated = true;
+        this.throughputToken = window.localStorage.getItem("ThroughputWidgetToken");
+        this.orcidName = window.localStorage.getItem("ThroughputWidgetName");
+      } else {
+        this.authenticated = false;
+        this.throughputToken = null;
+        this.orcidName = null;
+      }
+    } else {
+      console.warn("Web Storage unavailable, authentication state will not be preserved on page change or refresh.");
+    }    
   }
 
   // Exchange ORCID bearer token for Throughput token.

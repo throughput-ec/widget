@@ -29,6 +29,13 @@ export class AnnotationsDisplay {
     composed: true
   }) annotationAdded: EventEmitter<void>;
 
+  @Event({
+    eventName: 'checkAuth',
+    bubbles: true,
+    cancelable: false,
+    composed: true
+  }) checkAuth: EventEmitter<void>;
+
   @Listen("click")
   async handleClick(ev) {
     const clicked_id = ev.composedPath()[0].id;
@@ -54,6 +61,10 @@ export class AnnotationsDisplay {
       default:
         console.error("Unhandled click, id = ", clicked_id);
     }
+  }
+
+  componentWillRender() {
+    this.checkAuth.emit(); // update authentication state
   }
 
   updateAnnotationText(event) {
