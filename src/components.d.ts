@@ -6,6 +6,8 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface AboutThroughput {
+    }
     interface AnnotationsDisplay {
         "additionalType": string;
         "annotations": any;
@@ -46,6 +48,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLAboutThroughputElement extends Components.AboutThroughput, HTMLStencilElement {
+    }
+    var HTMLAboutThroughputElement: {
+        prototype: HTMLAboutThroughputElement;
+        new (): HTMLAboutThroughputElement;
+    };
     interface HTMLAnnotationsDisplayElement extends Components.AnnotationsDisplay, HTMLStencilElement {
     }
     var HTMLAnnotationsDisplayElement: {
@@ -71,6 +79,7 @@ declare global {
         new (): HTMLThroughputWidgetElement;
     };
     interface HTMLElementTagNameMap {
+        "about-throughput": HTMLAboutThroughputElement;
         "annotations-display": HTMLAnnotationsDisplayElement;
         "data-display": HTMLDataDisplayElement;
         "orcid-connect": HTMLOrcidConnectElement;
@@ -78,6 +87,8 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface AboutThroughput {
+    }
     interface AnnotationsDisplay {
         "additionalType"?: string;
         "annotations"?: any;
@@ -119,6 +130,7 @@ declare namespace LocalJSX {
         "useOrcidSandbox"?: boolean;
     }
     interface IntrinsicElements {
+        "about-throughput": AboutThroughput;
         "annotations-display": AnnotationsDisplay;
         "data-display": DataDisplay;
         "orcid-connect": OrcidConnect;
@@ -129,6 +141,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "about-throughput": LocalJSX.AboutThroughput & JSXBase.HTMLAttributes<HTMLAboutThroughputElement>;
             "annotations-display": LocalJSX.AnnotationsDisplay & JSXBase.HTMLAttributes<HTMLAnnotationsDisplayElement>;
             "data-display": LocalJSX.DataDisplay & JSXBase.HTMLAttributes<HTMLDataDisplayElement>;
             "orcid-connect": LocalJSX.OrcidConnect & JSXBase.HTMLAttributes<HTMLOrcidConnectElement>;

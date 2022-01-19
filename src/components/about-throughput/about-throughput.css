@@ -1,0 +1,86 @@
+.overlay {
+  cursor: default;
+  position: fixed;
+  z-index: 100002;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 1.0);
+}
+
+/* brg 10/22/2020 I barely understand flexbox, but this works. */
+/* - .body fills the space remaining after .header without overflowing. */
+/* - Scrolling works without explicitly setting a height prop on .body. */
+/* https://stackoverflow.com/questions/90178/make-a-div-fill-the-height-of-the-remaining-screen-space */
+.about_area {
+  display: flex;
+  flex-flow: column;
+  /* position: absolute; */
+  z-index: 100001;
+  margin: 10vh auto;
+  width: 40vw;
+  max-height: 80vh;
+  min-width: 300px;
+  background-color: var(--modal-background-color, white);
+  border-radius: 4px;
+}
+
+.body {
+  /* flex: 1 1 auto; */
+  padding: 20px;
+  padding-top: 20px;
+  overflow-y: scroll;
+  background-color: var(--modal-background-color, white);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  color: #3b99e0;
+  background-color: var(--modal-background-color, white);
+  /* flex: 0 1 auto;
+  display: block; */
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
+  z-index: 10000000;
+  font-size: 20px;
+  border-radius: 4px;
+  text-align: center;
+  padding-bottom: 25px;
+}
+
+.closeContainer {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+/* pure CSS close X - https://codepen.io/brissmyr/pen/egidw */
+.close {
+  /* position: absolute;
+  right: 32px;
+  top: 32px; */
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before,
+.close:after {
+  position: absolute;
+  top: 10vh;
+  margin-left: 12px;
+  content: " ";
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
