@@ -20,6 +20,7 @@ export class AnnotationsDisplay {
   DEFAULT_ANNOTATION_TEXT: string = "Enter your annotation here.";
   
   @State() addAnnotation: boolean; // show add annotation text area, Submit/Cancel buttons
+  @State() showInfo: boolean = false; // show AboutThroughput component
   @State() annotationText: string; // current annotation text
 
   @Event({
@@ -40,6 +41,9 @@ export class AnnotationsDisplay {
   async handleClick(ev) {
     const clicked_id = ev.composedPath()[0].id;
     switch (clicked_id) {
+      case "info_i":
+        this.showInfo = true;
+        break;
       case "add_button":
         this.addAnnotation = true;
         break;
@@ -57,6 +61,9 @@ export class AnnotationsDisplay {
       case "close_x":
         // Ignore close_x here, it's handled in DataDisplay.handleClick(), which
         // is called after this.handleClick(). Otherwise we hit default below.
+        break;
+      case "close_about_x": // close_about_x lives in AboutThroughput
+        this.showInfo = false;
         break;
       default:
         console.error("Unhandled click, id = ", clicked_id);
@@ -147,7 +154,8 @@ export class AnnotationsDisplay {
 
     return (
       <div class="overlay">
-        <div class="annotation_list">
+        {this.showInfo ? <about-throughput/> : 
+        (<div class="annotation_list">
           <div class="closeContainer">
             {/* <div id="close_x" class="close" /> */}
             {/* brg 2/18/2021 Removing the href='#' to avoid appending '#' to window.location.href
@@ -205,7 +213,7 @@ export class AnnotationsDisplay {
               </div>
             ))}
           </div>
-        </div>
+        </div>)}
       </div>
     );
   }
