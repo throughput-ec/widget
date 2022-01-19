@@ -213,6 +213,6 @@ export class ThroughputWidget {
           readOnlyMode={this.readOnlyMode}
           orcidClientId={this.orcidClientId}
           useOrcidSandbox={this.useOrcidSandbox}
-      ></data-display></div>) : null;
+      ></data-display></div>) : "Error: see console for details.";
   }
 }
