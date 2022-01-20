@@ -8,7 +8,6 @@ import { Component, h } from "@stencil/core";
 
 export class AboutThroughput {
   render() {
-    const aboutText = "Throughput links data resources, such as research databases, to code repositories, such as those on github.com that reference those data resources.";
     return (
       <div class="about_area">
         <div class="closeContainer">
@@ -18,8 +17,14 @@ export class AboutThroughput {
           About Throughput
         </div>
         <div class="body">
-          <p>{aboutText}</p>
-          <p>Learn more at <a href="https://throughputdb.com/about" target="_blank">throughputdb.com</a>.</p>
+          <p>
+            The <a href="https://throughputdb.com" target="_blank">Throughput Annotation Database</a> links research
+            objects across the web, including data resources -- research databases and datasets -- to
+            code repositories, such as those on <a href="https://github.com" target="_blank">github.com</a>.
+          </p>
+          <p>
+            Throughput serves to make tacit knowledge explicit, and supports equity in data sharing.            
+          </p>
         </div>
       </div>
     );
