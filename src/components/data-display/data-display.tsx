@@ -16,7 +16,7 @@ export class DataDisplay {
   @Prop() link: any;
   @Prop() readOnlyMode: boolean;
   @Prop() orcidClientId: string;
-  @Prop() useOrcidSandbox: boolean;  
+  @Prop() useOrcidSandbox: boolean;
 
   @State() open: boolean = false; // is overlay being displayed?
 
@@ -29,7 +29,7 @@ export class DataDisplay {
       !this.open ||
       (this.open &&
         ev.composedPath().length > 0 &&
-        ev.composedPath()[0].id == "close_x")
+        ev.composedPath()[0].id == "close-x")
     ) {
       this.open = !this.open;
     }
@@ -52,15 +52,19 @@ export class DataDisplay {
     if (this.readOnlyMode) {
       text = this.annotations.length > 0 ? "Click to view" : "";
     } else {
-      text = this.annotations.length > 0 ? "Click to view or add" : "Click to add";
+      text =
+        this.annotations.length > 0 ? "Click to view or add" : "Click to add";
     }
     return text;
   }
 
   render() {
     return (
-      <div class="badge" title-="Throughput Annotation Widget. Learn more at throughputdb.com">
-        <div class='throughput-logo'>
+      <div
+        class="badge"
+        title-="Throughput Annotation Widget. Learn more at throughputdb.com"
+      >
+        <div class="throughput-logo">
           <img
             src="https://github.com/throughput-ec/widget/blob/master/figures/TPlogo_small.png?raw=true"
             title="Throughput"
@@ -68,9 +72,9 @@ export class DataDisplay {
         </div>
         <div class="summary-container">
           <div class="summary">{this.getCountText()}</div>
-        <div class="helptext">{this.getHelpText()}</div>
+          <div class="helptext">{this.getHelpText()}</div>
         </div>
-        
+
         {this.open ? (
           <annotations-display
             annotations={this.annotations}
