@@ -29,7 +29,10 @@ export class DataDisplay {
       !this.open ||
       (this.open &&
         ev.composedPath().length > 0 &&
-        ev.composedPath()[0].id == "close-x")
+        ev.composedPath()[0].id === "close-x") ||
+      (this.open &&
+        ev.composedPath().length > 0 &&
+        ev.composedPath()[0].id === "close-click-overlay")
     ) {
       this.open = !this.open;
     }

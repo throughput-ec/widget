@@ -82,22 +82,26 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  margin-top: -44px;
 }
 
 .header {
   color: #3b99e0;
   background-color: var(--modal-background-color, white);
-  /* flex: 0 1 auto;
-  display: block; */
   box-shadow: 0 0 0px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
-  z-index: 10000000;
+  z-index: 1000;
   font-size: 20px;
   border-radius: 4px;
-  /* text-align: center; */
   padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.header-hang-right {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
 #info_i {
@@ -110,7 +114,6 @@ button {
   padding: 5px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 18px;
   font-family: inherit;
   width: 150px;
@@ -120,27 +123,64 @@ button {
 }
 
 .add_button {
-  background-color: #4caf50; /* Green */
+  font-size: 25px;
+  background-color: #19b69a; /* Green */
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
   margin: auto;
+  margin-bottom: 20px;
+  width: 50px;
+  min-height: 50px;
+  margin-top: -24px;
+  z-index: 1000000;
+  border-radius: 50px;
+  display: inlin;
 }
 .add_button:hover {
-  background-color: #3e8e41;
+  background-color: #00a888;
+}
+@keyframes fadein {
+  from {
+    height: 0;
+  }
+  to {
+    height: 1;
+  }
 }
 
+.add-annotation {
+  animation: fadein 0.3s;
+  padding: 20px;
+  height: 260px;
+  font-size: small;
+}
+
+.add-annotation button {
+  width: 70px;
+  font-size: 15px;
+}
+#submit_button {
+  background-color: #19b69a;
+}
+#submit_button:hover {
+  background-color: #00a888;
+}
 .cancel_button {
-  background-color: red;
+  background-color: white;
+  color: grey;
+  border: 1px solid grey;
+  box-sizing: border-box;
 }
 .cancel_button:hover {
-  background-color: darkred;
+  background-color: lightgray;
+  color: black;
 }
 
 textarea {
   resize: none;
   width: 100%;
-  height: 200px;
-  font-size: 20px;
+  height: 90px;
   font-family: inherit;
-  /* padding: 10px 20px; */
+  border-radius: 4px;
 }
 
 .closeContainer {
@@ -152,9 +192,11 @@ textarea {
 }
 
 #close-x {
-  width: 20px;
-  height: 20px;
-  opacity: 0.3;
+  width: 25px;
+  height: 25px;
+  opacity: 0.6;
+  margin-top: -5px;
+  margin-right: -5px;
 }
 #close-x:hover {
   cursor: pointer;

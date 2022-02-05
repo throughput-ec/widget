@@ -77,8 +77,11 @@ export class AnnotationsDisplay {
       case "close_about_x": // close_about_x lives in AboutThroughput
         this.showInfo = false;
         break;
+      case "close-click-overlay":
+        //ignore for same reason as close-x
+        break;
       default:
-        console.error("Unhandled click, id = ", clicked_id);
+        console.log("Unhandled click, id = ", clicked_id);
     }
   }
 
@@ -148,16 +151,14 @@ export class AnnotationsDisplay {
     let annotationElement;
     if (this.addAnnotation) {
       annotationElement = (
-        <div>
+        <div class="add-annotation">
           <textarea
             onInput={(event) => this.updateAnnotationText(event)}
             onFocus={(event) => this.clearDefaultAnnotationText(event)}
           >
             {this.DEFAULT_ANNOTATION_TEXT}
           </textarea>
-          <button id="submit_button" class="add_button">
-            Submit
-          </button>
+          <button id="submit_button">Submit</button>
           <button id="cancel_button" class="cancel_button">
             Cancel
           </button>
@@ -166,13 +167,13 @@ export class AnnotationsDisplay {
     } else {
       annotationElement = (
         <button id="add_button" class="add_button">
-          + Add Annotation
+          +
         </button>
       );
     }
 
     return (
-      <div class="overlay">
+      <div class="overlay" id="close-click-overlay">
         {this.showInfo ? (
           <about-throughput />
         ) : (
@@ -192,27 +193,27 @@ export class AnnotationsDisplay {
               <div>
                 Throughput Annotations <a id="info_i">&#9432;</a>
               </div>
-              {/* <span class="closeContainer">
-                <a id="close_x" class="close" />
-              </span> */}
-              <div id="close-x" class="close">
-                <div class="close-x-sub">
-                  <div class="close-x-subsub"></div>
+              <div class="header-hang-right">
+                {!this.readOnlyMode ? (
+                  <orcid-connect
+                    orcidClientId={this.orcidClientId}
+                    useOrcidSandbox={this.useOrcidSandbox}
+                    authenticated={this.authenticated}
+                    orcidName={this.orcidName}
+                  />
+                ) : null}
+
+                <div id="close-x" class="close">
+                  <div class="close-x-sub">
+                    <div class="close-x-subsub"></div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="body">
-              {!this.readOnlyMode ? (
-                <orcid-connect
-                  orcidClientId={this.orcidClientId}
-                  useOrcidSandbox={this.useOrcidSandbox}
-                  authenticated={this.authenticated}
-                  orcidName={this.orcidName}
-                />
-              ) : null}
+            {this.authenticated && annotationElement}
 
+            <div class="body">
               {/* Show annotationElement if this.authenticated = true (https://reactjs.org/docs/conditional-rendering.html) */}
-              {this.authenticated && annotationElement}
 
               {/* Show annotations */}
               {this.annotations.map((annotation) => (
@@ -222,7 +223,7 @@ export class AnnotationsDisplay {
                     <div class="annotation_author">
                       {annotation.annotationauthor
                         ? annotation.annotationauthor
-                        : "[null author]"}
+                        : "unknown author"}
                     </div>
                     <div class="orcidLink">
                       <a
