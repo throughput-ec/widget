@@ -22,7 +22,7 @@
   margin: 10vh auto;
   width: 50vw;
   max-height: 80vh;
-  min-width: 300px;
+  min-width: 440px;
   background-color: var(--modal-background-color, white);
   border-radius: 4px;
 }
