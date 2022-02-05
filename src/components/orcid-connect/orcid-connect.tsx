@@ -58,6 +58,7 @@ export class OrcidConnect {
         width="24"
         height="24"
         alt="ORCID iD icon"
+        title="ORCID iD"
       />
     );
 
