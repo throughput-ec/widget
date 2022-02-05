@@ -15,6 +15,7 @@
 /* https://stackoverflow.com/questions/90178/make-a-div-fill-the-height-of-the-remaining-screen-space */
 .annotation_list {
   display: flex;
+  position: relative;
   flex-flow: column;
   /* position: absolute; */
   z-index: 100001;
@@ -36,15 +37,11 @@
   border-radius: 5px;
   border-left: 5px solid var(--badge-border-color, skyblue);
   cursor: default;
-  /* border-style: solid; */
-  /* border-color: white; */
 }
 .annotation-text {
 }
 
 .annotation_author {
-  /* font-size: large;
-  font-weight: bold; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -82,7 +79,7 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  margin-top: -44px;
+  /* margin-top: -44px; */
 }
 
 .header {
@@ -123,17 +120,18 @@ button {
 }
 
 .add_button {
+  position: absolute;
+  top: 52px;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: 25px;
   background-color: #19b69a; /* Green */
   box-shadow: 0 0 0px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
   margin: auto;
-  margin-bottom: 20px;
   width: 50px;
   min-height: 50px;
-  margin-top: -24px;
   z-index: 1000000;
   border-radius: 50px;
-  display: inlin;
 }
 .add_button:hover {
   background-color: #00a888;
@@ -150,7 +148,8 @@ button {
 .add-annotation {
   animation: fadein 0.3s;
   padding: 20px;
-  height: 260px;
+  padding-bottom: 0;
+  height: 150px;
   font-size: small;
 }
 
