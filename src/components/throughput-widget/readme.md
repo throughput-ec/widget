@@ -5,14 +5,13 @@
 
 ## Properties
 
-| Property          | Attribute           | Description | Type      | Default |
-| ----------------- | ------------------- | ----------- | --------- | ------- |
-| `additionalType`  | `additional-type`   |             | `string`  | `null`  |
-| `identifier`      | `identifier`        |             | `string`  | `null`  |
-| `link`            | `link`              |             | `any`     | `null`  |
-| `orcidClientId`   | `orcid-client-id`   |             | `string`  | `null`  |
-| `readOnlyMode`    | `read-only-mode`    |             | `boolean` | `false` |
-| `useOrcidSandbox` | `use-orcid-sandbox` |             | `boolean` | `false` |
+| Property         | Attribute         | Description | Type      | Default |
+| ---------------- | ----------------- | ----------- | --------- | ------- |
+| `additionalType` | `additional-type` |             | `string`  | `null`  |
+| `identifier`     | `identifier`      |             | `string`  | `null`  |
+| `link`           | `link`            |             | `any`     | `null`  |
+| `orcidClientId`  | `orcid-client-id` |             | `string`  | `null`  |
+| `readOnlyMode`   | `read-only-mode`  |             | `boolean` | `false` |
 
 
 ## Dependencies

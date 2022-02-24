@@ -18,7 +18,6 @@ export namespace Components {
         "orcidName": string;
         "readOnlyMode": boolean;
         "throughputToken": string;
-        "useOrcidSandbox": boolean;
     }
     interface DataDisplay {
         "additionalType": string;
@@ -30,13 +29,11 @@ export namespace Components {
         "orcidName": string;
         "readOnlyMode": boolean;
         "throughputToken": string;
-        "useOrcidSandbox": boolean;
     }
     interface OrcidConnect {
         "authenticated": boolean;
         "orcidClientId": string;
         "orcidName": string;
-        "useOrcidSandbox": boolean;
     }
     interface ThroughputWidget {
         "additionalType": string;
@@ -44,7 +41,6 @@ export namespace Components {
         "link": any;
         "orcidClientId": string;
         "readOnlyMode": boolean;
-        "useOrcidSandbox": boolean;
     }
 }
 declare global {
@@ -101,7 +97,6 @@ declare namespace LocalJSX {
         "orcidName"?: string;
         "readOnlyMode"?: boolean;
         "throughputToken"?: string;
-        "useOrcidSandbox"?: boolean;
     }
     interface DataDisplay {
         "additionalType"?: string;
@@ -113,14 +108,12 @@ declare namespace LocalJSX {
         "orcidName"?: string;
         "readOnlyMode"?: boolean;
         "throughputToken"?: string;
-        "useOrcidSandbox"?: boolean;
     }
     interface OrcidConnect {
         "authenticated"?: boolean;
         "onOrcidLogout"?: (event: CustomEvent<void>) => void;
         "orcidClientId"?: string;
         "orcidName"?: string;
-        "useOrcidSandbox"?: boolean;
     }
     interface ThroughputWidget {
         "additionalType"?: string;
@@ -128,7 +121,6 @@ declare namespace LocalJSX {
         "link"?: any;
         "orcidClientId"?: string;
         "readOnlyMode"?: boolean;
-        "useOrcidSandbox"?: boolean;
     }
     interface IntrinsicElements {
         "about-throughput": AboutThroughput;

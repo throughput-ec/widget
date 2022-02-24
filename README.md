@@ -41,8 +41,6 @@ Minimal examples of widget integration into Vue, React, Angular, and static HTML
 
 To add annotations, widget users must first authenticate through ORCID. We encourage devs to [register for the public ORCID API](https://info.orcid.org/documentation/integration-guide/registering-a-public-api-client/#easy-faq-2606 ) so they can freely manage post-authentication redirects for their site.
 
-Separate registrations are required for the [ORCID production](https://orcid.org) and [ORCID sandbox](https://sandbox.orcid.org) sites.
-
 Once registered, an ORCID Client ID (e.g. APP-1234567890ABCDEF) will be provided. This is passed to the widget in the `orcid-client-id` property, described below.
 
 #### Install the widget
@@ -71,7 +69,7 @@ It accepts the following properties:
 | `additional-type` | **Required** | Identifies the data type associated with `link`. |
 | `read-only-mode` | Optional bool (def. `false`) | If `true`, the *"Add Annotation"* UI will be hidden. |
 | `orcid-client-id` | Required if `read-only-mode=false` | The ORCID client ID to be used for authentication. |
-| `use-orcid-sandbox` | Optional bool (def. `false`) | If `false`, use [ORCID production](https://orcid.org) for authentication. If `true`, use [ORCID sandbox](https://sandbox.orcid.org/) |
+
 
 Databases registered within Throughput use the [re3data](https://www.re3data.org/) identifier as a UID. For example, the Neotoma Paleoecology Database has a re3data landing page at [https://www.re3data.org/repository/r3d100011761](https://www.re3data.org/repository/r3d100011761), and a UID within Throughput of **r3d100011761**.
 

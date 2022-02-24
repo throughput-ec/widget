@@ -7,18 +7,25 @@
 
 ## Properties
 
-| Property          | Attribute           | Description | Type      | Default     |
-| ----------------- | ------------------- | ----------- | --------- | ----------- |
-| `additionalType`  | `additional-type`   |             | `string`  | `undefined` |
-| `annotations`     | `annotations`       |             | `any`     | `[]`        |
-| `authenticated`   | `authenticated`     |             | `boolean` | `false`     |
-| `identifier`      | `identifier`        |             | `string`  | `undefined` |
-| `link`            | `link`              |             | `any`     | `undefined` |
-| `orcidClientId`   | `orcid-client-id`   |             | `string`  | `undefined` |
-| `orcidName`       | `orcid-name`        |             | `string`  | `undefined` |
-| `readOnlyMode`    | `read-only-mode`    |             | `boolean` | `true`      |
-| `throughputToken` | `throughput-token`  |             | `string`  | `null`      |
-| `useOrcidSandbox` | `use-orcid-sandbox` |             | `boolean` | `undefined` |
+| Property          | Attribute          | Description | Type      | Default     |
+| ----------------- | ------------------ | ----------- | --------- | ----------- |
+| `additionalType`  | `additional-type`  |             | `string`  | `undefined` |
+| `annotations`     | `annotations`      |             | `any`     | `[]`        |
+| `authenticated`   | `authenticated`    |             | `boolean` | `false`     |
+| `identifier`      | `identifier`       |             | `string`  | `undefined` |
+| `link`            | `link`             |             | `any`     | `undefined` |
+| `orcidClientId`   | `orcid-client-id`  |             | `string`  | `undefined` |
+| `orcidName`       | `orcid-name`       |             | `string`  | `undefined` |
+| `readOnlyMode`    | `read-only-mode`   |             | `boolean` | `true`      |
+| `throughputToken` | `throughput-token` |             | `string`  | `null`      |
+
+
+## Events
+
+| Event             | Description | Type                |
+| ----------------- | ----------- | ------------------- |
+| `annotationAdded` |             | `CustomEvent<void>` |
+| `checkAuth`       |             | `CustomEvent<void>` |
 
 
 ## Dependencies

@@ -7,7 +7,6 @@ import { Component, Event, EventEmitter, h, Listen, Prop } from "@stencil/core";
 })
 export class OrcidConnect {
   @Prop() orcidClientId: string;
-  @Prop() useOrcidSandbox: boolean;
   @Prop() authenticated: boolean;
   @Prop() orcidName: string;
 
@@ -31,8 +30,7 @@ export class OrcidConnect {
   openORCID() {
     const redirect_uri = window.location.href.toString().split('#')[0]; // remove anchor '#' and everything to right
     const orcid_auth_uri =
-      (this.useOrcidSandbox ? "https://sandbox.orcid.org" : "https://orcid.org") +
-      "/oauth/authorize?response_type=token&redirect_uri=" +
+      "https://orcid.org/oauth/authorize?response_type=token&redirect_uri=" +
       redirect_uri +
       "&client_id=" + this.orcidClientId +
       "&scope=openid&nonce=ThroughputWidgetNonce";

@@ -12,7 +12,6 @@ export class ThroughputWidget {
   @Prop() link: any = null; // specifies the resource-specific dataset
   @Prop() readOnlyMode: boolean = false; // if true, hide add annotation UI elements
   @Prop() orcidClientId: string = null; // ORCID API key; required if readOnlyMode = false
-  @Prop() useOrcidSandbox: boolean = false; // use sandbox.orcid.org if true, else orcid.org (production)
 
   @State() annotations: Array<object>;
   @State() authenticated: boolean = false;
@@ -174,14 +173,6 @@ export class ThroughputWidget {
   }
 
   checkSig(idToken) {
-    const orcidSandboxCert = {
-      kty: "RSA",
-      e: "AQAB",
-      use: "sig",
-      kid: "sandbox-orcid-org-3hpgosl3b6lapenh1ewsgdob3fawepoj",
-      n:
-        "pl-jp-kTAGf6BZUrWIYUJTvqqMVd4iAnoLS6vve-KNV0q8TxKvMre7oi9IulDcqTuJ1alHrZAIVlgrgFn88MKirZuTqHG6LCtEsr7qGD9XyVcz64oXrb9vx4FO9tLNQxvdnIWCIwyPAYWtPMHMSSD5oEVUtVL_5IaxfCJvU-FchdHiwfxvXMWmA-i3mcEEe9zggag2vUPPIqUwbPVUFNj2hE7UsZbasuIToEMFRZqSB6juc9zv6PEUueQ5hAJCEylTkzMwyBMibrt04TmtZk2w9DfKJR91555s2ZMstX4G_su1_FqQ6p9vgcuLQ6tCtrW77tta-Rw7McF_tyPmvnhQ",
-    };
     const orcidProdCert = {
       kty: "RSA",
       e: "AQAB",
@@ -190,10 +181,10 @@ export class ThroughputWidget {
       n:
         "jxTIntA7YvdfnYkLSN4wk__E2zf_wbb0SV_HLHFvh6a9ENVRD1_rHK0EijlBzikb-1rgDQihJETcgBLsMoZVQqGj8fDUUuxnVHsuGav_bf41PA7E_58HXKPrB2C0cON41f7K3o9TStKpVJOSXBrRWURmNQ64qnSSryn1nCxMzXpaw7VUo409ohybbvN6ngxVy4QR2NCC7Fr0QVdtapxD7zdlwx6lEwGemuqs_oG5oDtrRuRgeOHmRps2R6gG5oc-JqVMrVRv6F9h4ja3UgxCDBQjOVT1BFPWmMHnHCsVYLqbbXkZUfvP2sO1dJiYd_zrQhi-FtNth9qrLLv3gkgtwQ",
     };
-    const pubKey = KEYUTIL.getKey(this.useOrcidSandbox ? orcidSandboxCert : orcidProdCert);
+    const pubKey = KEYUTIL.getKey(orcidProdCert);
     return KJUR.jws.JWS.verifyJWT(idToken, pubKey, {
       alg: ["RS256"],
-      iss: [this.useOrcidSandbox ? "https://sandbox.orcid.org" : "https://orcid.org"],
+      iss: ["https://orcid.org"],
       aud: this.orcidClientId,
       gracePeriod: 15 * 60, //15 mins skew allowed
     });
@@ -212,7 +203,6 @@ export class ThroughputWidget {
           link={this.link}
           readOnlyMode={this.readOnlyMode}
           orcidClientId={this.orcidClientId}
-          useOrcidSandbox={this.useOrcidSandbox}
       ></data-display></div>) : "Error: see console for details.";
   }
 }

@@ -16,7 +16,6 @@ export class DataDisplay {
   @Prop() link: any;
   @Prop() readOnlyMode: boolean;
   @Prop() orcidClientId: string;
-  @Prop() useOrcidSandbox: boolean;  
 
   @State() open: boolean = false; // is overlay being displayed?
 
@@ -82,7 +81,6 @@ export class DataDisplay {
             link={this.link}
             readOnlyMode={this.readOnlyMode}
             orcidClientId={this.orcidClientId}
-            useOrcidSandbox={this.useOrcidSandbox}
           ></annotations-display>
         ) : null}
       </div>

@@ -7,12 +7,18 @@
 
 ## Properties
 
-| Property          | Attribute           | Description | Type      | Default     |
-| ----------------- | ------------------- | ----------- | --------- | ----------- |
-| `authenticated`   | `authenticated`     |             | `boolean` | `undefined` |
-| `orcidClientId`   | `orcid-client-id`   |             | `string`  | `undefined` |
-| `orcidName`       | `orcid-name`        |             | `string`  | `undefined` |
-| `useOrcidSandbox` | `use-orcid-sandbox` |             | `boolean` | `undefined` |
+| Property        | Attribute         | Description | Type      | Default     |
+| --------------- | ----------------- | ----------- | --------- | ----------- |
+| `authenticated` | `authenticated`   |             | `boolean` | `undefined` |
+| `orcidClientId` | `orcid-client-id` |             | `string`  | `undefined` |
+| `orcidName`     | `orcid-name`      |             | `string`  | `undefined` |
+
+
+## Events
+
+| Event         | Description | Type                |
+| ------------- | ----------- | ------------------- |
+| `orcidLogout` |             | `CustomEvent<void>` |
 
 
 ## Dependencies

@@ -15,7 +15,6 @@ export class AnnotationsDisplay {
   @Prop() throughputToken: string = null;
   @Prop() readOnlyMode: boolean = true;
   @Prop() orcidClientId: string;
-  @Prop() useOrcidSandbox: boolean;
   @Prop() annotations: any = [];  
   DEFAULT_ANNOTATION_TEXT: string = "Enter your annotation here.";
   
@@ -177,7 +176,6 @@ export class AnnotationsDisplay {
             {!this.readOnlyMode ? (
                 <orcid-connect
                   orcidClientId={this.orcidClientId}
-                  useOrcidSandbox={this.useOrcidSandbox}
                   authenticated={this.authenticated}
                   orcidName={this.orcidName}
                 />
