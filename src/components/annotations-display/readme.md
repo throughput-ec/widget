@@ -36,11 +36,13 @@
 
 ### Depends on
 
+- [about-throughput](../about-throughput)
 - [orcid-connect](../orcid-connect)
 
 ### Graph
 ```mermaid
 graph TD;
+  annotations-display --> about-throughput
   annotations-display --> orcid-connect
   data-display --> annotations-display
   style annotations-display fill:#f9f,stroke:#333,stroke-width:4px

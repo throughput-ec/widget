@@ -25,6 +25,7 @@
 graph TD;
   throughput-widget --> data-display
   data-display --> annotations-display
+  annotations-display --> about-throughput
   annotations-display --> orcid-connect
   style throughput-widget fill:#f9f,stroke:#333,stroke-width:4px
 ```

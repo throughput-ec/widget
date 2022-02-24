@@ -34,6 +34,7 @@
 ```mermaid
 graph TD;
   data-display --> annotations-display
+  annotations-display --> about-throughput
   annotations-display --> orcid-connect
   throughput-widget --> data-display
   style data-display fill:#f9f,stroke:#333,stroke-width:4px
