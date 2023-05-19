@@ -9,6 +9,7 @@ export class OrcidConnect {
   @Prop() orcidClientId: string;
   @Prop() authenticated: boolean;
   @Prop() orcidName: string;
+  @Prop() isamplesServerBase: string = "http://localhost:8000/manage/login";
 
   @Event({
     eventName: 'orcidLogout',
@@ -28,19 +29,9 @@ export class OrcidConnect {
   }
 
   openORCID() {
-    const redirect_uri = window.location.href.toString().split('#')[0]; // remove anchor '#' and everything to right
-    const orcid_auth_uri =
-      "https://orcid.org/oauth/authorize?response_type=token&redirect_uri=" +
-      redirect_uri +
-      "&client_id=" + this.orcidClientId +
-      "&scope=openid&nonce=ThroughputWidgetNonce";
-
-    console.log("opening URL ", orcid_auth_uri);
-
-    window.open(
-      orcid_auth_uri,
-      "_self"
-    );
+    // end point to do login for annotation purposes
+    const isamples_auth_uri =  this.isamplesServerBase + "?annotation=true";
+    window.open( isamples_auth_uri , "_self");
   }
 
   render() {
