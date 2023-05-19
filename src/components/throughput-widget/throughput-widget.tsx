@@ -40,14 +40,11 @@ export class ThroughputWidget {
 
     this.checkAuth();
 
-    if (window.location.hash) {
-      if (this.getFragmentParameterByName("access_token") !== "" && this.getFragmentParameterByName("id_token") !== "") {
-        // access_token and id_token keys in window.location indicate redirect from successful
-        // ORCID authentication. Exchange ORCID bearer token for Throughput token.
+    if (!this.throughputToken && this.getFragmentParameterByName("access_token") !== "")  {
+        // use the access token query param if throughput token not initialized yet 
         this.processOrcidAuthResponse();
-      } else {
-        console.log("non-ORCID auth hash found, ignoring");
-      }
+    } else {
+      console.log("non-ORCID auth hash found, ignoring");
     }
 
     this.getAnnotations();
@@ -73,18 +70,13 @@ export class ThroughputWidget {
   // Exchange ORCID bearer token for Throughput token.
   processOrcidAuthResponse() {
     const bearerToken = this.getFragmentParameterByName("access_token");
-    const idToken = this.getFragmentParameterByName("id_token");
     // clear #... in address bar so we don't repeatedly process the ORCID response on page refresh
     // https://stackoverflow.com/questions/1397329/how-to-remove-the-hash-from-window-location-url-with-javascript-without-page-r/5298684#5298684
-    history.replaceState("", document.title, window.location.pathname + window.location.search);
-    if (bearerToken !== "" && idToken !== "") {
-      const sigIsValid = this.checkSig(idToken);
+    // history.replaceState("", document.title, window.location.pathname + window.location.search);
+    if (bearerToken !== "") {
       // console.log("ORCID bearer token (access_token key of window.location.hash):", bearerToken);
-      // console.log("ORCID id_token signature is valid:", sigIsValid);
-      // console.log("Decrypted token contents:", KJUR.jws.JWS.parse(id_token).payloadPP);
-      if (sigIsValid) {
         this.getThroughputToken(bearerToken).then((response) => {
-          // console.log("Throughput response:", response);
+          console.log("Throughput response:", response);
           response.json().then((json) => {
             if (json.status == "success") {
               this.authenticated = true;
@@ -93,13 +85,12 @@ export class ThroughputWidget {
               window.localStorage.setItem("ThroughputWidgetToken", this.throughputToken);
               window.localStorage.setItem("ThroughputWidgetName", this.orcidName);
             }
-          });
+          }).catch(error => {
+            console.log(error)
+          })
         });
-      } else {
-        console.error("id_token signature is invalid");
-      }
     } else {
-      console.error("no access_token or id_token found");
+      console.error("no bearer token found");
     }
   }
 
@@ -161,15 +152,12 @@ export class ThroughputWidget {
     return (this.identifier && this.link && this.additionalType && !missingProps);
   }
 
-  // ORCID OpenID handling lifted from
-  // https://github.com/ORCID/orcid-openid-examples/blob/master/js-orcid-jwt/example.html
+  // modified to parse the query parameters to get the access token value
   getFragmentParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\#&]" + name + "=([^&#]*)");
-    var results = regex.exec(window.location.hash);
-    return results === null
-      ? ""
-      : decodeURIComponent(results[1].replace(/\+/g, " "));
+    var paramsString = window.location.hash.split("?")[1];
+    const searchParams = new URLSearchParams(paramsString);
+    return searchParams.get(name); 
   }
 
   checkSig(idToken) {
